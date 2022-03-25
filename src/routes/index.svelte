@@ -1,14 +1,14 @@
 <script>
-	import {TestComponent} from "$lib";
+  import { TestComponent } from "$lib";
 </script>
 
 <style lang="scss">
-	$font-color: #222;
+  $font-color: #222;
 
-	:global(body) {
-		font-family: sans-serif;
-		color: $font-color;
-	}
+  :global(body) {
+    font-family: sans-serif;
+    color: $font-color;
+  }
 </style>
 
 <h1>Welcome to Cal-Adapt Svelte Components</h1>

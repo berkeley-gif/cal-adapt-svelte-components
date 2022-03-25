@@ -66,13 +66,13 @@ Now when the `package` directory is updated the project using it will reflect th
 For example:
 
 ```js
-import SomeComponent from 'cal-adapt-svelte-components/SomeComponent/SomeComponent.svelte';
+import SomeComponent from "cal-adapt-svelte-components/SomeComponent/SomeComponent.svelte";
 ```
 
 Sapper / Webpack will not be able to resolve the bare module import and thus the following will fail:
 
 ```js
-import { SomeComponent } from 'cal-adapt-svelte-components';
+import { SomeComponent } from "cal-adapt-svelte-components";
 ```
 
 ## Code Credits
