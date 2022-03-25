@@ -1,20 +1,20 @@
 <script>
-	export let message = "world";
+  export let message = "world";
 </script>
 
 <style lang="scss">
-	$margin: 0;
-	$font-size: 1.25rem;
-	$color-strong: magenta;
+  $margin: 0;
+  $font-size: 1.25rem;
+  $color-strong: magenta;
 
-	p {
-		margin: $margin;
-		font-size: $font-size;
-	}
+  p {
+    margin: $margin;
+    font-size: $font-size;
+  }
 
-	strong {
-		color: $color-strong;
-	}
+  strong {
+    color: $color-strong;
+  }
 </style>
 
 <p>Hello <strong>{message}</strong>!!!</p>
