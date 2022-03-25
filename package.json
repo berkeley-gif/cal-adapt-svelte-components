@@ -2,7 +2,8 @@
   "name": "cal-adapt-svelte-components",
   "version": "0.0.1",
   "scripts": {
-    "dev": "svelte-kit dev",
+    "start": "npm run dev",
+    "dev": "svelte-kit dev -p 3333 -o",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
