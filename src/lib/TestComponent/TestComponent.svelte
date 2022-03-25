@@ -1,5 +1,7 @@
-<script>
+<script lang="ts">
   export let message = "world";
+  let foo = true;
+  foo = "bar";
 </script>
 
 <style lang="scss">
