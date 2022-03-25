@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-prettier-scss",
+    "stylelint-config-html/svelte"
+  ],
+  "rules": {
+    "scss/comment-no-empty": null,
+    "declaration-empty-line-before": "never",
+    "custom-property-empty-line-before": "never"
+  }
+}
