@@ -33,7 +33,7 @@ You can preview the production build with `npm run preview`.
 
 ## Packaging
 
-To compile the components from the [`src/lib`](./src/lib/) component directory do:
+To compile the components from the [`src/lib`](./src/lib/) component directory so that they may be used as a dependency within another project do:
 
 ```bash
 npm run package
@@ -41,7 +41,39 @@ npm run package
 
 This will create a local `package/` directory with the compiled Svelte components, meaning all TypeScript will be converted to normal JavaScript and all Sass will be converted to normal CSS.
 
-The `package` directory may then be [`npm link`](https://docs.npmjs.com/cli/v7/commands/npm-link)'d to the Cal-Adapt repository for local development.
+## Linking
+
+The `package` directory of this repo may be [`npm link`](https://docs.npmjs.com/cli/v7/commands/npm-link)'d to another project for local development.
+
+First, from the `./package` directory of this repository (assuming you have already done `npm run package`):
+
+```bash
+npm link
+```
+
+Then from the project directory that uses this component library:
+
+```bash
+npm link cal-adapt-svelte-components
+```
+
+Now when the `package` directory is updated the project using it will reflect those updates. This means whenever components are updated in `src/lib` the script `npm run package` will need to be run in order to reflect updates.
+
+**Note** that if you have multiple versions of NodeJS installed that you need to make sure you're using `npm link` with the same NodeJS and NPM version.
+
+**Note** that the `caladapt-website-2021` project uses [Sapper](https://sapper.svelte.dev) (the predecessor to SvelteKit) and in order to import components from this repo you must use the component's full path.
+
+For example:
+
+```js
+import SomeComponent from 'cal-adapt-svelte-components/SomeComponent/SomeComponent.svelte';
+```
+
+Sapper / Webpack will not be able to resolve the bare module import and thus the following will fail:
+
+```js
+import { SomeComponent } from 'cal-adapt-svelte-components';
+```
 
 ## Code Credits
 
