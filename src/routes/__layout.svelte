@@ -1,5 +1,15 @@
+<script>
+  import { Grid, Row, Column } from "carbon-components-svelte";
+</script>
+
 <style lang="scss" global>
   @use "../styles/main";
 </style>
 
-<slot />
+<Grid padding="{true}">
+  <Row>
+    <Column>
+      <slot />
+    </Column>
+  </Row>
+</Grid>
