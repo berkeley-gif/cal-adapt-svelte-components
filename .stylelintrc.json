@@ -7,6 +7,12 @@
   "rules": {
     "scss/comment-no-empty": null,
     "declaration-empty-line-before": "never",
-    "custom-property-empty-line-before": "never"
+    "custom-property-empty-line-before": "never",
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ]
   }
 }
