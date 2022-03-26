@@ -1,5 +1,6 @@
 <script lang="ts">
-  export let message = "world";
+  import { default_message } from "./test";
+  export let message = default_message;
   let open = true;
   const handleClick = () => (open = !open);
 </script>
