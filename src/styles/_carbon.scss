@@ -1,4 +1,4 @@
-@import "carbon-components/scss/globals/scss/vendor/@carbon/themes/scss/themes.scss";
+// @import "carbon-components/scss/globals/scss/vendor/@carbon/themes/scss/themes.scss";
 
 $feature-flags: (
   ui-shell: true,
@@ -13,8 +13,11 @@ $css--reset: true;
 $css--default-type: true;
 $css--plex: true;
 
+// with the $css- flags above the following imports the global carbon styles
+// it does not include the component styles which must be added separately
+// see: https://github.com/carbon-design-system/carbon/blob/main/docs/guides/sass.md
+@import "carbon-components/scss/globals/scss/css--reset";
+@import "carbon-components/scss/globals/scss/css--font-face";
+@import "carbon-components/scss/globals/scss/css--helpers";
+@import "carbon-components/scss/globals/scss/css--body";
 @import "carbon-components/scss/globals/grid/grid";
-@import "carbon-components/scss/globals/scss/styles";
-
-// Import all component styles
-// @import "carbon-components/scss/globals/scss/styles";
