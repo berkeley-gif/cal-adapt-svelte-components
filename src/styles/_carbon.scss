@@ -1,0 +1,20 @@
+@import "carbon-components/scss/globals/scss/vendor/@carbon/themes/scss/themes.scss";
+
+$feature-flags: (
+  ui-shell: true,
+  grid-columns-16: true
+);
+
+$css--font-face: true;
+$css--helpers: true;
+$css--body: true;
+$css--use-layer: true;
+$css--reset: true;
+$css--default-type: true;
+$css--plex: true;
+
+@import "carbon-components/scss/globals/grid/grid";
+@import "carbon-components/scss/globals/scss/styles";
+
+// Import all component styles
+// @import "carbon-components/scss/globals/scss/styles";

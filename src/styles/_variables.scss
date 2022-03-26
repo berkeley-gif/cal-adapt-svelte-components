@@ -1,0 +1,399 @@
+@import "carbon-components/scss/globals/scss/spacing";
+
+// Colors
+$white: #ffffff;
+$black: #090f20;
+$accent: #6be7ba;
+
+$gray-10: #fafbfb;
+$gray-20: #eaecee;
+$gray-30: #bcc2c7;
+$gray-40: #9fa6ac;
+$gray-50: #838b92;
+$gray-60: #697178;
+$gray-70: #51585e;
+$gray-80: #3b4045;
+$gray-90: #26292c;
+$gray-100: #121416;
+
+$blue-40: #074e67;
+$blue-50: #003850;
+$blue-60: #002448;
+$blue-70: #001440;
+
+$teal-10: #cce4e4;
+$teal-20: #9ac9ca;
+$teal-30: #68aeb0;
+$teal-40: #369396;
+$teal-50: #1d8689;
+$teal-60: #04797c;
+$teal-70: #036063;
+$teal-80: #02484a;
+$teal-90: #013031;
+$teal-100: #001818;
+
+// slr raster colors
+$rs-green: #5dfa25;
+$rs-blue: #25c7fa;
+$rs-teal: #88dcc4;
+
+$card-gradient-01: linear-gradient(
+  180deg,
+  #187a45 0%,
+  #125949 71.35%,
+  #0d4034 97.4%
+);
+$card-gradient-02: linear-gradient(
+  180deg,
+  #197d7f 0%,
+  #017f77 0.01%,
+  #145066 72.92%,
+  #0f3c4d 100%
+);
+$card-gradient-03: linear-gradient(
+  180deg,
+  #1f7799 0%,
+  #195380 76.04%,
+  #143466 100%
+);
+
+$gradientGrayBlue: linear-gradient(
+  to bottom,
+  $gray-90 0%,
+  #262b30 8.1%,
+  #262e33 15.5%,
+  #253037 22.5%,
+  #25333b 29%,
+  #24353f 35.3%,
+  #233743 41.2%,
+  #223a47 47.1%,
+  #213c4b 52.9%,
+  #1f3f4f 58.8%,
+  #1d4153 64.7%,
+  #1b4457 71%,
+  #18465b 77.5%,
+  #14495f 84.5%,
+  #0f4b63 91.9%,
+  #074e67 100%
+);
+
+$caladapt-colors: (
+  "gray-10": $gray-10,
+  "gray-20": $gray-20,
+  "gray-30": $gray-30,
+  "gray-40": $gray-40,
+  "gray-50": $gray-50,
+  "gray-60": $gray-60,
+  "gray-70": $gray-70,
+  "gray-80": $gray-80,
+  "gray-90": $gray-90,
+  "gray-100": $gray-100,
+  "black": $black,
+  "white": $white,
+  "accent": $accent,
+  "teal-10": $teal-10,
+  "teal-20": $teal-20,
+  "teal-30": $teal-30,
+  "teal-40": $teal-40,
+  "teal-50": $teal-50,
+  "teal-60": $teal-60,
+  "teal-70": $teal-70,
+  "teal-80": $teal-80,
+  "teal-90": $teal-90,
+  "teal-100": $teal-100,
+  "blue-40": $blue-40,
+  "blue-50": $blue-50,
+  "blue-60": $blue-60,
+  "blue-70": $blue-70,
+  "rs-green": $rs-green,
+  "rs-blue": $rs-blue
+);
+
+// Carbon theme colors for Cal-Adapt
+$interactive-01: $teal-60;
+$interactive-02: $blue-60;
+$interactive-03: $teal-60;
+$interactive-04: $teal-60;
+$ui-01: $white;
+$ui-02: $gray-10;
+$ui-03: $gray-20;
+$ui-04: $gray-50;
+$ui-05: $gray-100;
+$ui-background: rgba(250, 251, 251, 0.5);
+$text-01: $gray-100;
+$text-02: $gray-70;
+$text-03: $gray-40;
+$text-04: $white;
+$icon-01: $gray-100;
+$icon-02: $gray-70;
+$icon-03: $white;
+$link-01: #015afe;
+$link-02: #0043ce;
+$field-01: $white;
+$field-02: $gray-10;
+$inverse-01: $white;
+$inverse-02: $gray-80;
+$support-01: #df4759;
+$support-02: #24a148;
+$support-03: #fdd13a;
+$support-04: $teal-60;
+$inverse-support-01: #fb4b53;
+$inverse-support-02: #3dbb61;
+$inverse-support-03: #fdd13a;
+$inverse-support-04: $teal-20;
+$overlay-01: rgba(23, 23, 23, 0.5);
+$hover-danger: #ba1b23;
+$active-danger: #750e13;
+$focus: $blue-60;
+$hover-primary: $teal-70;
+$active-primary: $teal-70;
+$hover-primary-text: $gray-100;
+$hover-secondary: $blue-50;
+$active-secondary: $blue-70;
+$hover-tertiary: $teal-60;
+$active-tertiary: $teal-60;
+$hover-ui: $gray-10;
+$active-ui: $gray-30;
+$selected-ui: $gray-20;
+$hover-selected-ui: $gray-30;
+$hover-row: $gray-10;
+$visited-link: #8a3ffc;
+$disabled-01: $white;
+$disabled-02: $teal-20;
+$disabled-03: $gray-70;
+$highlight: #c9deff;
+$skeleton-01: $gray-20;
+$skeleton-02: $gray-30;
+$active-01: $teal-60;
+$hover-field: #e5e5e5;
+
+$caladapt-carbon-theme: (
+  interactive-01: $interactive-01,
+  interactive-02: $interactive-02,
+  interactive-03: $interactive-03,
+  interactive-04: $interactive-04,
+  ui-background: $ui-background,
+  ui-01: $ui-01,
+  ui-02: $ui-02,
+  ui-03: $ui-03,
+  ui-04: $ui-04,
+  ui-05: $ui-05,
+  text-01: $text-01,
+  text-02: $text-02,
+  text-03: $text-03,
+  text-04: $text-04,
+  icon-01: $icon-01,
+  icon-02: $icon-02,
+  icon-03: $icon-03,
+  link-01: $link-01,
+  link-02: $link-02,
+  field-01: $field-01,
+  field-02: $field-02,
+  inverse-01: $inverse-01,
+  inverse-02: $inverse-02,
+  support-01: $support-01,
+  support-02: $support-02,
+  support-03: $support-03,
+  support-04: $support-04,
+  inverse-support-01: $inverse-support-01,
+  inverse-support-02: $inverse-support-02,
+  inverse-support-03: $inverse-support-03,
+  inverse-support-04: $inverse-support-04,
+  overlay-01: $overlay-01,
+  focus: $focus,
+  hover-primary: $hover-primary,
+  active-primary: $active-primary,
+  hover-primary-text: $hover-primary-text,
+  hover-secondary: $hover-secondary,
+  active-secondary: $active-secondary,
+  hover-tertiary: $hover-tertiary,
+  active-tertiary: $active-tertiary,
+  hover-ui: $hover-ui,
+  active-ui: $active-ui,
+  selected-ui: $selected-ui,
+  hover-selected-ui: $hover-selected-ui,
+  hover-danger: $hover-danger,
+  active-danger: $active-danger,
+  hover-row: $hover-row,
+  visited-link: $visited-link,
+  disabled-01: $disabled-01,
+  disabled-02: $disabled-02,
+  disabled-03: $disabled-03,
+  highlight: $highlight,
+  skeleton-01: $skeleton-01,
+  skeleton-02: $skeleton-02,
+  active-01: $active-01,
+  hover-field: $hover-field
+);
+
+$box-shadow: 0 0.125rem 0.25rem rgba($black, 0.075);
+$box-shadow-lift: 0 1rem 2.5rem fade-out($black, 0.9),
+  0 0.5rem 1rem -0.75rem fade-out($black, 0.9);
+
+$border-radius: 0.175rem;
+
+// Carbon design system spacing
+// number corresponds to equivalent pixel units in rem
+$spacing-1: $spacing-4xs;
+$spacing-2: $spacing-3xs;
+$spacing-4: $spacing-2xs;
+$spacing-8: $spacing-xs;
+$spacing-12: $spacing-sm;
+$spacing-16: $spacing-md;
+$spacing-24: $spacing-lg;
+$spacing-32: $spacing-xl;
+$spacing-40: $spacing-2xl;
+$spacing-48: $spacing-3xl;
+$spacing-64: $layout-lg;
+$spacing-96: $layout-xl;
+$spacing-160: $layout-2xl;
+
+// text variables
+$p-default-max-width: 75ch;
+$p-lead-default-max-width: 55ch;
+
+// gcms
+$gcm-ACCESS1-0: rgba(31, 119, 180, 1);
+$gcm-CanESM2: rgba(188, 189, 34, 1);
+$gcm-CCSM4: rgba(44, 160, 44, 1);
+$gcm-CESM1-BGC: rgba(140, 86, 75, 1);
+$gcm-CMCC-CMS: rgba(227, 119, 194, 1);
+$gcm-CNRM-CM5: rgba(23, 190, 207, 1);
+$gcm-GFDL-CM3: rgba(255, 127, 14, 1);
+$gcm-HadGEM2-CC: rgba(69, 68, 68, 1);
+$gcm-HadGEM2-ES: rgba(214, 39, 40, 1);
+$gcm-MIROC5: rgba(148, 103, 189, 1);
+
+// Sass variables as CSS Custom Properties to fix variables in .svelte components
+:root {
+  --white: #{$white};
+  --black: #{$black};
+  --accent: #{$accent};
+
+  --gray-10: #{$gray-10};
+  --gray-20: #{$gray-20};
+  --gray-30: #{$gray-30};
+  --gray-40: #{$gray-40};
+  --gray-50: #{$gray-50};
+  --gray-60: #{$gray-60};
+  --gray-70: #{$gray-70};
+  --gray-80: #{$gray-80};
+  --gray-90: #{$gray-90};
+  --gray-100: #{$gray-100};
+
+  --blue-40: #{$blue-40};
+  --blue-50: #{$blue-50};
+  --blue-60: #{$blue-60};
+  --blue-70: #{$blue-70};
+
+  --teal-10: #{$teal-10};
+  --teal-20: #{$teal-20};
+  --teal-30: #{$teal-30};
+  --teal-40: #{$teal-40};
+  --teal-50: #{$teal-50};
+  --teal-60: #{$teal-60};
+  --teal-70: #{$teal-70};
+  --teal-80: #{$teal-80};
+  --teal-90: #{$teal-90};
+  --teal-100: #{$teal-100};
+
+  --rs-green: #{$rs-green};
+  --rs-blue: #{$rs-blue};
+  --rs-teal: #{$rs-teal};
+
+  --card-gradient-01: #{$card-gradient-01};
+  --card-gradient-02: #{$card-gradient-02};
+  --card-gradient-03: #{$card-gradient-03};
+
+  --gradient-gray-blue: #{$gradientGrayBlue};
+
+  --interactive-01: #{$interactive-01};
+  --interactive-02: #{$interactive-02};
+  --interactive-03: #{$interactive-03};
+  --interactive-04: #{$interactive-04};
+  --ui-background: #{$ui-background};
+  --ui-01: #{$ui-01};
+  --ui-02: #{$ui-02};
+  --ui-03: #{$ui-03};
+  --ui-04: #{$ui-04};
+  --ui-05: #{$ui-05};
+  --text-01: #{$text-01};
+  --text-02: #{$text-02};
+  --text-03: #{$text-03};
+  --text-04: #{$text-04};
+  --icon-01: #{$icon-01};
+  --icon-02: #{$icon-02};
+  --icon-03: #{$icon-03};
+  --link-01: #{$link-01};
+  --link-02: #{$link-02};
+  --field-01: #{$field-01};
+  --field-02: #{$field-02};
+  --inverse-01: #{$inverse-01};
+  --inverse-02: #{$inverse-02};
+  --support-01: #{$support-01};
+  --support-02: #{$support-02};
+  --support-03: #{$support-03};
+  --support-04: #{$support-04};
+  --inverse-support-01: #{$inverse-support-01};
+  --inverse-support-02: #{$inverse-support-02};
+  --inverse-support-03: #{$inverse-support-03};
+  --inverse-support-04: #{$inverse-support-04};
+  --overlay-01: #{$overlay-01};
+  --focus: #{$focus};
+  --hover-primary: #{$hover-primary};
+  --active-primary: #{$active-primary};
+  --hover-primary-text: #{$hover-primary-text};
+  --hover-secondary: #{$hover-secondary};
+  --active-secondary: #{$active-secondary};
+  --hover-tertiary: #{$hover-tertiary};
+  --active-tertiary: #{$active-tertiary};
+  --hover-ui: #{$hover-ui};
+  --active-ui: #{$active-ui};
+  --selected-ui: #{$selected-ui};
+  --hover-selected-ui: #{$hover-selected-ui};
+  --hover-danger: #{$hover-danger};
+  --active-danger: #{$active-danger};
+  --hover-row: #{$hover-row};
+  --visited-link: #{$visited-link};
+  --disabled-01: #{$disabled-01};
+  --disabled-02: #{$disabled-02};
+  --disabled-03: #{$disabled-03};
+  --highlight: #{$highlight};
+  --skeleton-01: #{$skeleton-01};
+  --skeleton-02: #{$skeleton-02};
+  --active-01: #{$active-01};
+  --hover-field: #{$hover-field};
+
+  --box-shadow: #{$box-shadow};
+  --box-shadow-lift: #{$box-shadow-lift};
+
+  --border-radius: #{$border-radius};
+
+  --spacing-1: #{$spacing-1};
+  --spacing-2: #{$spacing-2};
+  --spacing-4: #{$spacing-4};
+  --spacing-8: #{$spacing-8};
+  --spacing-12: #{$spacing-12};
+  --spacing-16: #{$spacing-16};
+  --spacing-24: #{$spacing-24};
+  --spacing-32: #{$spacing-32};
+  --spacing-40: #{$spacing-40};
+  --spacing-48: #{$spacing-48};
+  --spacing-64: #{$spacing-64};
+  --spacing-96: #{$spacing-96};
+  --spacing-160: #{$spacing-160};
+
+  --p-default-max-width: #{$p-default-max-width};
+  --p-lead-default-max-width: #{$p-lead-default-max-width};
+
+  --gcm-ACCESS1-0: #{$gcm-ACCESS1-0};
+  --gcm-CanESM2: #{$gcm-CanESM2};
+  --gcm-CCSM4: #{$gcm-CCSM4};
+  --gcm-CESM1-BGC: #{$gcm-CESM1-BGC};
+  --gcm-CMCC-CMS: #{$gcm-CMCC-CMS};
+  --gcm-CNRM-CM5: #{$gcm-CNRM-CM5};
+  --gcm-GFDL-CM3: #{$gcm-GFDL-CM3};
+  --gcm-HadGEM2-CC: #{$gcm-HadGEM2-CC};
+  --gcm-HadGEM2-ES: #{$gcm-HadGEM2-ES};
+  --gcm-MIROC5: #{$gcm-MIROC5};
+}
