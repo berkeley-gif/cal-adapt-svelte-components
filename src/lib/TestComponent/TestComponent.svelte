@@ -1,11 +1,10 @@
 <script lang="ts">
   export let message = "world";
-  let foo = true;
-  foo = "bar";
+  let open = true;
+  const handleClick = () => (open = !open);
 </script>
 
 <style lang="scss">
-  $margin: 0;
   $font-size: 1.25rem;
   $color-strong: magenta;
 
@@ -16,8 +15,8 @@
     max-width: clamp(25%, 6rem, 100%);
   }
 
-  p {
-    margin: $margin;
+  p,
+  summary {
     font-size: $font-size;
   }
 
@@ -27,5 +26,9 @@
 </style>
 
 <div>
-  <p>Hello <strong>{message}</strong>!!!</p>
+  <details bind:open>
+    <summary>Hello from...</summary>
+    <p><strong>{message} !!!</strong></p>
+    <button on:click="{handleClick}">close me</button>
+  </details>
 </div>
