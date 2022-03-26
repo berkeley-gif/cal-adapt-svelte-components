@@ -1,14 +1,23 @@
-<script>
-  export let message = "world";
+<script lang="ts">
+  import { default_message } from "./test";
+  export let message = default_message;
+  let open = true;
+  const handleClick = () => (open = !open);
 </script>
 
 <style lang="scss">
-  $margin: 0;
   $font-size: 1.25rem;
   $color-strong: magenta;
 
-  p {
-    margin: $margin;
+  div {
+    padding: 1rem;
+    border: 1px solid #333;
+    border-radius: 0.125rem;
+    max-width: clamp(25%, 6rem, 100%);
+  }
+
+  p,
+  summary {
     font-size: $font-size;
   }
 
@@ -17,4 +26,10 @@
   }
 </style>
 
-<p>Hello <strong>{message}</strong>!!!</p>
+<div>
+  <details bind:open>
+    <summary>Hello from...</summary>
+    <p><strong>{message} !!!</strong></p>
+    <button on:click="{handleClick}">close me</button>
+  </details>
+</div>
