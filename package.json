@@ -42,7 +42,7 @@
   },
   "type": "module",
   "lint-staged": {
-    "*.{js,svelte}": "eslint --cache",
+    "*.{js,ts,svelte}": "eslint --cache",
     "*.{css,scss,svelte}": "stylelint --allow-empty-input",
     "*.{js,svelte,jsx,ts,tsx,md,html,css,scss}": "prettier --write"
   }
