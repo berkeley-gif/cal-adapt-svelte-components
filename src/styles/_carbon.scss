@@ -1,4 +1,11 @@
-// @import "carbon-components/scss/globals/scss/vendor/@carbon/themes/scss/themes.scss";
+@use "./variables" as *;
+
+// Use the "g10" (Gray 10) Carbon theme
+// see: https://github.com/carbon-design-system/carbon-components-svelte/blob/master/css/g10.scss
+@import "carbon-components/scss/globals/scss/vendor/@carbon/themes/scss";
+
+$carbon--theme: $caladapt-carbon-theme;
+@include carbon--theme();
 
 $feature-flags: (
   ui-shell: true,
@@ -13,9 +20,10 @@ $css--reset: true;
 $css--default-type: true;
 $css--plex: true;
 
-// with the $css- flags above the following imports the global carbon styles
-// it does not include the component styles which must be added separately
-// see: https://github.com/carbon-design-system/carbon/blob/main/docs/guides/sass.md
+// Using the $css-* flags above, the following @import the global carbon styles.
+// This DOES NOT include the component styles which must be added separately.
+// This helps reduce the Sass rebuild times when files in the src/styles dir are changed.
+// See: https://github.com/carbon-design-system/carbon/blob/main/docs/guides/sass.md
 @import "carbon-components/scss/globals/scss/css--reset";
 @import "carbon-components/scss/globals/scss/css--font-face";
 @import "carbon-components/scss/globals/scss/css--helpers";
