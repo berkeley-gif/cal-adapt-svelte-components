@@ -29,3 +29,9 @@ $css--plex: true;
 @import "carbon-components/scss/globals/scss/css--helpers";
 @import "carbon-components/scss/globals/scss/css--body";
 @import "carbon-components/scss/globals/grid/grid";
+
+// Individual component style imports.
+// Unlike the caladapt-website-2021 repo, import only the component styles that
+// that we require.
+@import "carbon-components/scss/components/search/search";
+@import "carbon-components/scss/components/button/button";

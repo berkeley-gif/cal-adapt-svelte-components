@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { TestComponent } from "$lib";
+  import { Search } from "$lib";
 </script>
 
 <h1>Welcome to Cal-Adapt Svelte Components</h1>
 
-<h2>Test Component</h2>
+<h2>Seach with Auto-Suggest</h2>
 
-<TestComponent message="Cal-Adapt" />
+<Search />
