@@ -1,6 +1,6 @@
 @use "./variables" as *;
 
-// Use the "g10" (Gray 10) Carbon theme
+// Set Cal-Adapt color theme overrides. Based on:
 // see: https://github.com/carbon-design-system/carbon-components-svelte/blob/master/css/g10.scss
 @import "carbon-components/scss/globals/scss/vendor/@carbon/themes/scss";
 
