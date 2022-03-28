@@ -1,0 +1,50 @@
+@use "./variables" as var;
+@use "carbon-components/scss/globals/scss/helper-mixins" as *;
+
+.h1,
+h1 {
+  @include type-style("display-02", false);
+  margin-top: $spacing-lg;
+  margin-bottom: $spacing-md;
+}
+
+.h2,
+h2 {
+  @include type-style("expressive-heading-05", false);
+  margin-top: $spacing-lg;
+  margin-bottom: $spacing-md;
+  font-weight: 600;
+}
+
+.h3,
+h3 {
+  @include type-style("expressive-heading-04", false);
+  margin-top: $spacing-lg;
+  margin-bottom: $spacing-md;
+  font-weight: 600;
+}
+
+.h4,
+h4 {
+  @include type-style("expressive-heading-03", false);
+  margin-top: $spacing-lg;
+  margin-bottom: $spacing-md;
+  font-weight: 600;
+}
+
+.h5,
+h5,
+.h6,
+h6 {
+  // h5 and h6 intentionally mimic one another
+  @include type-style("productive-heading-02", false);
+  margin-top: $spacing-lg;
+  margin-bottom: $spacing-md;
+  font-weight: 600;
+}
+
+p {
+  @include type-style("body-long-02", false);
+  margin-bottom: $spacing-md;
+  max-width: var.$p-default-max-width;
+}

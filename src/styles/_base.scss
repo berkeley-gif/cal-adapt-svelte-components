@@ -1,0 +1,33 @@
+@use "./variables" as *;
+
+table {
+  // note: these are set by CSS reset
+  // border-collapse: collapse;
+  // border-spacing: 0;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 0.5rem;
+  text-align: left;
+  border: 1px solid $gray-30;
+  line-height: 1.3;
+}
+
+th {
+  background-color: $gray-80;
+  color: $white;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 0.875rem;
+  letter-spacing: 0.031rem;
+  vertical-align: middle;
+}
+
+td {
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}

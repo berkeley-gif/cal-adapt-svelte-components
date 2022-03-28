@@ -75,6 +75,18 @@ Sapper / Webpack will not be able to resolve the bare module import and thus the
 import { SomeComponent } from "cal-adapt-svelte-components";
 ```
 
+## Other NPM Scripts
+
+### sass:check
+
+The rebuild times for the project level / global Sass is a little slow with Vite. To verify that the project's Sass compiles successfully you may do:
+
+```bash
+npm run sass:check
+```
+
+If all goes well no output will be shown. Any errors will be printed to the console.
+
 ## Code Credits
 
 ### create-svelte
