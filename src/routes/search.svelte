@@ -57,7 +57,3 @@
   handleSearchInput="{handleSearchInput}"
   clearSearch="{clearSearch}"
 />
-
-<footer style="margin-top: 10rem">
-  <p><a href="/">Go back to the homepage</a></p>
-</footer>
