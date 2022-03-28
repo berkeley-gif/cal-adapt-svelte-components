@@ -21,9 +21,12 @@
   let suggestionsList: HTMLOListElement;
 
   function selectSearchResult(item: Item) {
-    searchValue = item.title;
-    suggestions = [];
-    dispatch("change", item);
+    // what to do when item is not defined?
+    if (item) {
+      searchValue = item.title;
+      suggestions = [];
+      dispatch("change", item);
+    }
   }
 
   function handleInputKeydown(event: KeyboardEvent) {
@@ -36,9 +39,10 @@
       flag = true;
     }
 
-    if (key === "Enter" && value && suggestions.length) {
+    if (key === "Enter" && suggestions.length) {
       const items = getListItems();
       const idx = getActiveListItemIdx(items);
+      // what do to when idx === -1?
       selectSearchResult(suggestions[idx]);
       flag = true;
     }
@@ -72,13 +76,11 @@
   function highlightFirstItem() {
     const items = getListItems();
     highlightItem(items[0]);
-    searchValue = items[0].innerText;
   }
 
   function highlightLastItem() {
     const items = getListItems();
     highlightItem(items[items.length - 1]);
-    searchValue = items[items.length - 1].innerText;
   }
 
   function highlightNextItem() {
@@ -93,7 +95,6 @@
     }
 
     highlightItem(next);
-    searchValue = next.innerText;
   }
 
   function highlightPrevItem() {
@@ -108,7 +109,6 @@
     }
 
     highlightItem(prev);
-    searchValue = prev.innerText;
   }
 
   function highlightItem(item: HTMLLIElement) {
