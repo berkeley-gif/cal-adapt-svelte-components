@@ -25,13 +25,16 @@
 
   function handleSearchInput(event: Event) {
     const { value } = <HTMLInputElement>event.target;
+
     if (value && value.length >= 3) {
       searchForItem(value);
+    } else {
+      suggestionsFiltered = suggestions.slice();
     }
   }
 
   function searchForItem(value: string) {
-    suggestionsFiltered = suggestionsFiltered.filter(({ title }) =>
+    suggestionsFiltered = suggestions.filter(({ title }) =>
       title.toLowerCase().includes(value.toLocaleLowerCase())
     );
   }
