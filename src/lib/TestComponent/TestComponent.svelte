@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { default_message } from "./test";
+  import { default_message } from "./constants";
   export let message = default_message;
   let open = true;
   const handleClick = () => (open = !open);
