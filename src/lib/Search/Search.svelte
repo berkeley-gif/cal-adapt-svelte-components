@@ -2,45 +2,31 @@
   import { createEventDispatcher } from "svelte";
   import { Button, Search } from "carbon-components-svelte";
 
-  export const description = "Search for a place name or address";
-  export const inputDebounceMs = 350;
+  // describes the properties of a suggestion item
+  interface Item {
+    title: string;
+    id: string | number;
+    value: any;
+  }
+
+  export let description = "Search for a place name or address";
+  export let searchValue = "";
+  export let suggestions: Item[] = [];
+  export let outlineColor = "#fdd13a"; // the color applied to the input field when focused
+  export let handleSearchInput: (event: Event) => void; // specify how items are filtered when the user types
+  export let clearSearch: () => void; // specify what happens when search results are cleared
 
   const dispatch = createEventDispatcher();
 
-  let searchValue = "";
-  let suggestions = [];
-
-  function selectSearchResult(item) {
+  function selectSearchResult(item: Item) {
     searchValue = item.title;
     suggestions = [];
     dispatch("change", item);
   }
 
-  async function handleSearchInput(event) {
-    const { value } = event.target;
-    if (value && value.length >= 3) {
-      await handleSearch();
-    }
-  }
-
-  async function handleSearch() {
-    suggestions = await getSuggestions(searchValue);
-  }
-
-  async function getSuggestions(value: string) {
-    try {
-      // TO DO: do geocoding / search work here
-    } catch (error) {
-      console.warn(error);
-    }
-    return [];
-  }
-
-  function handleInputKeydown(event) {
-    const {
-      key,
-      target: { value }
-    } = event;
+  function handleInputKeydown(event: KeyboardEvent) {
+    const key = event.key;
+    const value = (<HTMLInputElement>event.target).value;
     let flag = false;
 
     if (key === "Escape" || key === "Esc") {
@@ -58,23 +44,17 @@
       event.preventDefault();
     }
   }
-
-  function clearSearch() {
-    searchValue = "";
-    suggestions = [];
-  }
 </script>
 
 <style lang="scss">
-  @use "../../styles/variables" as *;
-
   div {
-    width: 24rem;
     padding-left: 0.5rem;
-    background-color: $white;
+    background-color: var(--white);
+    border: 1px solid var(--gray-60);
 
     &:focus-within {
-      outline: 2px solid $support-03;
+      border: none;
+      outline: 2px solid var(--support-03);
     }
 
     /* stylelint-disable-next-line selector-class-pattern */
@@ -99,7 +79,7 @@
   }
 </style>
 
-<div>
+<div style="outline-color: {outlineColor}">
   <Search
     bind:value="{searchValue}"
     on:input="{handleSearchInput}"
