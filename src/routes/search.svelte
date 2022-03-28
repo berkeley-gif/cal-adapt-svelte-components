@@ -21,7 +21,7 @@
   const outlineColor = "#036063";
 
   let searchValue = "";
-  let suggestionsFiltered = suggestions.slice();
+  let suggestionsFiltered = [];
 
   function handleSearchInput(event: Event) {
     const { value } = <HTMLInputElement>event.target;
@@ -29,7 +29,7 @@
     if (value && value.length >= 3) {
       searchForItem(value);
     } else {
-      suggestionsFiltered = suggestions.slice();
+      suggestionsFiltered = [];
     }
   }
 
@@ -44,13 +44,16 @@
   }
 
   function clearSearch() {
-    suggestionsFiltered = suggestions.slice();
+    suggestionsFiltered = [];
     searchValue = "";
   }
 </script>
 
 <h1>Seach with auto-suggest</h1>
-<p>This search input will filter suggestions as you type.</p>
+<p>
+  This search input will filter suggestions as you type. To try it out, focus
+  the search box and start typing the word "option".
+</p>
 
 <Search
   on:change="{handleSearchChange}"
