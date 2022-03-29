@@ -1,5 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import Search16 from "carbon-icons-svelte/lib/Search16";
+  import Close16 from "carbon-icons-svelte/lib/Close16";
 
   // describes the properties of a suggestion item
   interface Item {
@@ -8,18 +10,36 @@
     value: string | number;
   }
 
+  /** specify the label & placeholder text */
   export let description = "Search for a place name or address";
+
+  /** the value of the search input */
   export let searchValue = "";
+
+  /** the list of suggestions */
   export let suggestions: Item[] = [];
-  export let outlineColor = "#fdd13a"; // the color applied to the input field when focused
-  export let handleSearchInput: (event: Event) => void; // specify how items are filtered when the user types
-  export let clearSearch: () => void; // specify what happens when search results are cleared
+
+  /** the outline color to use when the input is focused */
+  export let outlineColor = "#fdd13a";
+
+  /** a reference to the search input */
+  export let inputRef: HTMLInputElement | null = null;
+
+  /** optional id for the input element */
+  export let inputId = `cac-${Math.random().toString(36)}`;
+
+  /** size of the search bar */
+  export let size: "sm" | "lg" | "xl" = "sm";
+
+  /** specify how items are filtered when the user types */
+  export let handleSearchInput: (event: Event) => void;
+
+  /** specify what happens when search results are cleared */
+  export let clearSearch: () => void;
 
   const dispatch = createEventDispatcher();
-  const getRandomId = (precision = 9) =>
-    Math.random().toFixed(precision).replace(".", "");
-  const inputId = `combo-box-${getRandomId()}`;
-  const labelId = `label-${getRandomId()}`;
+
+  const labelId = `cac-${Math.random().toString(36)}`;
 
   let suggestionsList: HTMLOListElement;
 
@@ -34,7 +54,6 @@
 
   function handleInputKeydown(event: KeyboardEvent) {
     const key = event.key;
-    const value = (<HTMLInputElement>event.target).value;
     let flag = false;
 
     if (key === "Escape" || key === "Esc") {
@@ -135,19 +154,19 @@
 
 <style lang="scss">
   /* stylelint-disable-next-line selector-class-pattern */
-  div.ca--search {
+  div.cac--search {
     padding-left: 0.5rem;
     background-color: var(--white);
     border: 1px solid var(--gray-60);
 
     &:focus-within {
-      border: none;
-      outline: 2px solid var(--support-03);
+      border-color: transparent;
+      outline: 2px solid var(--outline-color, var(--support-03));
     }
 
     /* stylelint-disable-next-line selector-class-pattern */
     :global(.bx--search-input) {
-      border-color: transparent;
+      border: none;
     }
 
     /* stylelint-disable-next-line selector-class-pattern */
@@ -177,70 +196,47 @@
 </style>
 
 <!-- TODO: add aria attribues -->
-<div class="ca--search" style="outline-color: {outlineColor}">
-  <!-- <Search
-    bind:value="{searchValue}"
-    on:input="{handleSearchInput}"
-    on:keydown="{handleInputKeydown}"
-    on:clear="{clearSearch}"
-    size="sm"
-    labelText="{description}"
-    placeholder="{description}"
-  /> -->
+<div class="cac--search" style="--outline-color:{outlineColor};">
   <div
-    class="bx--search bx--search--sm"
+    class:bx--search="{true}"
+    class:bx--search--sm="{size === 'sm'}"
+    class:bx--search--lg="{size === 'lg'}"
+    class:bx--search--xl="{size === 'xl'}"
     role="search"
     aria-labelledby="{labelId}"
   >
     <div class="bx--search-magnifier">
-      <svg
-        data-carbon-icon="Search16"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 16 16"
-        fill="currentColor"
-        width="16"
-        height="16"
-        class="bx--search-magnifier-icon"
-        preserveAspectRatio="xMidYMid meet"
-        aria-hidden="true"
-        focusable="false"
-        ><path
-          d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
-        ></path></svg
-      >
-      <!-- <Search16 /> -->
+      <Search16 />
     </div>
     <label id="{labelId}" class="bx--label" for="{inputId}">{description}</label
     >
     <input
+      bind:this="{inputRef}"
+      bind:value="{searchValue}"
       id="{inputId}"
-      class="bx--search-input"
+      class:bx--search-input="{true}"
+      type="text"
       role="combobox"
       placeholder="{description}"
-      type="text"
+      autocomplete="off"
       aria-autocomplete="both"
       aria-owns="res"
-      autocomplete="off"
+      on:change
+      on:input="{handleSearchInput}"
+      on:focus
+      on:blur
+      on:keydown
+      on:keydown="{handleInputKeydown}"
+      on:keyup
     />
     <button
-      class="bx--search-close bx--search-close--hidden"
+      class:bx--search-close="{true}"
+      class:bx--search-close--hidden="{searchValue === ''}"
       type="button"
       aria-label="Clear search input"
+      on:click="{clearSearch}"
     >
-      <svg
-        data-carbon-icon="Close16"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 32 32"
-        fill="currentColor"
-        width="16"
-        height="16"
-        preserveAspectRatio="xMidYMid meet"
-        aria-hidden="true"
-        focusable="false"
-        ><path
-          d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
-        ></path></svg
-      >
+      <Close16 />
     </button>
   </div>
   {#if suggestions.length}
