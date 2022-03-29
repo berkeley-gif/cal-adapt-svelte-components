@@ -1,6 +1,5 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { Search } from "carbon-components-svelte";
 
   // describes the properties of a suggestion item
   interface Item {
@@ -17,6 +16,10 @@
   export let clearSearch: () => void; // specify what happens when search results are cleared
 
   const dispatch = createEventDispatcher();
+  const getRandomId = (precision = 9) =>
+    Math.random().toFixed(precision).replace(".", "");
+  const inputId = `combo-box-${getRandomId()}`;
+  const labelId = `label-${getRandomId()}`;
 
   let suggestionsList: HTMLOListElement;
 
@@ -131,7 +134,8 @@
 </script>
 
 <style lang="scss">
-  div {
+  /* stylelint-disable-next-line selector-class-pattern */
+  div.ca--search {
     padding-left: 0.5rem;
     background-color: var(--white);
     border: 1px solid var(--gray-60);
@@ -143,7 +147,7 @@
 
     /* stylelint-disable-next-line selector-class-pattern */
     :global(.bx--search-input) {
-      border-bottom: none;
+      border-color: transparent;
     }
 
     /* stylelint-disable-next-line selector-class-pattern */
@@ -172,8 +176,9 @@
   }
 </style>
 
-<div style="outline-color: {outlineColor}">
-  <Search
+<!-- TODO: add aria attribues -->
+<div class="ca--search" style="outline-color: {outlineColor}">
+  <!-- <Search
     bind:value="{searchValue}"
     on:input="{handleSearchInput}"
     on:keydown="{handleInputKeydown}"
@@ -181,7 +186,63 @@
     size="sm"
     labelText="{description}"
     placeholder="{description}"
-  />
+  /> -->
+  <div
+    class="bx--search bx--search--sm"
+    role="search"
+    aria-labelledby="{labelId}"
+  >
+    <div class="bx--search-magnifier">
+      <svg
+        data-carbon-icon="Search16"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        width="16"
+        height="16"
+        class="bx--search-magnifier-icon"
+        preserveAspectRatio="xMidYMid meet"
+        aria-hidden="true"
+        focusable="false"
+        ><path
+          d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
+        ></path></svg
+      >
+      <!-- <Search16 /> -->
+    </div>
+    <label id="{labelId}" class="bx--label" for="{inputId}">{description}</label
+    >
+    <input
+      id="{inputId}"
+      class="bx--search-input"
+      role="combobox"
+      placeholder="{description}"
+      type="text"
+      aria-autocomplete="both"
+      aria-owns="res"
+      autocomplete="off"
+    />
+    <button
+      class="bx--search-close bx--search-close--hidden"
+      type="button"
+      aria-label="Clear search input"
+    >
+      <svg
+        data-carbon-icon="Close16"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 32 32"
+        fill="currentColor"
+        width="16"
+        height="16"
+        preserveAspectRatio="xMidYMid meet"
+        aria-hidden="true"
+        focusable="false"
+        ><path
+          d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+        ></path></svg
+      >
+    </button>
+  </div>
   {#if suggestions.length}
     <ol bind:this="{suggestionsList}">
       {#each suggestions as item (item.id)}
