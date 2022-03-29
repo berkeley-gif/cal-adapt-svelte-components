@@ -40,8 +40,10 @@
   const dispatch = createEventDispatcher();
 
   const labelId = `cac-${Math.random().toString(36)}`;
+  const listboxId = `cac-${Math.random().toString(36)}`;
 
-  let suggestionsList: HTMLOListElement;
+  let suggestionsList: HTMLDivElement;
+  let selectedId: string | number;
 
   function selectSearchResult(item: Item) {
     // what to do when item is not defined?
@@ -108,12 +110,12 @@
   function highlightNextItem() {
     const items = getListItems();
     let idx = getActiveListItemIdx(items);
-    let next: HTMLLIElement;
+    let next: HTMLDivElement;
 
     if (idx === -1) {
       next = items[0];
     } else {
-      next = items[idx + 1] || (items[0] as HTMLLIElement);
+      next = items[idx + 1] || (items[0] as HTMLDivElement);
     }
 
     highlightItem(next);
@@ -122,18 +124,18 @@
   function highlightPrevItem() {
     const items = getListItems();
     let idx = getActiveListItemIdx(items);
-    let prev: HTMLLIElement;
+    let prev: HTMLDivElement;
 
     if (idx === -1) {
       prev = items[items.length - 1];
     } else {
-      prev = items[idx - 1] || (items[items.length - 1] as HTMLLIElement);
+      prev = items[idx - 1] || (items[items.length - 1] as HTMLDivElement);
     }
 
     highlightItem(prev);
   }
 
-  function highlightItem(item: HTMLLIElement) {
+  function highlightItem(item: HTMLDivElement) {
     const items = getListItems();
     items.forEach((item) => item.classList.remove("active"));
     item.classList.add("active");
@@ -142,12 +144,12 @@
   function getListItems() {
     if (suggestionsList) {
       return Array.from(
-        suggestionsList.querySelectorAll("li")
-      ) as Array<HTMLLIElement>;
+        suggestionsList.querySelectorAll("div")
+      ) as Array<HTMLDivElement>;
     }
   }
 
-  function getActiveListItemIdx(items: HTMLLIElement[]) {
+  function getActiveListItemIdx(items: HTMLDivElement[]) {
     return items.findIndex((el) => el.classList.contains("active"));
   }
 </script>
@@ -155,6 +157,7 @@
 <style lang="scss">
   /* stylelint-disable-next-line selector-class-pattern */
   div.cac--search {
+    position: relative;
     padding-left: 0.5rem;
     background-color: var(--white);
     border: 1px solid var(--gray-60);
@@ -173,24 +176,6 @@
     :global(.bx--search-input:focus) {
       // outline created on parent element on focus
       outline: none;
-    }
-  }
-
-  ol {
-    list-style: none;
-    padding-left: 0.9rem !important;
-  }
-
-  li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--gray-60);
-
-    &:last-child {
-      border-bottom: none;
-    }
-
-    &:global(.active) {
-      background-color: var(--accent);
     }
   }
 </style>
@@ -220,7 +205,7 @@
       placeholder="{description}"
       autocomplete="off"
       aria-autocomplete="both"
-      aria-owns="res"
+      aria-owns="{listboxId}"
       on:change
       on:input="{handleSearchInput}"
       on:focus
@@ -240,12 +225,23 @@
     </button>
   </div>
   {#if suggestions.length}
-    <ol bind:this="{suggestionsList}">
+    <div
+      bind:this="{suggestionsList}"
+      class:bx--list-box__menu="{true}"
+      id="{listboxId}"
+      role="listbox"
+    >
       {#each suggestions as item (item.id)}
-        <li>
-          {item.title}
-        </li>
+        <div
+          class:bx--list-box__menu-item="{true}"
+          class:bx--list-box__menu-item--highlighted="{item.id === selectedId}"
+          role="option"
+        >
+          <div class:bx--list-box__menu-item__option="{true}">
+            {item.title}
+          </div>
+        </div>
       {/each}
-    </ol>
+    </div>
   {/if}
 </div>
