@@ -87,33 +87,35 @@
     let flag = false;
 
     if (key === "Escape" || key === "Esc") {
-      clearSearch();
+      open = false;
       flag = true;
     }
 
-    if (key === "Enter" && suggestions.length && !selectedItem) {
-      selectSearchResult();
-      flag = true;
-    }
+    if (open && suggestions.length && !selectedItem) {
+      if (key === "Enter") {
+        selectSearchResult();
+        flag = true;
+      }
 
-    if (key === "Home" && suggestions.length && !selectedItem) {
-      highlightFirstItem();
-      flag = true;
-    }
+      if (key === "Home") {
+        highlightFirstItem();
+        flag = true;
+      }
 
-    if (key === "End" && suggestions.length && !selectedItem) {
-      highlightLastItem();
-      flag = true;
-    }
+      if (key === "End") {
+        highlightLastItem();
+        flag = true;
+      }
 
-    if (key === "ArrowDown" && suggestions.length && !selectedItem) {
-      updateHighlightedIndex(1);
-      flag = true;
-    }
+      if (key === "ArrowDown") {
+        updateHighlightedIndex(1);
+        flag = true;
+      }
 
-    if (key === "ArrowUp" && suggestions.length && !selectedItem) {
-      updateHighlightedIndex(-1);
-      flag = true;
+      if (key === "ArrowUp") {
+        updateHighlightedIndex(-1);
+        flag = true;
+      }
     }
 
     if (flag) {
