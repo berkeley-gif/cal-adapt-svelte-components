@@ -20,6 +20,11 @@ $css--reset: true;
 $css--default-type: true;
 $css--plex: true;
 
+@import "carbon-components/scss/globals/scss/component-tokens";
+@import "carbon-components/src/components/tag/tag";
+@import "carbon-components/src/components/notification/inline-notification";
+@import "carbon-components/src/components/notification/toast-notification";
+
 // Using the $css-* flags above, the following @import the global carbon styles.
 // This DOES NOT include the component styles which must be added separately.
 // This helps reduce the Sass rebuild times when files in the src/styles dir are changed.
@@ -35,3 +40,5 @@ $css--plex: true;
 // that we require.
 @import "carbon-components/scss/components/search/search";
 @import "carbon-components/scss/components/button/button";
+@import "carbon-components/scss/components/text-input/text-input";
+@import "carbon-components/scss/components/combo-box/combo-box";
