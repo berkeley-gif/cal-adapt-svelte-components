@@ -22,24 +22,21 @@
   const description = "Search for an option";
 
   let searchValue = "";
-  let suggestionsFiltered = suggestions;
+  let suggestionsFiltered = suggestions.slice();
 
   function handleSearchInput(event: Event) {
     const { value } = <HTMLInputElement>event.target;
-
     if (value && value.length) {
-      searchForItem(value);
+      suggestionsFiltered = suggestions.filter(({ title }) =>
+        title.toLowerCase().includes(value.toLocaleLowerCase())
+      );
+    } else {
+      suggestionsFiltered = suggestions.slice();
     }
   }
 
-  function searchForItem(value: string) {
-    suggestionsFiltered = suggestions.filter(({ title }) =>
-      title.toLowerCase().includes(value.toLocaleLowerCase())
-    );
-  }
-
   function handleSearchChange(event: CustomEvent) {
-    console.log(event.detail);
+    console.log("search change event: ", event.detail);
   }
 </script>
 
@@ -58,5 +55,6 @@
   suggestions="{suggestionsFiltered}"
 />
 
-<p>Another input to test tab flow</p>
+<br />
+<p>A non-search related dummy input to test tab flow.</p>
 <input type="text" />
