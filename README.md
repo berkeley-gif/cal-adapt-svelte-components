@@ -8,6 +8,27 @@ The rationale for this component repository is:
 
 2. Develop components in isolation so that they may be compatible in other Cal-Adapt related projects.
 
+## The Components
+
+### Search with auto-suggest
+
+A search box component with auto-suggest. Similar to the [CDS ComboBox](https://carbon-components-svelte.onrender.com/components/ComboBox) but with some corrections to `aria` and `role` attributes for improved accessibility.
+
+- [Component code](./src/lib/Search/)
+- [Demo](./src/routes/search.svelte)
+
+#### Props
+
+| Prop name    | Type                     | Default Value                        | Description                                        |
+| ------------ | ------------------------ | ------------------------------------ | -------------------------------------------------- |
+| description  | string                   | "Search for a place name or address" | Sets the input's label & placeholder text          |
+| searchValue  | string                   | ""                                   | The value of the search input                      |
+| suggestions  | SearchItem               | [ ]                                  | The list of suggestions.                           |
+| outlineColor | string                   | "#fdd13a"                            | The outline color to use when the input is focused |
+| inputRef     | HTMLInputElement \| null | null                                 | Reference to the search input HTML node.           |
+| inputId      | string                   | `cac-${Math.random().toString(36)}`  | Optional id for the input element                  |
+| size         | "sm"\|"lg"\|"xl"         | "sm"                                 | The size of the carbon components search bar.      |
+
 ## Developing
 
 Once you've installed dependencies with `npm install`, start a development server:
