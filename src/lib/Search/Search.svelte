@@ -42,9 +42,20 @@
   let highlightedIndex = -1;
 
   $: {
-    console.log(selectedItem);
-    console.log(open);
-    console.log(highlightedIndex);
+    console.log("selectedItem: ", selectedItem);
+    console.log("open: ", open);
+    console.log("highlightedIndex: ", highlightedIndex);
+  }
+
+  /** Clears the value of the search input, may be used programmatically */
+  export function clearSearch(focus = true) {
+    searchValue = "";
+    highlightedIndex = -1;
+    selectedItem = undefined;
+    open = false;
+    if (focus && inputRef) {
+      inputRef.focus();
+    }
   }
 
   function selectSearchResult() {
@@ -57,16 +68,6 @@
     highlightedIndex = -1;
     searchValue = selectedItem.title;
     dispatch("change", selectedItem);
-  }
-
-  function clearSearch() {
-    searchValue = "";
-    highlightedIndex = -1;
-    selectedItem = undefined;
-    open = false;
-    if (inputRef) {
-      inputRef.focus();
-    }
   }
 
   function handleInput(event: Event) {
