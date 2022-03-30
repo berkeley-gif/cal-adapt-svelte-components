@@ -100,6 +100,11 @@
         flag = true;
       }
 
+      if (key === "Tab") {
+        open = false;
+        // we want the focus to change so don't preventDefault here
+      }
+
       if (key === "Home") {
         highlightFirstItem();
         flag = true;
