@@ -197,10 +197,8 @@
 
 <svelte:window on:click="{handleWindowClick}" />
 
-<!-- TODO: add aria attribues -->
 <div class="cac--search" style="--outline-color:{outlineColor};">
-  <form
-    on:submit|preventDefault
+  <div
     class:bx--search="{true}"
     class:bx--search--sm="{size === 'sm'}"
     class:bx--search--lg="{size === 'lg'}"
@@ -256,7 +254,7 @@
     >
       <ChevronUp16 />
     </div>
-  </form>
+  </div>
   {#if open}
     <div class:bx--list-box__menu="{true}" id="{listboxId}" role="listbox">
       {#each suggestions as item, i (item.id)}
