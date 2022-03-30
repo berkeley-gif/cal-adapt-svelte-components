@@ -184,6 +184,7 @@
 <!-- TODO: add aria attribues -->
 <div class="cac--search" style="--outline-color:{outlineColor};">
   <form
+    on:submit|preventDefault
     class:bx--search="{true}"
     class:bx--search--sm="{size === 'sm'}"
     class:bx--search--lg="{size === 'lg'}"
