@@ -35,7 +35,7 @@
     }
   }
 
-  function handleSearchChange(event: CustomEvent) {
+  function handleSearchSelection(event: CustomEvent) {
     console.log("search change event: ", event.detail);
   }
 </script>
@@ -48,7 +48,7 @@
 
 <Search
   bind:searchValue
-  on:change="{handleSearchChange}"
+  on:select="{handleSearchSelection}"
   on:input="{handleSearchInput}"
   description="{description}"
   outlineColor="{outlineColor}"
