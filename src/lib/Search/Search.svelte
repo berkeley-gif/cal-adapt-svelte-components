@@ -41,8 +41,15 @@
   let open = false;
   let highlightedIndex = -1;
 
+  // the id attribute of the selected listbox option
+  $: selectedId =
+    highlightedIndex > -1 && suggestions.length
+      ? getOptionId(suggestions[highlightedIndex].id)
+      : undefined;
+
   $: {
     console.log("selectedItem: ", selectedItem);
+    console.log("selectedId: ", selectedId);
     console.log("open: ", open);
     console.log("highlightedIndex: ", highlightedIndex);
   }
@@ -156,6 +163,10 @@
       open = false;
     }
   }
+
+  function getOptionId(value: string | number) {
+    return `suggestion-${value}`;
+  }
 </script>
 
 <style lang="scss">
@@ -213,6 +224,7 @@
       autocomplete="off"
       aria-autocomplete="both"
       aria-owns="{listboxId}"
+      aria-activedescendant="{selectedId}"
       on:change
       on:input
       on:input="{handleInput}"
@@ -249,6 +261,7 @@
     <div class:bx--list-box__menu="{true}" id="{listboxId}" role="listbox">
       {#each suggestions as item, i (item.id)}
         <div
+          id="{getOptionId(item.id)}"
           class:bx--list-box__menu-item="{true}"
           class:bx--list-box__menu-item--highlighted="{i === highlightedIndex}"
           role="option"
