@@ -42,15 +42,30 @@
   const labelId = `cac-${Math.random().toString(36)}`;
   const listboxId = `cac-${Math.random().toString(36)}`;
 
-  let suggestionsList: HTMLDivElement;
+  let selectedItem: Item;
   let selectedId: string | number;
+  let open = false;
+  let highlightedIndex = -1;
 
-  function selectSearchResult(item: Item) {
+  function selectSearchResult() {
     // what to do when item is not defined?
-    if (item) {
-      searchValue = item.title;
+    if (highlightedIndex !== -1 && suggestions[highlightedIndex]) {
+      selectedItem = suggestions[highlightedIndex];
+      searchValue = selectedItem.title;
       suggestions = [];
-      dispatch("change", item);
+      dispatch("change", selectedItem);
+    }
+  }
+
+  function handleInput(event: Event) {
+    const { value } = <HTMLInputElement>event.target;
+    if (!open && value.length > 0) {
+      open = true;
+    }
+    searchValue = value;
+    if (!searchValue.length) {
+      clearSearch();
+      open = true;
     }
   }
 
@@ -64,10 +79,7 @@
     }
 
     if (key === "Enter" && suggestions.length) {
-      const items = getListItems();
-      const idx = getActiveListItemIdx(items);
-      // what do to when idx === -1?
-      selectSearchResult(suggestions[idx]);
+      selectSearchResult();
       flag = true;
     }
 
@@ -82,12 +94,12 @@
     }
 
     if (key === "ArrowDown" && suggestions.length) {
-      highlightNextItem();
+      updateHighlightedIndex(1);
       flag = true;
     }
 
     if (key === "ArrowUp" && suggestions.length) {
-      highlightPrevItem();
+      updateHighlightedIndex(-1);
       flag = true;
     }
 
@@ -97,60 +109,22 @@
     }
   }
 
+  function updateHighlightedIndex(dir: number) {
+    let index = highlightedIndex + dir;
+    if (index < 0) {
+      index = suggestions.length - 1;
+    } else if (index >= suggestions.length) {
+      index = 0;
+    }
+    highlightedIndex = index;
+  }
+
   function highlightFirstItem() {
-    const items = getListItems();
-    highlightItem(items[0]);
+    highlightedIndex = 0;
   }
 
   function highlightLastItem() {
-    const items = getListItems();
-    highlightItem(items[items.length - 1]);
-  }
-
-  function highlightNextItem() {
-    const items = getListItems();
-    let idx = getActiveListItemIdx(items);
-    let next: HTMLDivElement;
-
-    if (idx === -1) {
-      next = items[0];
-    } else {
-      next = items[idx + 1] || (items[0] as HTMLDivElement);
-    }
-
-    highlightItem(next);
-  }
-
-  function highlightPrevItem() {
-    const items = getListItems();
-    let idx = getActiveListItemIdx(items);
-    let prev: HTMLDivElement;
-
-    if (idx === -1) {
-      prev = items[items.length - 1];
-    } else {
-      prev = items[idx - 1] || (items[items.length - 1] as HTMLDivElement);
-    }
-
-    highlightItem(prev);
-  }
-
-  function highlightItem(item: HTMLDivElement) {
-    const items = getListItems();
-    items.forEach((item) => item.classList.remove("active"));
-    item.classList.add("active");
-  }
-
-  function getListItems() {
-    if (suggestionsList) {
-      return Array.from(
-        suggestionsList.querySelectorAll("div")
-      ) as Array<HTMLDivElement>;
-    }
-  }
-
-  function getActiveListItemIdx(items: HTMLDivElement[]) {
-    return items.findIndex((el) => el.classList.contains("active"));
+    highlightedIndex = suggestions.length - 1;
   }
 </script>
 
@@ -208,6 +182,7 @@
       aria-owns="{listboxId}"
       on:change
       on:input="{handleSearchInput}"
+      on:input="{handleInput}"
       on:focus
       on:blur
       on:keydown
@@ -220,22 +195,31 @@
       type="button"
       aria-label="Clear search input"
       on:click="{clearSearch}"
+      on:click="{() => {
+        highlightedIndex = -1;
+        searchValue = '';
+      }}"
     >
       <Close16 />
     </button>
   </div>
-  {#if suggestions.length}
-    <div
-      bind:this="{suggestionsList}"
-      class:bx--list-box__menu="{true}"
-      id="{listboxId}"
-      role="listbox"
-    >
-      {#each suggestions as item (item.id)}
+  {#if open}
+    <div class:bx--list-box__menu="{true}" id="{listboxId}" role="listbox">
+      {#each suggestions as item, i (item.id)}
         <div
           class:bx--list-box__menu-item="{true}"
-          class:bx--list-box__menu-item--highlighted="{item.id === selectedId}"
+          class:bx--list-box__menu-item--highlighted="{i === highlightedIndex}"
           role="option"
+          on:mouseenter="{() => {
+            highlightedIndex = i;
+          }}"
+          on:click="{() => {
+            selectedId = item.id;
+
+            if (suggestions && suggestions[i]) {
+              searchValue = suggestions[i].title;
+            }
+          }}"
         >
           <div class:bx--list-box__menu-item__option="{true}">
             {item.title}
