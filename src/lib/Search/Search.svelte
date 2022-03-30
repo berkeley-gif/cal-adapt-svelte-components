@@ -43,7 +43,6 @@
   const listboxId = `cac-${Math.random().toString(36)}`;
 
   let selectedItem: Item;
-  let selectedId: string | number;
   let open = false;
   let highlightedIndex = -1;
 
@@ -214,8 +213,6 @@
             highlightedIndex = i;
           }}"
           on:click="{() => {
-            selectedId = item.id;
-
             if (suggestions && suggestions[i]) {
               searchValue = suggestions[i].title;
             }
