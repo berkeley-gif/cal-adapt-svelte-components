@@ -80,6 +80,9 @@
       clearSearch();
       open = true;
     }
+    if (selectedItem) {
+      selectedItem = undefined;
+    }
   }
 
   function handleInputKeydown(event: KeyboardEvent) {
