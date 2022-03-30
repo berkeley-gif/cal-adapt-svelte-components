@@ -179,7 +179,7 @@
 
     &:focus-within {
       border-color: transparent;
-      outline: 2px solid var(--outline-color, var(--support-03));
+      outline: 3px solid var(--outline-color, var(--support-03));
     }
 
     /* stylelint-disable-next-line selector-class-pattern */
