@@ -19,17 +19,16 @@
     }
   ];
   const outlineColor = "#036063";
+  const description = "Search for an option";
 
   let searchValue = "";
-  let suggestionsFiltered = [];
+  let suggestionsFiltered = suggestions;
 
   function handleSearchInput(event: Event) {
     const { value } = <HTMLInputElement>event.target;
 
-    if (value && value.length >= 3) {
+    if (value && value.length) {
       searchForItem(value);
-    } else {
-      suggestionsFiltered = [];
     }
   }
 
@@ -42,11 +41,6 @@
   function handleSearchChange(event: CustomEvent) {
     console.log(event.detail);
   }
-
-  function clearSearch() {
-    suggestionsFiltered = [];
-    searchValue = "";
-  }
 </script>
 
 <h1>Seach with auto-suggest</h1>
@@ -56,10 +50,13 @@
 </p>
 
 <Search
+  bind:searchValue
   on:change="{handleSearchChange}"
+  on:input="{handleSearchInput}"
+  description="{description}"
   outlineColor="{outlineColor}"
   suggestions="{suggestionsFiltered}"
-  searchValue="{searchValue}"
-  handleSearchInput="{handleSearchInput}"
-  clearSearch="{clearSearch}"
 />
+
+<p>Another input to test tab flow</p>
+<input type="text" />

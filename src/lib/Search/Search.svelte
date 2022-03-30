@@ -2,6 +2,7 @@
   import { createEventDispatcher } from "svelte";
   import Search16 from "carbon-icons-svelte/lib/Search16";
   import Close16 from "carbon-icons-svelte/lib/Close16";
+  import ChevronUp16 from "carbon-icons-svelte/lib/ChevronUp16";
 
   // describes the properties of a suggestion item
   interface Item {
@@ -31,28 +32,40 @@
   /** size of the search bar */
   export let size: "sm" | "lg" | "xl" = "sm";
 
-  /** specify how items are filtered when the user types */
-  export let handleSearchInput: (event: Event) => void;
-
-  /** specify what happens when search results are cleared */
-  export let clearSearch: () => void;
-
   const dispatch = createEventDispatcher();
 
-  const labelId = `cac-${Math.random().toString(36)}`;
-  const listboxId = `cac-${Math.random().toString(36)}`;
+  const labelId = `cac-${inputId}`;
+  const listboxId = `cac-${inputId}`;
 
   let selectedItem: Item;
   let open = false;
   let highlightedIndex = -1;
 
+  $: {
+    console.log(selectedItem);
+    console.log(open);
+    console.log(highlightedIndex);
+  }
+
   function selectSearchResult() {
-    // what to do when item is not defined?
     if (highlightedIndex !== -1 && suggestions[highlightedIndex]) {
       selectedItem = suggestions[highlightedIndex];
-      searchValue = selectedItem.title;
-      suggestions = [];
-      dispatch("change", selectedItem);
+    } else {
+      selectedItem = suggestions[0];
+    }
+    open = false;
+    highlightedIndex = -1;
+    searchValue = selectedItem.title;
+    dispatch("change", selectedItem);
+  }
+
+  function clearSearch() {
+    searchValue = "";
+    highlightedIndex = -1;
+    selectedItem = undefined;
+    open = false;
+    if (inputRef) {
+      inputRef.focus();
     }
   }
 
@@ -77,27 +90,27 @@
       flag = true;
     }
 
-    if (key === "Enter" && suggestions.length) {
+    if (key === "Enter" && suggestions.length && !selectedItem) {
       selectSearchResult();
       flag = true;
     }
 
-    if (key === "Home" && suggestions.length) {
+    if (key === "Home" && suggestions.length && !selectedItem) {
       highlightFirstItem();
       flag = true;
     }
 
-    if (key === "End" && suggestions.length) {
+    if (key === "End" && suggestions.length && !selectedItem) {
       highlightLastItem();
       flag = true;
     }
 
-    if (key === "ArrowDown" && suggestions.length) {
+    if (key === "ArrowDown" && suggestions.length && !selectedItem) {
       updateHighlightedIndex(1);
       flag = true;
     }
 
-    if (key === "ArrowUp" && suggestions.length) {
+    if (key === "ArrowUp" && suggestions.length && !selectedItem) {
       updateHighlightedIndex(-1);
       flag = true;
     }
@@ -164,7 +177,7 @@
 
 <!-- TODO: add aria attribues -->
 <div class="cac--search" style="--outline-color:{outlineColor};">
-  <div
+  <form
     class:bx--search="{true}"
     class:bx--search--sm="{size === 'sm'}"
     class:bx--search--lg="{size === 'lg'}"
@@ -189,7 +202,7 @@
       aria-autocomplete="both"
       aria-owns="{listboxId}"
       on:change
-      on:input="{handleSearchInput}"
+      on:input
       on:input="{handleInput}"
       on:focus
       on:blur
@@ -197,20 +210,29 @@
       on:keydown="{handleInputKeydown}"
       on:keyup
     />
-    <button
-      class:bx--search-close="{true}"
-      class:bx--search-close--hidden="{searchValue === ''}"
-      type="button"
-      aria-label="Clear search input"
-      on:click="{clearSearch}"
-      on:click="{() => {
-        highlightedIndex = -1;
-        searchValue = '';
+    {#if searchValue}
+      <button
+        class:bx--list-box__selection="{true}"
+        type="button"
+        aria-label="Clear search text"
+        on:click="{clearSearch}"
+      >
+        <Close16 />
+      </button>
+    {/if}
+    <div
+      class:bx--list-box__menu-icon="{true}"
+      class:bx--list-box__menu-icon--open="{open}"
+      aria-hidden="true"
+      tabindex="-1"
+      on:click|preventDefault="{(event) => {
+        open = !open;
+        event.stopPropagation();
       }}"
     >
-      <Close16 />
-    </button>
-  </div>
+      <ChevronUp16 />
+    </div>
+  </form>
   {#if open}
     <div class:bx--list-box__menu="{true}" id="{listboxId}" role="listbox">
       {#each suggestions as item, i (item.id)}
