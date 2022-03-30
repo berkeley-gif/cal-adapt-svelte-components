@@ -11,16 +11,16 @@
     value: string | number;
   }
 
-  /** specify the label & placeholder text */
+  /** specify the input's label & placeholder text */
   export let description = "Search for a place name or address";
 
-  /** the value of the search input */
+  /** specify the value of the search input */
   export let searchValue = "";
 
-  /** the list of suggestions */
+  /** specify the list of suggestions */
   export let suggestions: Item[] = [];
 
-  /** the outline color to use when the input is focused */
+  /** specify the outline color to use when the input is focused */
   export let outlineColor = "#fdd13a";
 
   /** a reference to the search input */
@@ -29,7 +29,7 @@
   /** optional id for the input element */
   export let inputId = `cac-${Math.random().toString(36)}`;
 
-  /** size of the search bar */
+  /** specify size of the carbon components search bar */
   export let size: "sm" | "lg" | "xl" = "sm";
 
   const dispatch = createEventDispatcher();
@@ -47,7 +47,7 @@
     console.log("highlightedIndex: ", highlightedIndex);
   }
 
-  /** Clears the value of the search input, may be used programmatically */
+  /** clears the value of the search input, may be used programmatically */
   export function clearSearch(focus = true) {
     searchValue = "";
     highlightedIndex = -1;
