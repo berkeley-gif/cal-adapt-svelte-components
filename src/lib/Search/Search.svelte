@@ -67,7 +67,7 @@
     open = false;
     highlightedIndex = -1;
     searchValue = selectedItem.title;
-    dispatch("change", selectedItem);
+    dispatch("select", selectedItem);
   }
 
   function handleInput(event: Event) {
