@@ -125,6 +125,13 @@
   function highlightLastItem() {
     highlightedIndex = suggestions.length - 1;
   }
+
+  function handleWindowClick(event: Event) {
+    const { target } = event;
+    if (open && inputRef && !inputRef.contains(target as Node)) {
+      open = false;
+    }
+  }
 </script>
 
 <style lang="scss">
@@ -152,6 +159,8 @@
     }
   }
 </style>
+
+<svelte:window on:click="{handleWindowClick}" />
 
 <!-- TODO: add aria attribues -->
 <div class="cac--search" style="--outline-color:{outlineColor};">
