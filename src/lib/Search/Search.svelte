@@ -218,7 +218,7 @@
         class:bx--list-box__selection="{true}"
         type="button"
         aria-label="Clear search text"
-        on:click="{clearSearch}"
+        on:click="{() => clearSearch()}"
       >
         <Close16 />
       </button>
@@ -246,11 +246,7 @@
           on:mouseenter="{() => {
             highlightedIndex = i;
           }}"
-          on:click="{() => {
-            if (suggestions && suggestions[i]) {
-              searchValue = suggestions[i].title;
-            }
-          }}"
+          on:click="{() => selectSearchResult()}"
         >
           <div class:bx--list-box__menu-item__option="{true}">
             {item.title}
