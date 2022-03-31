@@ -242,18 +242,20 @@
         <Close16 />
       </button>
     {/if}
-    <div
-      class:bx--list-box__menu-icon="{true}"
-      class:bx--list-box__menu-icon--open="{open}"
-      aria-hidden="true"
-      tabindex="-1"
-      on:click|preventDefault="{(event) => {
-        open = !open;
-        event.stopPropagation();
-      }}"
-    >
-      <ChevronUp16 />
-    </div>
+    {#if suggestions && suggestions.length}
+      <div
+        class:bx--list-box__menu-icon="{true}"
+        class:bx--list-box__menu-icon--open="{open}"
+        aria-hidden="true"
+        tabindex="-1"
+        on:click|preventDefault="{(event) => {
+          open = !open;
+          event.stopPropagation();
+        }}"
+      >
+        <ChevronUp16 />
+      </div>
+    {/if}
   </div>
   {#if open}
     <div class:bx--list-box__menu="{true}" id="{listboxId}" role="listbox">
