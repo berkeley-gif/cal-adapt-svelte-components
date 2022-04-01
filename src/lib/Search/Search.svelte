@@ -240,9 +240,10 @@
       role="combobox"
       placeholder="{description}"
       autocomplete="off"
-      aria-autocomplete="both"
-      aria-owns="{listboxId}"
+      aria-autocomplete="list"
+      aria-controls="{listboxId}"
       aria-activedescendant="{selectedId}"
+      aria-expanded="{open}"
       on:change
       on:input
       on:input="{handleInput}"
@@ -256,35 +257,45 @@
       <button
         class:bx--list-box__selection="{true}"
         type="button"
-        aria-label="Clear search text"
+        aria-label="Clear input"
         on:click="{() => clearSearch()}"
       >
-        <Close16 />
+        <Close16 aria-hidden="{true}" focusable="{false}" />
       </button>
     {/if}
     {#if suggestions && suggestions.length}
       <div
         class:bx--list-box__menu-icon="{true}"
         class:bx--list-box__menu-icon--open="{open}"
-        aria-hidden="true"
+        role="button"
+        aria-label="Options"
+        aria-controls="{listboxId}"
+        aria-expanded="{open}"
         tabindex="-1"
         on:click|preventDefault="{(event) => {
           open = !open;
           event.stopPropagation();
         }}"
       >
-        <ChevronUp16 />
+        <ChevronUp16 aria-hidden="{true}" focusable="{false}" />
       </div>
     {/if}
   </div>
   {#if open}
-    <div class:bx--list-box__menu="{true}" id="{listboxId}" role="listbox">
+    <div
+      class:bx--list-box__menu="{true}"
+      id="{listboxId}"
+      role="listbox"
+      aria-label="options"
+    >
       {#each suggestions as item, i (item.id)}
         <div
           id="{getOptionId(item.id)}"
           class:bx--list-box__menu-item="{true}"
           class:bx--list-box__menu-item--highlighted="{i === highlightedIndex}"
           role="option"
+          aria-selected="{i === highlightedIndex}"
+          aria-label="{item.title}"
           on:mouseenter="{() => {
             highlightedIndex = i;
           }}"
