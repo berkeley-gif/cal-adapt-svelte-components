@@ -105,7 +105,15 @@
     }
   }
 
+  async function handleInputFocus() {
+    console.log("--handle focus--");
+    if (!open && suggestions && suggestions.length && searchValue === "") {
+      open = true;
+    }
+  }
+
   function handleInputKeydown(event: KeyboardEvent) {
+    console.log("--handle keydown--");
     const key = event.key;
     let flag = false;
 
@@ -300,6 +308,7 @@
       on:input
       on:input="{handleInput}"
       on:focus
+      on:focus="{handleInputFocus}"
       on:blur
       on:keydown
       on:keydown="{handleInputKeydown}"
