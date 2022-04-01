@@ -215,6 +215,22 @@
   }
 </style>
 
+<!--
+  Note: the following markup roughly follows the carbon-components-svelte
+  package's markup for the Search, ComboBox, and ListBox components. This markup
+  and CSS have been slightly modified to convey that this component is an
+  autosuggest Search component, not a ComboBox or regular Search component.
+  Some ARIA attributes differ as well, to follow the recommendations from the
+  following examples:
+
+  WAI-ARIA ComboBox Autocomplete List:
+  https://www.w3.org/TR/wai-aria-practices-1.2/examples/combobox/combobox-autocomplete-list.html
+  https://codepen.io/clhenrick/pen/PoEjyLv
+
+  Accessible Auto Suggest:
+  https://uxmastery.com/anatomy-of-an-accessible-auto-suggest/
+  https://codepen.io/ademcifcioglu/pen/xdOyXv
+-->
 <svelte:window on:click="{handleWindowClick}" />
 
 <div class="cac--search" style="--outline-color:{outlineColor};">
