@@ -182,15 +182,35 @@
       outline: 3px solid var(--outline-color, var(--support-03));
     }
 
+    // overrides the search icon
+    /* stylelint-disable-next-line selector-class-pattern */
+    :global(.bx--search-magnifier) {
+      line-height: 1;
+    }
+
+    // override the close button styles
+    /* stylelint-disable-next-line selector-class-pattern */
+    :global(.bx--list-box__selection) {
+      right: 1.75rem;
+    }
+
+    // override the chevron menu icon styles
+    /* stylelint-disable-next-line selector-class-pattern */
+    :global(.bx--list-box__menu-icon) {
+      right: 0.5rem;
+    }
+
+    // override the input styles
     /* stylelint-disable-next-line selector-class-pattern */
     :global(.bx--search-input) {
       border: none;
-    }
+      padding-left: 0.5rem;
+      padding-right: 4rem;
 
-    /* stylelint-disable-next-line selector-class-pattern */
-    :global(.bx--search-input:focus) {
-      // outline created on parent element on focus
-      outline: none;
+      &:focus {
+        // outline created on parent element when focused
+        outline: none;
+      }
     }
   }
 </style>
