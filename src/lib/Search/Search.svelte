@@ -20,6 +20,9 @@
   /** specify the list of suggestions */
   export let suggestions: Item[] = [];
 
+  /** specify the label for the listbox */
+  export let listboxLabel = "Options";
+
   /** specify the outline color to use when the input is focused */
   export let outlineColor = "#fdd13a";
 
@@ -302,7 +305,7 @@
       class:bx--list-box__menu="{true}"
       id="{listboxId}"
       role="listbox"
-      aria-label="options"
+      aria-label="{listboxLabel}"
     >
       {#each suggestions as item, i (item.id)}
         <div
