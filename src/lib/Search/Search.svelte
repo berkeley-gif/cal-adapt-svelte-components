@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, afterUpdate } from "svelte";
   import Search16 from "carbon-icons-svelte/lib/Search16";
   import Close16 from "carbon-icons-svelte/lib/Close16";
   import ChevronUp16 from "carbon-icons-svelte/lib/ChevronUp16";
@@ -37,16 +37,17 @@
 
   const dispatch = createEventDispatcher();
 
-  const labelId = `cac-${inputId}`;
-  const listboxId = `cac-${inputId}`;
+  const labelId = `cac-label-${inputId}`;
+  const listboxId = `cac-listbox-${inputId}`;
 
   let selectedItem: Item;
   let open = false;
   let highlightedIndex = -1;
+  let announceContainer: HTMLDivElement;
 
   // the id attribute of the selected listbox option
   $: selectedId =
-    highlightedIndex > -1 && suggestions.length
+    suggestions && suggestions[highlightedIndex]
       ? getOptionId(suggestions[highlightedIndex].id)
       : undefined;
 
@@ -55,10 +56,17 @@
     console.log("selectedId: ", selectedId);
     console.log("open: ", open);
     console.log("highlightedIndex: ", highlightedIndex);
+    console.log("suggestions: ", suggestions);
   }
+
+  afterUpdate(() => {
+    // informs AT that the number of suggestions changed
+    setAriaLiveRegionContent((suggestions && suggestions.length) || 0);
+  });
 
   /** clears the value of the search input, may be used programmatically */
   export function clearSearch(focus = true) {
+    console.log("--clear search--");
     searchValue = "";
     highlightedIndex = -1;
     selectedItem = undefined;
@@ -69,6 +77,7 @@
   }
 
   function selectSearchResult() {
+    console.log("--select search result--");
     if (highlightedIndex !== -1 && suggestions[highlightedIndex]) {
       selectedItem = suggestions[highlightedIndex];
     } else {
@@ -81,6 +90,7 @@
   }
 
   function handleInput(event: Event) {
+    console.log("--handle input--");
     const { value } = <HTMLInputElement>event.target;
     if (!open && value.length > 0) {
       open = true;
@@ -161,6 +171,7 @@
   }
 
   function handleWindowClick(event: Event) {
+    console.log("--handle window click--");
     const { target } = event;
     if (open && inputRef && !inputRef.contains(target as Node)) {
       open = false;
@@ -169,6 +180,22 @@
 
   function getOptionId(value: string | number) {
     return `suggestion-${value}`;
+  }
+
+  function setAriaLiveRegionContent(value: number) {
+    console.log("--set aria live content--");
+    if (!announceContainer) {
+      return;
+    }
+    if (selectedItem) {
+      announceContainer.innerText = "";
+    } else if (value > 0) {
+      announceContainer.innerText = `${value} suggestions found.`;
+    } else if (value === 0) {
+      announceContainer.innerText = "No suggestions found";
+    } else {
+      announceContainer.innerText = "";
+    }
   }
 </script>
 
@@ -235,6 +262,12 @@
   https://codepen.io/ademcifcioglu/pen/xdOyXv
 -->
 <svelte:window on:click="{handleWindowClick}" />
+
+<div
+  bind:this="{announceContainer}"
+  class="sr-only"
+  aria-live="assertive"
+></div>
 
 <div class="cac--search" style="--outline-color:{outlineColor};">
   <div
