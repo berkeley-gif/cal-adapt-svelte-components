@@ -18,7 +18,7 @@
       value: 3
     }
   ];
-  const outlineColor = "#036063";
+  const outlineColor = "var(--interactive-01)";
   const description = "Search for an option";
 
   let searchValue = "";
@@ -36,7 +36,7 @@
   }
 
   function handleSearchSelection(event: CustomEvent) {
-    console.log("search change event: ", event.detail);
+    console.log("search select event: ", event.detail);
   }
 </script>
 
