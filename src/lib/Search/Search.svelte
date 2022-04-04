@@ -35,6 +35,9 @@
   /** specify size of the carbon components search bar */
   export let size: "sm" | "lg" | "xl" = "sm";
 
+  /** enables console.logging of reactive variables and some function calls */
+  export let debug = false;
+
   const dispatch = createEventDispatcher();
 
   const labelId = `cac-label-${inputId}`;
@@ -51,7 +54,7 @@
       ? getOptionId(suggestions[highlightedIndex].id)
       : undefined;
 
-  $: {
+  $: if (debug) {
     console.log("selectedItem: ", selectedItem);
     console.log("selectedId: ", selectedId);
     console.log("open: ", open);
@@ -68,7 +71,9 @@
 
   /** clears the value of the search input, may be used programmatically */
   export function clearSearch(focus = true) {
-    console.log("--clear search--");
+    if (debug) {
+      console.log("--clear search--");
+    }
     searchValue = "";
     highlightedIndex = -1;
     selectedItem = undefined;
@@ -79,7 +84,9 @@
   }
 
   function selectSearchResult() {
-    console.log("--select search result--");
+    if (debug) {
+      console.log("--select search result--");
+    }
     if (highlightedIndex !== -1 && suggestions[highlightedIndex]) {
       selectedItem = suggestions[highlightedIndex];
     } else {
@@ -92,7 +99,9 @@
   }
 
   function handleInput(event: Event) {
-    console.log("--handle input--");
+    if (debug) {
+      console.log("--handle input--");
+    }
     const { value } = <HTMLInputElement>event.target;
     if (!open && value.length > 0) {
       open = true;
@@ -108,14 +117,19 @@
   }
 
   async function handleInputFocus() {
-    console.log("--handle focus--");
+    if (debug) {
+      console.log("--handle focus--");
+    }
     if (!open && suggestions && suggestions.length && searchValue === "") {
       open = true;
     }
   }
 
   function handleInputKeydown(event: KeyboardEvent) {
-    console.log("--handle keydown--");
+    if (debug) {
+      console.log("--handle keydown--");
+    }
+
     const key = event.key;
     let flag = false;
 
@@ -181,7 +195,9 @@
   }
 
   function handleWindowClick(event: Event) {
-    console.log("--handle window click--");
+    if (debug) {
+      console.log("--handle window click--");
+    }
     const { target } = event;
     if (open && inputRef && !inputRef.contains(target as Node)) {
       open = false;
@@ -204,7 +220,9 @@
     } else {
       value = "";
     }
-    console.log("--set aria live content--", value);
+    if (debug) {
+      console.log("--set aria live content--", value);
+    }
     announceContainer.innerText = value;
   }
 </script>

@@ -53,6 +53,7 @@
   description="{description}"
   outlineColor="{outlineColor}"
   suggestions="{suggestionsFiltered}"
+  debug="{true}"
 />
 
 <br />
