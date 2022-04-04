@@ -61,7 +61,9 @@
 
   afterUpdate(() => {
     // informs AT that the number of suggestions changed
-    setAriaLiveRegionContent((suggestions && suggestions.length) || 0);
+    if (announceContainer) {
+      setAriaLiveRegionContent();
+    }
   });
 
   /** clears the value of the search input, may be used programmatically */
@@ -190,20 +192,20 @@
     return `suggestion-${value}`;
   }
 
-  function setAriaLiveRegionContent(value: number) {
-    console.log("--set aria live content--");
-    if (!announceContainer) {
-      return;
-    }
+  function setAriaLiveRegionContent() {
+    let value;
+    let selected = (suggestions && suggestions.length) || 0;
     if (selectedItem) {
-      announceContainer.innerText = "";
-    } else if (value > 0) {
-      announceContainer.innerText = `${value} suggestions found.`;
-    } else if (value === 0) {
-      announceContainer.innerText = "No suggestions found";
+      value = "";
+    } else if (selected > 0 && searchValue.length) {
+      value = `${selected} suggestion${selected > 1 ? "s" : ""} found.`;
+    } else if (selected === 0 && searchValue.length) {
+      value = "No suggestions found";
     } else {
-      announceContainer.innerText = "";
+      value = "";
     }
+    console.log("--set aria live content--", value);
+    announceContainer.innerText = value;
   }
 </script>
 
