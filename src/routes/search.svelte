@@ -4,18 +4,15 @@
   const suggestions = [
     {
       id: "one",
-      title: "Option One",
-      value: 1
+      title: "Option One"
     },
     {
       id: "two",
-      title: "Option Two",
-      value: 2
+      title: "Option Two"
     },
     {
       id: "three",
-      title: "Option Three",
-      value: 3
+      title: "Option Three"
     }
   ];
   const outlineColor = "var(--interactive-01)";
@@ -55,7 +52,3 @@
   suggestions="{suggestionsFiltered}"
   debug="{true}"
 />
-
-<br />
-<p>A non-search related dummy input to test tab flow.</p>
-<input type="text" />

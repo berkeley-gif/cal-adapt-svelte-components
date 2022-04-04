@@ -109,14 +109,13 @@
     searchValue = value;
     if (!searchValue.length) {
       clearSearch();
-      open = true;
     }
     if (selectedItem) {
       selectedItem = undefined;
     }
   }
 
-  async function handleInputFocus() {
+  function handleInputFocus() {
     if (debug) {
       console.log("--handle focus--");
     }
