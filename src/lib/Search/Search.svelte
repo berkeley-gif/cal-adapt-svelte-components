@@ -228,6 +228,10 @@
 </script>
 
 <style lang="scss">
+  @mixin outline-style {
+    outline: 3px solid var(--outline-color, var(--support-03));
+  }
+
   /* stylelint-disable-next-line selector-class-pattern */
   div.cac--search {
     position: relative;
@@ -236,8 +240,8 @@
     border: 1px solid var(--gray-60);
 
     &:focus-within {
+      @include outline-style;
       border-color: transparent;
-      outline: 3px solid var(--outline-color, var(--support-03));
     }
 
     // overrides the search icon
@@ -256,6 +260,13 @@
     /* stylelint-disable-next-line selector-class-pattern */
     :global(.bx--list-box__menu-icon) {
       right: 0.5rem;
+    }
+
+    // overrides the listbox's highlighted option style
+    /* stylelint-disable-next-line selector-class-pattern */
+    :global(.bx--list-box__menu-item--highlighted) {
+      @include outline-style;
+      outline-offset: -3px;
     }
 
     // override the input styles
