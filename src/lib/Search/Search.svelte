@@ -228,9 +228,7 @@
 </script>
 
 <style lang="scss">
-  @mixin outline-style {
-    outline: 3px solid var(--outline-color, var(--support-03));
-  }
+  @use "../../styles/utils/mixins" as *;
 
   /* stylelint-disable-next-line selector-class-pattern */
   div.cac--search {
