@@ -9,8 +9,9 @@
 // predecessor node-sass, so some structure of the modules here may be different
 // (for example the use of @use instead of @import in places).
 
-@use "./variables";
+@use "./utils/variables";
 @use "./carbon";
 @use "./carbon-overrides";
 @use "./base";
 @use "./type";
+@use "./helpers";

@@ -8,6 +8,29 @@ The rationale for this component repository is:
 
 2. Develop components in isolation so that they may be compatible in other Cal-Adapt related projects.
 
+## The Components
+
+### Search with auto-suggest
+
+A search box component with auto-suggest. Similar to the [CDS ComboBox](https://carbon-components-svelte.onrender.com/components/ComboBox) but with some corrections to `aria` and `role` attributes for improved accessibility.
+
+- [Component code](./src/lib/Search/)
+- [Demo](./src/routes/search.svelte)
+
+#### Props
+
+| Prop name    | Type                     | Default Value                        | Description                                                   |
+| ------------ | ------------------------ | ------------------------------------ | ------------------------------------------------------------- |
+| description  | string                   | "Search for a place name or address" | The input's label & placeholder text.                         |
+| searchValue  | string                   | ""                                   | The value of the search input.                                |
+| suggestions  | Suggestion[ ]            | [ ]                                  | The array of suggestions to be shown in the listbox.          |
+| outlineColor | string                   | "#fdd13a"                            | The outline color to use when the input is focused.           |
+| inputRef     | HTMLInputElement \| null | null                                 | Reference to the search input HTML node.                      |
+| inputId      | string                   | `cac-${Math.random().toString(36)}`  | Optional id for the input element.                            |
+| size         | "sm"\|"lg"\|"xl"         | "sm"                                 | The size of the carbon components' search bar.                |
+| listboxLabel | string                   | "Options"                            | The aria-label for the listbox                                |
+| debug        | boolean                  | false                                | Enables console.log'ing of reactive variables & some methods. |
+
 ## Developing
 
 Once you've installed dependencies with `npm install`, start a development server:

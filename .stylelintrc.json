@@ -18,7 +18,7 @@
   "ignoreFiles": [
     "./node_modules/**/*.css",
     "./node_modules/**/*.scss",
-    "src/styles/_variables.scss",
+    "src/styles/utils/_variables.scss",
     "src/styles/_carbon.scss",
     "src/styles/_carbon-overrides.scss"
   ]
