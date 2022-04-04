@@ -5,10 +5,10 @@
   import ChevronUp16 from "carbon-icons-svelte/lib/ChevronUp16";
 
   // describes the properties of a suggestion item
-  interface Item {
+  interface Suggestion {
     title: string;
     id: string | number;
-    value: string | number;
+    data?: any;
   }
 
   /** specify the input's label & placeholder text */
@@ -18,7 +18,7 @@
   export let searchValue = "";
 
   /** specify the list of suggestions */
-  export let suggestions: Item[] = [];
+  export let suggestions: Suggestion[] = [];
 
   /** specify the label for the listbox */
   export let listboxLabel = "Options";
@@ -43,7 +43,7 @@
   const labelId = `cac-label-${inputId}`;
   const listboxId = `cac-listbox-${inputId}`;
 
-  let selectedItem: Item;
+  let selectedItem: Suggestion;
   let open = false;
   let highlightedIndex = -1;
   let announceContainer: HTMLDivElement;
