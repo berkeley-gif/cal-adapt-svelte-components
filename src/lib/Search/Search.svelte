@@ -300,8 +300,8 @@
       role="combobox"
       placeholder="{description}"
       autocomplete="off"
-      aria-autocomplete="list"
-      aria-controls="{listboxId}"
+      aria-autocomplete="both"
+      aria-owns="{listboxId}"
       aria-activedescendant="{selectedId}"
       aria-expanded="{open}"
       on:change
@@ -342,31 +342,32 @@
       </div>
     {/if}
   </div>
-  {#if open}
-    <div
-      class:bx--list-box__menu="{true}"
-      id="{listboxId}"
-      role="listbox"
-      aria-label="{listboxLabel}"
-    >
-      {#each suggestions as item, i (item.id)}
-        <div
-          id="{getOptionId(item.id)}"
-          class:bx--list-box__menu-item="{true}"
-          class:bx--list-box__menu-item--highlighted="{i === highlightedIndex}"
-          role="option"
-          aria-selected="{i === highlightedIndex}"
-          aria-label="{item.title}"
-          on:mouseenter="{() => {
-            highlightedIndex = i;
-          }}"
-          on:click="{() => selectSearchResult()}"
-        >
-          <div class:bx--list-box__menu-item__option="{true}">
-            {item.title}
-          </div>
+  <div
+    class:bx--list-box__menu="{true}"
+    id="{listboxId}"
+    tabindex="-1"
+    role="listbox"
+    aria-label="{listboxLabel}"
+    style="display:{open ? 'block' : 'none'}"
+  >
+    {#each suggestions as item, i (item.id)}
+      <div
+        id="{getOptionId(item.id)}"
+        class:bx--list-box__menu-item="{true}"
+        class:bx--list-box__menu-item--highlighted="{i === highlightedIndex}"
+        role="option"
+        tabindex="-1"
+        aria-selected="{i === highlightedIndex}"
+        aria-label="{item.title}"
+        on:mouseenter="{() => {
+          highlightedIndex = i;
+        }}"
+        on:click="{() => selectSearchResult()}"
+      >
+        <div class:bx--list-box__menu-item__option="{true}">
+          {item.title}
         </div>
-      {/each}
-    </div>
-  {/if}
+      </div>
+    {/each}
+  </div>
 </div>
