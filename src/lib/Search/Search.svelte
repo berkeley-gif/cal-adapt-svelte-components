@@ -305,7 +305,11 @@
   aria-live="assertive"
 ></div>
 
-<div class="cac--search" style="--outline-color:{outlineColor};">
+<div
+  class="cac--search"
+  style="--outline-color:{outlineColor};"
+  data-testid="cac--search-container"
+>
   <div
     class:bx--search="{true}"
     class:bx--search--sm="{size === 'sm'}"
