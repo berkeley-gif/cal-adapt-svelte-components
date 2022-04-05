@@ -34,6 +34,7 @@
 
   function handleSearchSelection(event: CustomEvent) {
     console.log("search select event: ", event.detail);
+    suggestionsFiltered = [];
   }
 </script>
 
