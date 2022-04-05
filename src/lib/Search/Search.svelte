@@ -1,8 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher, afterUpdate } from "svelte";
-  import Search16 from "carbon-icons-svelte/lib/Search16";
-  import Close16 from "carbon-icons-svelte/lib/Close16";
-  import ChevronUp16 from "carbon-icons-svelte/lib/ChevronUp16";
+  import Search16 from "carbon-icons-svelte/lib/Search16/Search16.svelte";
+  import Close16 from "carbon-icons-svelte/lib/Close16/Close16.svelte";
+  import ChevronUp16 from "carbon-icons-svelte/lib/ChevronUp16/ChevronUp16.svelte";
 
   // describes the properties of a suggestion item
   interface Suggestion {
