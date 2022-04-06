@@ -116,4 +116,39 @@ describe("Search", () => {
     expect(label).toBeTruthy();
     expect(listbox.getAttribute("id")).toBe("cac-listbox-custom-id");
   });
+
+  test("clearSearch fn prop", async () => {
+    const { getByRole, component } = render(Search, {
+      target,
+      props: {
+        suggestions
+      }
+    });
+    const input = getByRole("combobox") as HTMLInputElement;
+    await fireEvent.focus(input);
+    await component.$set({ searchValue: "foo" });
+    await component.clearSearch();
+    const listbox = getByRole("listbox");
+    expect(input.value).toBe("");
+    expect(
+      listbox.querySelector(".bx--list-box__menu-item--highlighted")
+    ).toBeNull();
+  });
+
+  test("select event", async () => {
+    const { getByRole, component } = render(Search, {
+      target,
+      props: {
+        suggestions
+      }
+    });
+    const mock = jest.fn();
+    const result = { title: "Text for thing one", id: "a" };
+    const input = getByRole("combobox") as HTMLInputElement;
+    component.$on("select", mock);
+    await fireEvent.focus(input);
+    await component.$set({ searchValue: "one" });
+    await fireEvent.keyDown(input, { key: "Enter" });
+    expect(mock.mock.calls[0][0].detail).toEqual(result);
+  });
 });
