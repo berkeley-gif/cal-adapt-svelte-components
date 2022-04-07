@@ -198,7 +198,12 @@
       console.log("--handle window click--");
     }
     const { target } = event;
-    if (open && inputRef && !inputRef.contains(target as Node)) {
+    if (
+      open &&
+      target instanceof Node &&
+      inputRef &&
+      !inputRef.contains(target)
+    ) {
       open = false;
     }
   }

@@ -151,4 +151,18 @@ describe("Search", () => {
     await fireEvent.keyDown(input, { key: "Enter" });
     expect(mock.mock.calls[0][0].detail).toEqual(result);
   });
+
+  test("external click event closes the listbox", async () => {
+    const { getByRole, queryByRole } = render(Search, {
+      target,
+      props: {
+        suggestions
+      }
+    });
+    const input = getByRole("combobox") as HTMLInputElement;
+    await fireEvent.focus(input);
+    await fireEvent.click(document.body);
+    const listbox = queryByRole("listbox");
+    expect(listbox).toBeNull();
+  });
 });
