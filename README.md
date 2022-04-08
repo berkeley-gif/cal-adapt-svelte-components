@@ -17,6 +17,10 @@ A search box component with auto-suggest. Similar to the [CDS ComboBox](https://
 - [Component code](./src/lib/Search/)
 - [Demo](./src/routes/search.svelte)
 
+#### Behavior Notes
+
+Note that the Search component **will not** filter list items on its own, it's up to you to implement filtering. One way to do this is by using an `on:input` binding and filtering the `suggestions` prop based on what the user types. For suggestions that are retrieved asyncronously, e.g. from a RESTful API, it is recommended to [debounce](https://css-tricks.com/debouncing-throttling-explained-examples/) the input event handler.
+
 #### Props
 
 | Prop name    | Type                     | Default Value                        | Description                                                   |
@@ -98,11 +102,25 @@ Sapper / Webpack will not be able to resolve the bare module import and thus the
 import { SomeComponent } from "cal-adapt-svelte-components";
 ```
 
-## Other NPM Scripts
+## Tests
 
-### sass:check
+Component unit tests are written in TypeScript and run via [Jest](https://jestjs.io/), [Babel](https://babeljs.io/), [@testing-library](https://testing-library.com/), and [svelte-jester](https://www.npmjs.com/package/svelte-jester).
 
-The rebuild times for the project level / global Sass is a little slow with Vite. To verify that the project's Sass compiles successfully you may do:
+To run component unit tests do
+
+```
+npm run test
+```
+
+To have tests run in watch mode do:
+
+```
+npm run test:watch
+```
+
+## Check Sass Build
+
+The rebuild times for the project's [global Sass](./src/styles/main.scss) is a little slow with Vite. To verify that the project's global Sass compiles successfully you may do:
 
 ```bash
 npm run sass:check
