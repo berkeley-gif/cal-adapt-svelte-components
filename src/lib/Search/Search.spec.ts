@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { prettyDOM } from "@testing-library/dom";
+// import { prettyDOM } from "@testing-library/dom";
 import "@testing-library/jest-dom";
 import { render, fireEvent } from "@testing-library/svelte";
 import Search from "./Search.svelte";
@@ -134,6 +134,21 @@ describe("Search", () => {
     const listbox = getByRole("listbox");
     expect(input.value).toBe("");
     expect(listbox.querySelector(`.${highlightClass}`)).toBeNull();
+  });
+
+  test("clicking clear input button clears input value", async () => {
+    const { getByRole, getByLabelText, component } = render(Search, {
+      target,
+      props: {
+        suggestions
+      }
+    });
+    const input = getByRole("combobox") as HTMLInputElement;
+    await fireEvent.focus(input);
+    await component.$set({ searchValue: "I read the news today, oh boy." });
+    const button = getByLabelText("Clear input") as HTMLButtonElement;
+    await fireEvent.click(button);
+    expect(input.value).toBe("");
   });
 
   test("clicking on an option selects a suggestion", async () => {
