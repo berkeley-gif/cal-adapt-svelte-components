@@ -8,6 +8,7 @@ import Search from "./Search.svelte";
 
 describe("Search", () => {
   const announceContainerTestId = "cac--announce-container";
+  const searchContainerTestId = "cac--search-container";
   const highlightClass = "bx--list-box__menu-item--highlighted";
   let target;
   let suggestions;
@@ -98,7 +99,7 @@ describe("Search", () => {
       target,
       props: { outlineColor: "magenta" }
     });
-    const container = getByTestId("cac--search-container");
+    const container = getByTestId(searchContainerTestId);
     const style = window.getComputedStyle(container);
     expect(style.getPropertyValue("--outline-color")).toBe("magenta");
   });
@@ -303,6 +304,8 @@ describe("Search", () => {
     await fireEvent.focus(input);
     await component.$set({ searchValue: " " });
     expect(announceContainer.innerText).toBe("3 suggestions found.");
+    await component.$set({ suggestions: suggestions.slice(0, 1) });
+    expect(announceContainer.innerText).toBe("1 suggestion found.");
     await component.$set({ searchValue: "" });
     expect(announceContainer.innerText).toBe("");
   });
