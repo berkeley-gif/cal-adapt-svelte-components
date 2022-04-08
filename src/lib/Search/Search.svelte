@@ -308,6 +308,7 @@
   bind:this="{announceContainer}"
   class="sr-only"
   aria-live="assertive"
+  data-testid="cac--announce-container"
 ></div>
 
 <div

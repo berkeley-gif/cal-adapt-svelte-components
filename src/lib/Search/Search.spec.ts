@@ -1,11 +1,13 @@
 /**
  * @jest-environment jsdom
  */
+import { prettyDOM } from "@testing-library/dom";
 import "@testing-library/jest-dom";
 import { render, fireEvent } from "@testing-library/svelte";
 import Search from "./Search.svelte";
 
 describe("Search", () => {
+  const announceContainerTestId = "cac--announce-container";
   const highlightClass = "bx--list-box__menu-item--highlighted";
   let target;
   let suggestions;
@@ -276,5 +278,17 @@ describe("Search", () => {
     const listbox = queryByRole("listbox");
     await fireEvent.click(document.body);
     expect(listbox.style.display).toBe("none");
+  });
+
+  test("aria-live content", async () => {
+    const { getByTestId, getByRole, component } = render(Search, { target });
+    const announceContainer = getByTestId(announceContainerTestId);
+    const input = getByRole("combobox");
+    await component.$set({ suggestions });
+    await fireEvent.focus(input);
+    await component.$set({ searchValue: " " });
+    expect(announceContainer.innerText).toBe("3 suggestions found.");
+    await component.$set({ searchValue: "" });
+    expect(announceContainer.innerText).toBe("");
   });
 });
