@@ -135,7 +135,7 @@ describe("Search", () => {
     ).toBeNull();
   });
 
-  test("on:select", async () => {
+  test("clicking on an option selects a suggestion", async () => {
     const { getByRole, getAllByRole, component } = render(Search, {
       target,
       props: {
@@ -143,24 +143,15 @@ describe("Search", () => {
       }
     });
     const mock = jest.fn();
-
-    // enter key in input
-    const result = { title: "Text for thing one", id: "a" };
     const input = getByRole("combobox") as HTMLInputElement;
     component.$on("select", mock);
-    await fireEvent.focus(input);
-    await component.$set({ searchValue: "one" });
-    await fireEvent.keyDown(input, { key: "Enter" });
-    expect(mock.mock.calls[0][0].detail).toEqual(result);
-
-    // clicking an option
     await component.$set({ searchValue: "" });
     await fireEvent.focus(input);
     await component.$set({ searchValue: "thing" });
     const options = getAllByRole("option");
     await fireEvent.mouseEnter(options[1]);
     await fireEvent.click(options[1]);
-    expect(mock.mock.calls[1][0].detail).toEqual({
+    expect(mock.mock.calls[0][0].detail).toEqual({
       title: "Text for thing two",
       id: "b"
     });
@@ -178,5 +169,22 @@ describe("Search", () => {
     await fireEvent.click(document.body);
     const listbox = queryByRole("listbox");
     expect(listbox).toBeNull();
+  });
+
+  test("keydown enter selects a suggestion", async () => {
+    const { getByRole, component } = render(Search, {
+      target,
+      props: {
+        suggestions
+      }
+    });
+    const mock = jest.fn();
+    const result = { title: "Text for thing one", id: "a" };
+    const input = getByRole("combobox") as HTMLInputElement;
+    component.$on("select", mock);
+    await fireEvent.focus(input);
+    await component.$set({ searchValue: "one" });
+    await fireEvent.keyDown(input, { key: "Enter" });
+    expect(mock.mock.calls[0][0].detail).toEqual(result);
   });
 });
