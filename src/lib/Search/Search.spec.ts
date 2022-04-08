@@ -6,6 +6,7 @@ import { render, fireEvent } from "@testing-library/svelte";
 import Search from "./Search.svelte";
 
 describe("Search", () => {
+  const highlightClass = "bx--list-box__menu-item--highlighted";
   let target;
   let suggestions;
 
@@ -130,9 +131,7 @@ describe("Search", () => {
     await component.clearSearch();
     const listbox = getByRole("listbox");
     expect(input.value).toBe("");
-    expect(
-      listbox.querySelector(".bx--list-box__menu-item--highlighted")
-    ).toBeNull();
+    expect(listbox.querySelector(`.${highlightClass}`)).toBeNull();
   });
 
   test("clicking on an option selects a suggestion", async () => {
@@ -157,20 +156,6 @@ describe("Search", () => {
     });
   });
 
-  test("external click event closes the listbox", async () => {
-    const { getByRole, queryByRole } = render(Search, {
-      target,
-      props: {
-        suggestions
-      }
-    });
-    const input = getByRole("combobox") as HTMLInputElement;
-    await fireEvent.focus(input);
-    await fireEvent.click(document.body);
-    const listbox = queryByRole("listbox");
-    expect(listbox).toBeNull();
-  });
-
   test("keydown enter selects a suggestion", async () => {
     const { getByRole, component } = render(Search, {
       target,
@@ -186,5 +171,110 @@ describe("Search", () => {
     await component.$set({ searchValue: "one" });
     await fireEvent.keyDown(input, { key: "Enter" });
     expect(mock.mock.calls[0][0].detail).toEqual(result);
+  });
+
+  test("keydown arrow down event", async () => {
+    const { getByRole, getAllByRole, component } = render(Search, {
+      target,
+      props: {
+        suggestions
+      }
+    });
+    const input = getByRole("combobox") as HTMLInputElement;
+    await component.$set({ searchValue: "" });
+    await fireEvent.focus(input);
+    const options = getAllByRole("option");
+    await fireEvent.keyDown(input, { key: "ArrowDown" });
+    expect(options[0].classList.contains(highlightClass)).toBe(true);
+    await fireEvent.keyDown(input, { key: "ArrowDown" });
+    await fireEvent.keyDown(input, { key: "ArrowDown" });
+    expect(options[2].classList.contains(highlightClass)).toBe(true);
+    await fireEvent.keyDown(input, { key: "ArrowDown" });
+    expect(options[0].classList.contains(highlightClass)).toBe(true);
+  });
+
+  test("keydown arrow up event", async () => {
+    const { getByRole, getAllByRole, component } = render(Search, {
+      target,
+      props: {
+        suggestions
+      }
+    });
+    const input = getByRole("combobox") as HTMLInputElement;
+    await component.$set({ searchValue: "" });
+    await fireEvent.focus(input);
+    const options = getAllByRole("option");
+    await fireEvent.keyDown(input, { key: "ArrowUp" });
+    expect(options[2].classList.contains(highlightClass)).toBe(true);
+    await fireEvent.keyDown(input, { key: "ArrowUp" });
+    await fireEvent.keyDown(input, { key: "ArrowUp" });
+    expect(options[0].classList.contains(highlightClass)).toBe(true);
+    await fireEvent.keyDown(input, { key: "ArrowUp" });
+    expect(options[2].classList.contains(highlightClass)).toBe(true);
+  });
+
+  test("keydown home event", async () => {
+    const { getByRole, getAllByRole, component } = render(Search, {
+      target,
+      props: {
+        suggestions
+      }
+    });
+    const input = getByRole("combobox") as HTMLInputElement;
+    await component.$set({ searchValue: "" });
+    await fireEvent.focus(input);
+    const options = getAllByRole("option");
+    await fireEvent.keyDown(input, { key: "Home" });
+    expect(options[0].classList.contains(highlightClass)).toBe(true);
+    await fireEvent.keyDown(input, { key: "ArrowUp" });
+    await fireEvent.keyDown(input, { key: "Home" });
+    expect(options[0].classList.contains(highlightClass)).toBe(true);
+  });
+
+  test("keydown end event", async () => {
+    const { getByRole, getAllByRole, component } = render(Search, {
+      target,
+      props: {
+        suggestions
+      }
+    });
+    const input = getByRole("combobox") as HTMLInputElement;
+    await component.$set({ searchValue: "" });
+    await fireEvent.focus(input);
+    const options = getAllByRole("option");
+    await fireEvent.keyDown(input, { key: "End" });
+    expect(options[2].classList.contains(highlightClass)).toBe(true);
+    await fireEvent.keyDown(input, { key: "ArrowDown" });
+    await fireEvent.keyDown(input, { key: "End" });
+    expect(options[2].classList.contains(highlightClass)).toBe(true);
+  });
+
+  test("keydown tab event", async () => {
+    const { getByRole, component } = render(Search, {
+      target,
+      props: {
+        suggestions
+      }
+    });
+    const input = getByRole("combobox") as HTMLInputElement;
+    await component.$set({ searchValue: "" });
+    await fireEvent.focus(input);
+    const listbox = getByRole("listbox") as HTMLDivElement;
+    await fireEvent.keyDown(input, { key: "Tab" });
+    expect(listbox.style.display).toBe("none");
+  });
+
+  test("external click event closes the listbox", async () => {
+    const { getByRole, queryByRole } = render(Search, {
+      target,
+      props: {
+        suggestions
+      }
+    });
+    const input = getByRole("combobox") as HTMLInputElement;
+    await fireEvent.focus(input);
+    const listbox = queryByRole("listbox");
+    await fireEvent.click(document.body);
+    expect(listbox.style.display).toBe("none");
   });
 });
