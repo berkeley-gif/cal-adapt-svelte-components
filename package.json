@@ -1,7 +1,7 @@
 {
   "name": "@berkeley-gif/cal-adapt-svelte-components",
   "description": "Cal-Adapt UI component library built with SvelteJS.",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "package/index.js",
   "module": "package/index.js",
   "type": "module",
