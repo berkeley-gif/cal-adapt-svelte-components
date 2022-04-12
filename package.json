@@ -1,6 +1,12 @@
 {
   "name": "@berkeley-gif/cal-adapt-svelte-components",
+  "description": "Cal-Adapt UI component library built with SvelteJS.",
   "version": "0.0.1",
+  "main": "package/index.js",
+  "module": "package/index.js",
+  "type": "module",
+  "types": "package/index.d.ts",
+  "files": [ "package/" ],
   "scripts": {
     "start": "npm run dev",
     "dev": "svelte-kit dev -p 3333 -o",
@@ -59,8 +65,6 @@
   "engines": {
     "node": ">=16.13.0"
   },
-  "engineStrict": true,
-  "type": "module",
   "lint-staged": {
     "*.{js,ts,svelte}": "eslint --cache",
     "*.{css,scss,svelte}": "stylelint --allow-empty-input",
