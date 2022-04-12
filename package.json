@@ -1,7 +1,7 @@
 {
   "name": "@berkeley-gif/cal-adapt-svelte-components",
   "description": "Cal-Adapt UI component library built with SvelteJS.",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "license": "BSD-3-Clause",
   "contributors": [
     "Chris Henrick <chrishenrick@gmail.com> (https://clhenrick.io)"
@@ -16,7 +16,6 @@
     "url": "https://github.com/berkeley-gif/cal-adapt-svelte-components.git"
   },
   "bugs": "https://github.com/berkeley-gif/cal-adapt-svelte-components/issues",
-
   "scripts": {
     "start": "npm run dev",
     "dev": "svelte-kit dev -p 3333 -o",
