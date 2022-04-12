@@ -1,5 +1,5 @@
 {
-  "name": "cal-adapt-svelte-components",
+  "name": "@berkeley-gif/cal-adapt-svelte-components",
   "version": "0.0.1",
   "scripts": {
     "start": "npm run dev",
