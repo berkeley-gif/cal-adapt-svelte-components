@@ -1,7 +1,12 @@
 {
   "name": "@berkeley-gif/cal-adapt-svelte-components",
   "description": "Cal-Adapt UI component library built with SvelteJS.",
-  "keywords": ["svelte", "cal-adapt", "component-library", "carbon-design"],
+  "keywords": [
+    "svelte",
+    "cal-adapt",
+    "component-library",
+    "carbon-design"
+  ],
   "version": "1.0.6",
   "license": "BSD-3-Clause",
   "contributors": [
