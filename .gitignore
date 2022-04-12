@@ -7,3 +7,4 @@ node_modules
 .env.*
 !.env.example
 .eslintcache
+berkeley-gif-cal-adapt-svelte-components-*.tgz

@@ -68,6 +68,18 @@ npm run package
 
 This will create a local `package/` directory with the compiled Svelte components, meaning all TypeScript will be converted to normal JavaScript and all Sass will be converted to normal CSS.
 
+## Publishing
+
+The components in this repository are publicly available on NPM and Github. The steps for publishing them are as follows:
+
+```bash
+npm version patch # first update the package version
+npm run package # build
+npm run publish --access=public ./package
+git tag -a v<x.x.x> -m "published version <x.x.x>"
+git push origin --tags
+```
+
 ## Linking
 
 The `package` directory of this repo may be [`npm link`](https://docs.npmjs.com/cli/v7/commands/npm-link)'d to another project for local development.
