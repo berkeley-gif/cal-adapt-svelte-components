@@ -68,17 +68,25 @@ npm run package
 
 This will create a local `package/` directory with the compiled Svelte components, meaning all TypeScript will be converted to normal JavaScript and all Sass will be converted to normal CSS.
 
-## Publishing
+## Publishing to NPM and Github
 
-The components in this repository are publicly available on NPM and Github. The steps for publishing them are as follows:
+The components in this repository are made publicly available on NPM and Github. The steps for publishing them are as follows:
 
 ```bash
-npm version patch # first update the package version
-npm run package # build
+npm version patch # updates the package version (including in git)
+npm run package
 npm run publish --access=public ./package
-git tag -a v<x.x.x> -m "published version <x.x.x>"
 git push origin --tags
 ```
+
+Then create a release on Github with the package code by doing:
+
+```bash
+cd ./package
+npm run pack
+```
+
+This will create a `berkeley-gif-cal-adapt-svelte-components-<x.x.x>.tzg` file in the `package/` directory which may be included with the Github release.
 
 ## Linking
 
