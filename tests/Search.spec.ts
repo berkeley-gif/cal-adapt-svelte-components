@@ -4,7 +4,7 @@
 // import { prettyDOM } from "@testing-library/dom";
 import "@testing-library/jest-dom";
 import { render, fireEvent } from "@testing-library/svelte";
-import Search from "./Search.svelte";
+import { Search } from "../src/lib";
 
 describe("Search", () => {
   const announceContainerTestId = "cac--announce-container";

@@ -17,7 +17,7 @@
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
     "prepare": "svelte-kit sync && husky install",
-    "test": "jest src",
+    "test": "jest tests",
     "test:watch": "npm run test -- --watch",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
