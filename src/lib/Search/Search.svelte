@@ -277,10 +277,16 @@
       border: none;
       padding-left: 0.5rem;
       padding-right: 4rem;
+      color: var(--gray-90);
 
       &:focus {
         // outline created on parent element when focused
         outline: none;
+      }
+
+      &::placeholder {
+        // ensures sufficient color contrast with placeholder text
+        color: var(--gray-60);
       }
     }
   }
