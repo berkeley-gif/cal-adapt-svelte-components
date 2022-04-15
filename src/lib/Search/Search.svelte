@@ -119,7 +119,7 @@
     if (debug) {
       console.log("--handle focus--");
     }
-    if (!open && suggestions && suggestions.length && searchValue === "") {
+    if (!open && suggestions && suggestions.length) {
       open = true;
     }
   }
