@@ -113,6 +113,9 @@
     if (selectedItem) {
       selectedItem = undefined;
     }
+    if (highlightedIndex > -1) {
+      highlightedIndex = -1;
+    }
   }
 
   function handleInputFocus() {
