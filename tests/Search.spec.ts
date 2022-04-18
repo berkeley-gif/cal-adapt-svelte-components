@@ -282,6 +282,19 @@ describe("Search", () => {
     expect(listbox.style.display).toBe("none");
   });
 
+  test("input focus event opens the listbox", async () => {
+    const { getByRole, queryByRole } = render(Search, {
+      target,
+      props: {
+        suggestions
+      }
+    });
+    const input = getByRole("combobox") as HTMLInputElement;
+    await fireEvent.focus(input);
+    const listbox = queryByRole("listbox");
+    expect(listbox.style.display).toBe("block");
+  });
+
   test("external click event closes the listbox", async () => {
     const { getByRole, queryByRole } = render(Search, {
       target,
