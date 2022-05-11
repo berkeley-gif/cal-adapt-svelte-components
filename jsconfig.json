@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+           // name and path to aliases
+          "~": ["./src/"],
+          "common/*": ["./src/common/*"],
+          "lib/*": ["./src/lib/*"],
+      }
+  },
+  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
+  "exclude": ["node_modules", "package", ".svelte-kit", "dist"]
+}
