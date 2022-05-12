@@ -10,11 +10,20 @@
   export let locations: SampleLocation[] = [];
 
   let selectedLocation: Location;
+  let useButton = true;
+  let width = 320;
+  let height = 250;
+
+  function handleClick(event: Event) {
+    if (useButton) {
+      window.alert(`You clicked on ${selectedLocation.title}`);
+    }
+  }
 </script>
 
 <style>
   fieldset {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 </style>
 
@@ -33,8 +42,26 @@
   </select>
 </fieldset>
 
+<fieldset>
+  <label for="use-button">Make it a button?</label>
+  <input bind:checked="{useButton}" type="checkbox" />
+</fieldset>
+
+<fieldset>
+  <label for="width">Width: </label>
+  <input bind:value="{width}" id="width" type="number" />
+</fieldset>
+
+<fieldset>
+  <label for="height">Height: </label>
+  <input bind:value="{height}" id="height" type="number" />
+</fieldset>
+
 <StaticMap
-  width="{320}"
+  on:click="{handleClick}"
+  width="{width}"
+  height="{height}"
+  useButton="{useButton}"
   location="{selectedLocation}"
   --stroke="var(--gray-80)"
 />
