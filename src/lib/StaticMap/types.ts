@@ -1,11 +1,6 @@
-import type { Geometry, Feature } from "geojson";
+import type { Geometry, Feature, BBox, Position } from "geojson";
 
 export type { Feature };
-
-export type GeometryType = "Polygon" | "MultiPolygon" | "Point";
-export type GeometryCoords = [number, number][][] | [number, number];
-export type CenterCoords = [number, number];
-export type BBoxCoords = [number, number, number, number];
 
 export type MapBoxStyle =
   | "streets-v11"
@@ -19,8 +14,8 @@ export interface Location {
   id: number;
   title: string;
   geometry: Geometry;
-  center: CenterCoords;
-  bbox: BBoxCoords;
+  center: Position;
+  bbox: BBox;
 }
 
 export interface Tiles extends Array<[number, number, number]> {
