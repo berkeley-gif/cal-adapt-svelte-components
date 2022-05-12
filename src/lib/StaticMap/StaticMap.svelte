@@ -1,28 +1,10 @@
 <script lang="ts">
   import * as d3 from "d3-geo";
   import { getTileUrl, getTiles } from "./utils";
-
-  /** represents location data from a locationStore in Cal-Adapt */
-  interface Location {
-    id: number;
-    title: string;
-    geometry: {
-      type: "Polygon" | "MultiPolygon" | "Point";
-      coordinates: [number[]] | number[];
-    };
-    center: [number, number];
-    bbox: [number, number, number, number];
-  }
-
-  type MapBoxStyle =
-    | "streets-v11"
-    | "light-v10"
-    | "dark-v10"
-    | "satellite-v9"
-    | "satellite-streets-v11";
+  import type { Location, MapBoxStyle, Feature, Tiles } from "./types";
 
   /** specify the height of the map */
-  // export let height = 250;
+  export let height = 250;
 
   /** specify the width of the map */
   export let width = 250;
@@ -45,12 +27,12 @@
   const projection = d3.geoMercator();
   const path = d3.geoPath(projection);
 
-  let tiles;
-  let tx;
-  let ty;
-  let k;
-  let overlay;
-  let heightComputed;
+  let tiles: Tiles;
+  let tx: number;
+  let ty: number;
+  let k: number;
+  let overlay: Feature;
+  let heightComputed: number;
 
   $: console.log(tiles);
 
@@ -109,9 +91,9 @@
   {#if heightComputed}
     <svg viewBox="0 0 {width} {heightComputed}" {...{ width, heightComputed }}>
       {#if tiles && tiles.length}
-        {#each tiles as [x, y, z], i}
+        {#each tiles as [x, y, z]}
           <image
-            xlink:href="{getTileUrl(x, y, z)}"
+            xlink:href="{getTileUrl(x, y, z, style)}"
             x="{Math.round((x + tx) * k)}"
             y="{Math.round((y + ty) * k)}"
             width="{k}"
