@@ -67,6 +67,11 @@
     display: inline-block;
     border: 1px solid #333;
   }
+
+  path {
+    stroke: var(--stroke, var(--gray-90));
+    stroke-width: var(--stroke-width, 3);
+  }
 </style>
 
 <div>
@@ -82,8 +87,7 @@
       {/each}
     {/if}
     {#if overlay}
-      <path fill="none" stroke="teal" stroke-width="3" d="{path(overlay)}"
-      ></path>
+      <path fill="none" d="{path(overlay)}"></path>
     {/if}
   </svg>
 </div>
