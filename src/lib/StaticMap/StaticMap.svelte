@@ -69,6 +69,10 @@
 <style lang="scss">
   pre {
     margin-bottom: 2rem;
+    padding: 1rem;
+    max-width: 50vw;
+    overflow-x: auto;
+    line-height: 1.5;
   }
 
   div {
