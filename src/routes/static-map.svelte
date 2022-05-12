@@ -2,9 +2,27 @@
   import { StaticMap } from "$lib";
   import type { Location } from "$lib/StaticMap/types";
   import _defaultLocation from "~/data/locations/default-location.json";
+  import _alameda from "~/data/locations/alameda.json";
 
-  const defaultLocation = _defaultLocation as Location;
+  const locations = [
+    {
+      value: _defaultLocation as Location,
+      title: "Default location"
+    },
+    {
+      value: _alameda as Location,
+      title: "Alameda County"
+    }
+  ];
+
+  let selectedLocation: Location;
 </script>
+
+<style>
+  fieldset {
+    margin-bottom: 2rem;
+  }
+</style>
 
 <h1>Static Map</h1>
 <p>
@@ -12,4 +30,17 @@
   locator map for a location selected by the user.
 </p>
 
-<StaticMap location="{defaultLocation}" />
+<fieldset>
+  <label for="location">Select overlay:</label>
+  <select bind:value="{selectedLocation}" id="location">
+    {#each locations as { value, title }}
+      <option value="{value}">{title}</option>
+    {/each}
+  </select>
+</fieldset>
+
+<StaticMap
+  width="{320}"
+  location="{selectedLocation}"
+  --stroke="var(--gray-80)"
+/>
