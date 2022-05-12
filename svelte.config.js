@@ -1,9 +1,6 @@
-import { resolve, dirname } from "path";
-import { fileURLToPath } from "url";
+import { resolve } from "path";
 import adapter from "@sveltejs/adapter-auto";
 import preprocess from "svelte-preprocess";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -16,9 +13,10 @@ const config = {
     vite: () => ({
       resolve: {
         alias: {
-          "~": resolve(__dirname, "./src"),
-          styles: resolve(__dirname, "./src/styles"),
-          common: resolve(__dirname, "./src/common")
+          "~": resolve("./src"),
+          styles: resolve("./src/styles"),
+          common: resolve("./src/lib/common"),
+          $lib: resolve("./src/lib")
         }
       }
     })
