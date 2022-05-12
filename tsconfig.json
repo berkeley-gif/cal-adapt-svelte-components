@@ -6,6 +6,8 @@
       "~/*": ["src/*"],
       "common": ["src/lib/common"],
       "common/*": ["src/lib/common/*"],
+      "data": ["src/lib/data"],
+      "data/*": ["src/lib/data/*"],
       "styles": ["src/styles"],
       "styles/*": ["src/styles/*"],
       "$lib": ["src/lib"],

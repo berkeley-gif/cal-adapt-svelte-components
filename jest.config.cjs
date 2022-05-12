@@ -17,6 +17,7 @@ module.exports = {
   moduleNameMapper: {
     "~/(.*)": "<rootDir>/src/$1",
     "^common/(.*)$": "<rootDir>/src/lib/common/$1",
+    "^data/(.*)$": "<rootDir>/src/data/$1",
     "^styles/(.*)$": "<rootDir>/src/styles/$1",
   },
   preset: "ts-jest/presets/js-with-babel-esm"
