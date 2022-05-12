@@ -1,7 +1,8 @@
 <script lang="ts">
   import { StaticMap } from "$lib";
+  import type { Location } from "$lib/StaticMap/types";
 
-  const location = {
+  const location: Location = {
     id: 37907,
     title: "240 32nd Street, Sacramento, California 95816",
     geometry: {
