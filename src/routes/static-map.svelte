@@ -1,19 +1,13 @@
 <script lang="ts">
   import { StaticMap } from "$lib";
   import type { Location } from "$lib/StaticMap/types";
-  import _defaultLocation from "~/data/locations/default-location.json";
-  import _alameda from "~/data/locations/alameda.json";
 
-  const locations = [
-    {
-      value: _defaultLocation as Location,
-      title: "Default location"
-    },
-    {
-      value: _alameda as Location,
-      title: "Alameda County"
-    }
-  ];
+  interface SampleLocation {
+    value: Location;
+    title: string;
+  }
+
+  export let locations: SampleLocation[] = [];
 
   let selectedLocation: Location;
 </script>
@@ -31,7 +25,7 @@
 </p>
 
 <fieldset>
-  <label for="location">Select overlay:</label>
+  <label for="location">Select location:</label>
   <select bind:value="{selectedLocation}" id="location">
     {#each locations as { value, title }}
       <option value="{value}">{title}</option>
