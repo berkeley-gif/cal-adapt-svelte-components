@@ -5,7 +5,7 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/svelte";
 import { StaticMap } from "../src/lib";
-import * as locations from "../src/data/locations/";
+import * as locations from "data/locations/";
 import type { Location } from "$lib/StaticMap/types";
 
 describe("StaticMap", () => {
@@ -48,15 +48,17 @@ describe("StaticMap", () => {
     const { queryByText } = render(StaticMap, {
       target,
       props: {
-        location
+        location,
+        titleId: "my-title"
       }
     });
     const searchStr =
       "Locator map for 240 32nd Street, Sacramento, California 95816";
     expect(queryByText(searchStr)).toBeInTheDocument();
+    expect(queryByText(searchStr).getAttribute("id")).toEqual("my-title");
   });
 
-  test("width and height", () => {
+  test("SVG viewBox attribute", () => {
     const { queryByRole } = render(StaticMap, {
       target,
       props: {
@@ -68,6 +70,20 @@ describe("StaticMap", () => {
     const svg = queryByRole("img");
     const expected = "0 0 300 500";
     expect(svg.getAttribute("viewBox")).toEqual(expected);
+  });
+
+  test("container dimensions", () => {
+    const { queryByTestId } = render(StaticMap, {
+      target,
+      props: {
+        location,
+        width: 300,
+        height: 500
+      }
+    });
+    const container = queryByTestId("cac-static-map-container");
+    expect(container.style.width).toEqual("300px");
+    expect(container.style.height).toEqual("500px");
   });
 
   test("basemap style", () => {
@@ -85,5 +101,28 @@ describe("StaticMap", () => {
     expect(result).toBe(true);
   });
 
-  // test("useButton", () => {});
+  test("button wraps svg", () => {
+    const { queryByRole } = render(StaticMap, {
+      target,
+      props: {
+        location,
+        basemapStyle: "dark-v10"
+      }
+    });
+    const button = queryByRole("button");
+    expect(button.querySelector("svg")).toBeInTheDocument();
+  });
+
+  test("tile wraps svg", () => {
+    const { queryByRole } = render(StaticMap, {
+      target,
+      props: {
+        location,
+        basemapStyle: "dark-v10",
+        useButton: false
+      }
+    });
+    const button = queryByRole("button");
+    expect(button).not.toBeInTheDocument();
+  });
 });

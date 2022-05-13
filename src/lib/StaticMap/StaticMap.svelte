@@ -110,6 +110,7 @@
 <div
   class="cac-static-map-container"
   style="--width:{width}px; --height:{height}px"
+  data-testid="cac-static-map-container"
 >
   <svelte:component this="{Wrapper}" on:click aria-label="{ariaLabel}">
     <svg
