@@ -27,7 +27,7 @@
     "dev": "svelte-kit dev -p 3333 -o",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
-    "preview": "svelte-kit preview",
+    "preview": "svelte-kit preview -p 3333",
     "prepare": "svelte-kit sync && husky install",
     "test": "jest tests",
     "test:watch": "npm run test -- --watch",
