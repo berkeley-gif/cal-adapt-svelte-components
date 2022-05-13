@@ -1,6 +1,6 @@
 import { tile } from "d3-tile";
 import type { GeoProjection } from "d3-geo";
-import { MAPBOX_ACCESS_TOKEN } from "common/mapbox";
+import { MAPBOX_ACCESS_TOKEN } from "../common/mapbox";
 
 export const getTileUrl = (
   x: number,
