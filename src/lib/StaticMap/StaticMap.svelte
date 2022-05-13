@@ -24,6 +24,9 @@
   /** wrap the map in an HTML button element or not */
   export let useButton = true;
 
+  /** the id attribute of the svg title element */
+  export let titleId = `cac-${Math.random().toString(36)}`;
+
   const projection = d3.geoMercator();
   const path = d3.geoPath(projection);
 
@@ -34,6 +37,9 @@
   let overlay: Feature;
 
   $: Wrapper = useButton ? Button : Tile;
+  $: ariaLabel = useButton ? "Change location" : undefined;
+  $: titleText =
+    location && location.title ? `Locator map for ${location.title}` : "";
 
   $: {
     if (location) {
@@ -68,7 +74,7 @@
 </script>
 
 <style lang="scss">
-  .container {
+  .cac-static-map-container {
     display: inline-block;
     box-sizing: content-box;
     border: 1px solid var(--border-color, var(--gray-90));
@@ -77,7 +83,7 @@
   }
 
   /* stylelint-disable-next-line */
-  .container > :global(.bx--btn.bx--btn--primary) {
+  .cac-static-map-container > :global(.bx--btn.bx--btn--primary) {
     all: unset;
     width: var(--width, 250px);
     cursor: pointer;
@@ -92,7 +98,7 @@
   }
 
   /* stylelint-disable-next-line */
-  .container > :global(.bx--tile) {
+  .cac-static-map-container > :global(.bx--tile) {
     width: var(--width, 250px);
     padding: 0;
   }
@@ -107,9 +113,18 @@
   }
 </style>
 
-<div class="container" style="--width:{width}px; --height:{height}px">
-  <svelte:component this="{Wrapper}" on:click>
-    <svg viewBox="0 0 {width} {height}" overflow="hidden">
+<div
+  class="cac-static-map-container"
+  style="--width:{width}px; --height:{height}px"
+>
+  <svelte:component this="{Wrapper}" on:click aria-label="{ariaLabel}">
+    <svg
+      viewBox="0 0 {width} {height}"
+      overflow="hidden"
+      aria-labelledby="{titleId}"
+      role="img"
+    >
+      <title id="{titleId}">{titleText}</title>
       {#if tiles && tiles.length}
         {#each tiles as [x, y, z]}
           <image
