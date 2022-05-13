@@ -10,12 +10,31 @@
 
   export let locations: SampleLocation[] = [];
 
+  const mapStyleOptions = [
+    { title: "Streets", value: "streets-v11" },
+    { title: "Light", value: "light-v10" },
+    { title: "Dark", value: "dark-v10" },
+    { title: "Satellite", value: "satellite-v9" },
+    { title: "Satellite with Streets", value: "satellite-streets-v11" }
+  ];
+
+  const darkStyles = new Set([
+    "dark-v10",
+    "satellite-v9",
+    "satellite-streets-v11"
+  ]);
+
   const throttleMs = 350;
 
   let selectedLocation: Location;
   let useButton = true;
   let width = 320;
   let height = 250;
+  let mapStyle;
+
+  $: strokeColor = darkStyles.has(mapStyle)
+    ? "var(--gray-10)"
+    : "var(--gray-80)";
 
   function handleClick(event: Event) {
     if (useButton) {
@@ -58,11 +77,6 @@
 </fieldset>
 
 <fieldset>
-  <label for="use-button">Make it a button?</label>
-  <input bind:checked="{useButton}" type="checkbox" />
-</fieldset>
-
-<fieldset>
   <label for="width">Width: </label>
   <input
     on:input="{throttle(handleChangeWidth, throttleMs)}"
@@ -82,11 +96,26 @@
   />
 </fieldset>
 
+<fieldset>
+  <label for="map-style">Map style: </label>
+  <select bind:value="{mapStyle}" id="map-style">
+    {#each mapStyleOptions as { title, value }}
+      <option value="{value}">{title}</option>
+    {/each}
+  </select>
+</fieldset>
+
+<fieldset>
+  <label for="use-button">Make it a button?</label>
+  <input bind:checked="{useButton}" type="checkbox" />
+</fieldset>
+
 <StaticMap
   on:click="{handleClick}"
   width="{width}"
   height="{height}"
   useButton="{useButton}"
   location="{selectedLocation}"
-  --stroke="var(--gray-80)"
+  basemapStyle="{mapStyle}"
+  --stroke="{strokeColor}"
 />
