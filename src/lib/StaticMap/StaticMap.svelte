@@ -16,7 +16,7 @@
   export let location: Location | null = null;
 
   /** specify the mapbox basemap style type */
-  export let style: MapBoxStyle = "streets-v11";
+  export let basemapStyle: MapBoxStyle = "streets-v11";
 
   /** specify the amount of padding between the overlay and map border */
   export let padding = 20;
@@ -47,7 +47,6 @@
   }
 
   function createOverlay() {
-    console.log("createOverlay");
     overlay = {
       type: "Feature",
       geometry: location.geometry,
@@ -120,18 +119,20 @@
       role="img"
     >
       <title id="{titleId}">{titleText}</title>
+
       {#if tiles && tiles.length}
         {#each tiles as [x, y, z]}
           {@const [tx, ty] = tiles.translate}
           {@const k = tiles.scale}
           <image
-            xlink:href="{getTileUrl(x, y, z, style)}"
+            xlink:href="{getTileUrl(x, y, z, basemapStyle)}"
             x="{Math.round((x + tx) * k)}"
             y="{Math.round((y + ty) * k)}"
             width="{k}"
             height="{k}"></image>
         {/each}
       {/if}
+
       {#if overlay}
         <path fill="none" d="{path(overlay)}"></path>
       {/if}
