@@ -1,4 +1,5 @@
 <script lang="ts">
+  import throttle from "lodash.throttle";
   import { StaticMap } from "$lib";
   import type { Location } from "$lib/StaticMap/types";
 
@@ -9,6 +10,8 @@
 
   export let locations: SampleLocation[] = [];
 
+  const throttleMs = 350;
+
   let selectedLocation: Location;
   let useButton = true;
   let width = 320;
@@ -17,6 +20,18 @@
   function handleClick(event: Event) {
     if (useButton) {
       window.alert(`You clicked on ${selectedLocation.title}`);
+    }
+  }
+
+  function handleChangeWidth(event: Event) {
+    if (event.target) {
+      width = +(event.target as HTMLInputElement).value;
+    }
+  }
+
+  function handleChangeHeight(event: Event) {
+    if (event.target) {
+      height = +(event.target as HTMLInputElement).value;
     }
   }
 </script>
@@ -49,12 +64,22 @@
 
 <fieldset>
   <label for="width">Width: </label>
-  <input bind:value="{width}" id="width" type="number" />
+  <input
+    on:input="{throttle(handleChangeWidth, throttleMs)}"
+    value="{width}"
+    id="width"
+    type="number"
+  />
 </fieldset>
 
 <fieldset>
   <label for="height">Height: </label>
-  <input bind:value="{height}" id="height" type="number" />
+  <input
+    on:input="{throttle(handleChangeHeight, throttleMs)}"
+    value="{height}"
+    id="height"
+    type="number"
+  />
 </fieldset>
 
 <StaticMap
