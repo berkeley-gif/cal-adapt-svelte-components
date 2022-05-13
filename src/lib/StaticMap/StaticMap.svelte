@@ -31,9 +31,6 @@
   const path = d3.geoPath(projection);
 
   let tiles: Tiles;
-  let tx: number;
-  let ty: number;
-  let k: number;
   let overlay: Feature;
 
   $: Wrapper = useButton ? Button : Tile;
@@ -46,8 +43,6 @@
       createOverlay();
       setProjection();
       tiles = getTiles(width, height, projection)();
-      [tx, ty] = tiles.translate;
-      k = tiles.scale;
     }
   }
 
@@ -127,6 +122,8 @@
       <title id="{titleId}">{titleText}</title>
       {#if tiles && tiles.length}
         {#each tiles as [x, y, z]}
+          {@const [tx, ty] = tiles.translate}
+          {@const k = tiles.scale}
           <image
             xlink:href="{getTileUrl(x, y, z, style)}"
             x="{Math.round((x + tx) * k)}"
