@@ -45,17 +45,19 @@ describe("StaticMap", () => {
   });
 
   test("SVG title", () => {
-    const { queryByText } = render(StaticMap, {
+    const { queryByText, queryByRole } = render(StaticMap, {
       target,
       props: {
         location,
         titleId: "my-title"
       }
     });
+    const svg = queryByRole("img");
     const searchStr =
       "Locator map for 240 32nd Street, Sacramento, California 95816";
     expect(queryByText(searchStr)).toBeInTheDocument();
     expect(queryByText(searchStr).getAttribute("id")).toEqual("my-title");
+    expect(svg.getAttribute("aria-labelledby")).toEqual("my-title");
   });
 
   test("SVG viewBox attribute", () => {
@@ -83,6 +85,7 @@ describe("StaticMap", () => {
     });
     const container = queryByTestId("cac-static-map-container");
     const styles = getComputedStyle(container);
+    // Note: for some reason "width" and "height" CSS props are not defined
     expect(styles.getPropertyValue("--width")).toEqual("300px");
     expect(styles.getPropertyValue("--height")).toEqual("500px");
   });
@@ -111,11 +114,13 @@ describe("StaticMap", () => {
       }
     });
     const button = queryByRole("button");
+    expect(button).toBeInTheDocument();
     expect(button.querySelector("svg")).toBeInTheDocument();
+    expect(button.getAttribute("aria-label")).toEqual("Change location");
   });
 
   test("tile wraps svg", () => {
-    const { queryByRole } = render(StaticMap, {
+    const { queryByRole, getByTestId } = render(StaticMap, {
       target,
       props: {
         location,
@@ -123,8 +128,13 @@ describe("StaticMap", () => {
         useButton: false
       }
     });
+    const container = getByTestId("cac-static-map-container");
     const button = queryByRole("button");
     expect(button).not.toBeInTheDocument();
+    expect(container.querySelector("div")).toBeInTheDocument();
+    expect(
+      container.querySelector("div").getAttribute("aria-label")
+    ).toBeNull();
   });
 
   test("on:click", async () => {
