@@ -3,7 +3,7 @@
  */
 // import { prettyDOM } from "@testing-library/dom";
 import "@testing-library/jest-dom";
-import { render } from "@testing-library/svelte";
+import { render, fireEvent } from "@testing-library/svelte";
 import { StaticMap } from "../src/lib";
 import * as locations from "data/locations/";
 import type { Location } from "$lib/StaticMap/types";
@@ -125,5 +125,20 @@ describe("StaticMap", () => {
     });
     const button = queryByRole("button");
     expect(button).not.toBeInTheDocument();
+  });
+
+  test("on:click", async () => {
+    const { queryByRole, component } = render(StaticMap, {
+      target,
+      props: {
+        location,
+        basemapStyle: "dark-v10"
+      }
+    });
+    const mock = jest.fn();
+    const button = queryByRole("button");
+    component.$on("click", mock);
+    await fireEvent.click(button);
+    expect(mock).toHaveBeenCalledTimes(1);
   });
 });
