@@ -82,8 +82,9 @@ describe("StaticMap", () => {
       }
     });
     const container = queryByTestId("cac-static-map-container");
-    expect(container.style.width).toEqual("300px");
-    expect(container.style.height).toEqual("500px");
+    const styles = getComputedStyle(container);
+    expect(styles.getPropertyValue("--width")).toEqual("300px");
+    expect(styles.getPropertyValue("--height")).toEqual("500px");
   });
 
   test("basemap style", () => {
