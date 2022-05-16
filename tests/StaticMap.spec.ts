@@ -5,7 +5,7 @@
 import "@testing-library/jest-dom";
 import { render, fireEvent } from "@testing-library/svelte";
 import { StaticMap } from "../src/lib";
-import * as locations from "data/locations/";
+import defaultLocation from "../static/data/locations/default-location.json";
 import type { Location } from "$lib/StaticMap/types";
 
 describe("StaticMap", () => {
@@ -14,7 +14,7 @@ describe("StaticMap", () => {
 
   beforeEach(() => {
     target = document.body.appendChild(document.createElement("slot"));
-    location = locations.defaultLocation as Location;
+    location = defaultLocation as Location;
   });
 
   test("Component should render", async () => {
