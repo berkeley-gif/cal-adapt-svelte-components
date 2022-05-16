@@ -45,19 +45,20 @@ describe("StaticMap", () => {
   });
 
   test("SVG title", () => {
+    const titleId = "my-title";
     const { queryByText, queryByRole } = render(StaticMap, {
       target,
       props: {
         location,
-        titleId: "my-title"
+        titleId
       }
     });
     const svg = queryByRole("img");
     const searchStr =
       "Locator map for 240 32nd Street, Sacramento, California 95816";
     expect(queryByText(searchStr)).toBeInTheDocument();
-    expect(queryByText(searchStr).getAttribute("id")).toEqual("my-title");
-    expect(svg.getAttribute("aria-labelledby")).toEqual("my-title");
+    expect(queryByText(searchStr).getAttribute("id")).toEqual(titleId);
+    expect(svg.getAttribute("aria-labelledby")).toEqual(titleId);
   });
 
   test("SVG viewBox attribute", () => {
@@ -116,7 +117,7 @@ describe("StaticMap", () => {
     const button = queryByRole("button");
     expect(button).toBeInTheDocument();
     expect(button.querySelector("svg")).toBeInTheDocument();
-    expect(button.getAttribute("aria-label")).toEqual("Change location");
+    expect(button.getAttribute("aria-label")).toBeTruthy();
   });
 
   test("tile wraps svg", () => {
@@ -141,8 +142,7 @@ describe("StaticMap", () => {
     const { queryByRole, component } = render(StaticMap, {
       target,
       props: {
-        location,
-        basemapStyle: "dark-v10"
+        location
       }
     });
     const mock = jest.fn();
