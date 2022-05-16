@@ -1,6 +1,8 @@
 <script lang="ts" context="module">
   /** @type {import('./[slug]').Load} */
   export async function load({ fetch }) {
+    let locations = [];
+
     const fileNames = [
       "alameda",
       "california",
@@ -10,20 +12,24 @@
     ];
     const baseUrl = "/data/locations/";
 
-    const responses = await Promise.all(
-      fileNames.map(async (file) => await fetch(`${baseUrl}${file}.json`))
-    );
+    try {
+      const responses = await Promise.all(
+        fileNames.map(async (file) => await fetch(`${baseUrl}${file}.json`))
+      );
 
-    const jsons = await Promise.all(
-      responses.map(async (res) => await res.json())
-    );
+      const jsons = await Promise.all(
+        responses.map(async (res) => await res.json())
+      );
 
-    const locations = jsons.map((d) => ({
-      title: d.title,
-      value: d
-    }));
+      locations = jsons.map((d) => ({
+        title: d.title,
+        value: d
+      }));
+    } catch {
+      console.error("failed to fetch locations json");
+    }
 
-    if (locations) {
+    if (locations && locations.length) {
       return {
         status: 200,
         props: {
