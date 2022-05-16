@@ -24,7 +24,7 @@
   "bugs": "https://github.com/berkeley-gif/cal-adapt-svelte-components/issues",
   "scripts": {
     "start": "npm run dev",
-    "dev": "svelte-kit dev -p 3333 -o",
+    "dev": "svelte-kit dev -p 3333",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview -p 3333",
