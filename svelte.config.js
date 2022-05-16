@@ -11,6 +11,7 @@ const config = {
   kit: {
     adapter: adapter(),
     vite: () => ({
+      assetsInclude: ["**/*.json"],
       resolve: {
         alias: {
           "~": resolve("./src"),
