@@ -75,7 +75,7 @@ locator map that displays the geographic boundary selected by the user. In most 
 
 - `click`
 
-**Note:** Technically whether or not the `useButton` prop is set to `true` the `click` could still be listened for, but it's bad for accessibility to add click event listeners to non-clickable elements so make sure to set `useButton` to `true` when listening for this event.
+**Note:** The `click` event handler is only exposed when `useButton` is set to `true`.
 
 ## Developing
 

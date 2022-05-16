@@ -83,9 +83,7 @@
     : "var(--gray-80)";
 
   function handleClick(event: Event) {
-    if (useButton) {
-      window.alert(`You clicked on ${selectedLocation.title}`);
-    }
+    window.alert(`You clicked on ${selectedLocation.title}`);
   }
 
   function handleChangeWidth(event: Event) {
