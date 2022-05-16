@@ -1,3 +1,43 @@
+<script lang="ts" context="module">
+  /** @type {import('./[slug]').Load} */
+  export async function load({ fetch }) {
+    const fileNames = [
+      "alameda",
+      "california",
+      "census-tract",
+      "default-location",
+      "los-angeles"
+    ];
+    const baseUrl = "/data/locations/";
+
+    const responses = await Promise.all(
+      fileNames.map(async (file) => await fetch(`${baseUrl}${file}.json`))
+    );
+
+    const jsons = await Promise.all(
+      responses.map(async (res) => await res.json())
+    );
+
+    const locations = jsons.map((d) => ({
+      title: d.title,
+      value: d
+    }));
+
+    if (locations) {
+      return {
+        status: 200,
+        props: {
+          locations
+        }
+      };
+    }
+
+    return {
+      status: 404
+    };
+  }
+</script>
+
 <script lang="ts">
   import throttle from "lodash.throttle";
   import { StaticMap } from "$lib";
