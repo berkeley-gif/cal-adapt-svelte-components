@@ -35,6 +35,29 @@ Note that the Search component **will not** filter list items on its own, it's u
 | listboxLabel | string                   | "Options"                            | The aria-label for the listbox                                |
 | debug        | boolean                  | false                                | Enables console.log'ing of reactive variables & some methods. |
 
+### Static Map
+
+The Static Map is intended to be used within a tool's settings panel as a
+locator map that displays the geographic boundary selected by the user. In most tools, it is wrapped in an HTML `<button>` element that when clicked on displays a modal which allows the user to change the selected location. The Static Map is not responsible for changing the location, only for handling a click event that may be used to trigger opening a modal.
+
+- [Component code](./src/lib/StaticMap/)
+- [Demo](./src/routes/static-map.svelte)
+
+#### Props
+
+| Prop Name      | Type             | Default Value                        | Description                                               |
+| -------------- | ---------------- | ------------------------------------ | --------------------------------------------------------- |
+| width          | number           | 250                                  | The width of the component / map in pixels.               |
+| height         | number           | 250                                  | The height of the component / map in pixels.              |
+| location       | Location \| null | null                                 | The location data to display as an overlay on the map.    |
+| basemapStyle   | string           | streets-v11                          | The name of the MapBox map tiles style.                   |
+| padding        | number           | 20                                   | Padding in pixels between the overlay and map frame.      |
+| useButton      | boolean          | true                                 | Whether or not to wrap the map in an HTML button element. |
+| tableId        | string           | `cac- ${Math.random().toString(36)}` | The id attribute of the SVG title element.                |
+| --border-color | string           | var(--gray-90)                       | The color of the map frame / neatline.                    |
+| --stroke       | string           | var(--gray-80)                       | The stroke color of the location overlay.                 |
+| --stroke-width | number           | 3                                    | The stroke width in pixels of the location overlay.       |
+
 ## Developing
 
 Once you've installed dependencies with `npm install`, start a development server:
@@ -75,7 +98,7 @@ The components in this repository are made publicly available on NPM and Github.
 ```bash
 npm version patch # updates the package version (including in git)
 npm run package
-npm run publish --access=public ./package
+npm publish --access=public ./package
 git push origin --tags
 ```
 
