@@ -17,7 +17,7 @@ const config = {
           "~": resolve("./src"),
           styles: resolve("./src/styles"),
           common: resolve("./src/lib/common"),
-          data: resolve("./src/data"),
+          data: resolve("./static/data"),
           $lib: resolve("./src/lib")
         }
       }
