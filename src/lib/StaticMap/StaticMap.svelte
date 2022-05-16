@@ -55,14 +55,12 @@
   }
 
   function setProjection() {
-    d3.geoPath(
-      projection.fitExtent(
-        [
-          [padding, padding],
-          [width - padding, height - padding]
-        ],
-        overlay
-      )
+    projection.fitExtent(
+      [
+        [padding, padding],
+        [width - padding, height - padding]
+      ],
+      overlay
     );
   }
 </script>
