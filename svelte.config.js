@@ -1,5 +1,5 @@
 import { resolve } from "path";
-import adapter from "@sveltejs/adapter-static";
+import adapter from "@sveltejs/adapter-auto";
 import preprocess from "svelte-preprocess";
 
 /** @type {import('@sveltejs/kit').Config} */
