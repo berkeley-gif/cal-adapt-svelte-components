@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as d3 from "d3-geo";
-  import Button from "carbon-components-svelte/src/Button/Button.svelte";
-  import Tile from "carbon-components-svelte/src/Tile/Tile.svelte";
+  import Button from "./Button.svelte";
+  import Div from "./Div.svelte";
 
   import { getTileUrl, getTiles } from "./utils";
   import type { Location, MapBoxStyle, Feature, Tiles } from "./types";
@@ -33,7 +33,7 @@
   let tiles: Tiles;
   let overlay: Feature;
 
-  $: Wrapper = useButton ? Button : Tile;
+  $: Wrapper = useButton ? Button : Div;
   $: ariaLabel = useButton ? "Change location" : undefined;
   $: titleText =
     location && location.title ? `Locator map for ${location.title}` : "";
@@ -72,27 +72,6 @@
     border: 1px solid var(--border-color, var(--gray-90));
     width: var(--width, 250px);
     height: var(--height, 250px);
-  }
-
-  /* stylelint-disable-next-line */
-  .cac-static-map-container > :global(.bx--btn.bx--btn--primary) {
-    all: unset;
-    width: var(--width, 250px);
-    cursor: pointer;
-
-    &:hover {
-      box-shadow: var(--box-shadow);
-    }
-
-    &:focus {
-      outline: 2px solid var(--gray-100);
-    }
-  }
-
-  /* stylelint-disable-next-line */
-  .cac-static-map-container > :global(.bx--tile) {
-    width: var(--width, 250px);
-    padding: 0;
   }
 
   svg {
