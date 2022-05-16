@@ -35,6 +35,19 @@ Note that the Search component **will not** filter list items on its own, it's u
 | listboxLabel | string                   | "Options"                            | The aria-label for the listbox                                |
 | debug        | boolean                  | false                                | Enables console.log'ing of reactive variables & some methods. |
 
+#### Events
+
+When a list item from the Search component's `suggestions` list is selected a `change` custom event is dispatched with the `selectedItem`.
+
+Additionally, the following native events may be listened for on the Search component's input element:
+
+- `change`
+- `input`
+- `focus`
+- `blur`
+- `keydown`
+- `keyup`
+
 ### Static Map
 
 The Static Map is intended to be used within a tool's settings panel as a
@@ -57,6 +70,12 @@ locator map that displays the geographic boundary selected by the user. In most 
 | --border-color | string           | var(--gray-90)                       | The color of the map frame / neatline.                    |
 | --stroke       | string           | var(--gray-80)                       | The stroke color of the location overlay.                 |
 | --stroke-width | number           | 3                                    | The stroke width in pixels of the location overlay.       |
+
+#### Events
+
+- `click`
+
+**Note:** Technically whether or not the `useButton` prop is set to `true` the `click` could still be listened for, but it's bad for accessibility to add click event listeners to non-clickable elements so make sure to set `useButton` to `true` when listening for this event.
 
 ## Developing
 
