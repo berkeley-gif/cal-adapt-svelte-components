@@ -64,17 +64,13 @@
   }
 </script>
 
-<style lang="scss">
-  .cac-static-map-container {
+<style>
+  div {
     display: inline-block;
     box-sizing: content-box;
     border: 1px solid var(--border-color, var(--gray-90));
     width: var(--width, 250px);
     height: var(--height, 250px);
-  }
-
-  svg {
-    display: inline-block;
   }
 
   path {
@@ -84,7 +80,6 @@
 </style>
 
 <div
-  class="cac-static-map-container"
   style="--width:{width}px; --height:{height}px"
   data-testid="cac-static-map-container"
 >
