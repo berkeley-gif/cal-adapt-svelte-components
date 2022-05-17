@@ -1,3 +1,4 @@
+import { resolve } from "path";
 import adapter from "@sveltejs/adapter-auto";
 import preprocess from "svelte-preprocess";
 
@@ -8,7 +9,20 @@ const config = {
   preprocess: preprocess(),
 
   kit: {
-    adapter: adapter()
+    adapter: adapter(),
+    vite: () => ({
+      assetsInclude: ["**/*.json"],
+      publicDir: "static",
+      resolve: {
+        alias: {
+          "~": resolve("./src"),
+          styles: resolve("./src/styles"),
+          common: resolve("./src/lib/common"),
+          data: resolve("./static/data"),
+          $lib: resolve("./src/lib")
+        }
+      }
+    })
   }
 };
 

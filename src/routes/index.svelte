@@ -4,4 +4,5 @@
 
 <ul>
   <li><p><a href="/search">Search with auto-suggest</a></p></li>
+  <li><p><a href="/static-map">Static Map</a></p></li>
 </ul>
