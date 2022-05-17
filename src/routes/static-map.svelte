@@ -8,7 +8,8 @@
       "california",
       "census-tract",
       "default-location",
-      "los-angeles"
+      "los-angeles",
+      "station"
     ];
     const baseUrl = "/data/locations/";
 
