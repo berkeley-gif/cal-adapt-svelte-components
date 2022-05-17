@@ -30,7 +30,9 @@
   export let titleId = `cac-${Math.random().toString(36)}`;
 
   const projection = d3.geoMercator();
-  const path = d3.geoPath(projection).pointRadius(3);
+
+  // TODO: remove .pointRadius after adding the marker.
+  const path = d3.geoPath(projection).pointRadius(5);
 
   let tiles: Tiles;
   let overlay: Feature;
@@ -42,7 +44,7 @@
   $: isPoint = location && location.geometry.type === "Point";
 
   $: {
-    if (location) {
+    if (location && "geometry" in location) {
       createOverlay();
       setProjection();
       tiles = getTiles(width, height, projection)();
@@ -58,9 +60,9 @@
   }
 
   function setProjection() {
-    if (isPoint && "coordinates" in location.geometry) {
+    if (isPoint && "coordinates" in overlay.geometry) {
       projection
-        .center(location.geometry.coordinates as [number, number])
+        .center(overlay.geometry.coordinates as [number, number])
         .scale(Math.pow(2, zoom) / (2 * Math.PI))
         .translate([width / 2, height / 2]);
     } else {
@@ -85,7 +87,6 @@
   }
 
   path {
-    stroke: var(--stroke, var(--gray-90));
     stroke-width: var(--stroke-width, 3);
   }
 </style>
@@ -120,6 +121,7 @@
 
       {#if overlay}
         <path
+          stroke="{isPoint ? 'none' : 'var(--stroke, var(--gray-90))'}"
           fill="{isPoint ? 'var(--stroke, var(--gray-90))' : 'none'}"
           d="{path(overlay)}"></path>
       {/if}
