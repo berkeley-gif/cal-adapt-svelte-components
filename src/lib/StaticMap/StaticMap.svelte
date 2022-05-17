@@ -20,6 +20,9 @@
   /** specify the amount of padding between the overlay and map border */
   export let padding = 20;
 
+  /** specify the zoom level when location has a point geometry */
+  export let zoom = 20;
+
   /** wrap the map in an HTML button element or not */
   export let useButton = true;
 
@@ -27,7 +30,7 @@
   export let titleId = `cac-${Math.random().toString(36)}`;
 
   const projection = d3.geoMercator();
-  const path = d3.geoPath(projection);
+  const path = d3.geoPath(projection).pointRadius(3);
 
   let tiles: Tiles;
   let overlay: Feature;
@@ -36,6 +39,7 @@
   $: ariaLabel = useButton ? "Change location" : undefined;
   $: titleText =
     location && location.title ? `Locator map for ${location.title}` : "";
+  $: isPoint = location && location.geometry.type === "Point";
 
   $: {
     if (location) {
@@ -54,13 +58,20 @@
   }
 
   function setProjection() {
-    projection.fitExtent(
-      [
-        [padding, padding],
-        [width - padding, height - padding]
-      ],
-      overlay
-    );
+    if (isPoint && "coordinates" in location.geometry) {
+      projection
+        .center(location.geometry.coordinates as [number, number])
+        .scale(Math.pow(2, zoom) / (2 * Math.PI))
+        .translate([width / 2, height / 2]);
+    } else {
+      projection.fitExtent(
+        [
+          [padding, padding],
+          [width - padding, height - padding]
+        ],
+        overlay
+      );
+    }
   }
 </script>
 
@@ -108,7 +119,9 @@
       {/if}
 
       {#if overlay}
-        <path fill="none" d="{path(overlay)}"></path>
+        <path
+          fill="{isPoint ? 'var(--stroke, var(--gray-90))' : 'none'}"
+          d="{path(overlay)}"></path>
       {/if}
     </svg>
   </svelte:component>
