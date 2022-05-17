@@ -1,0 +1,19 @@
+{
+  "title": "Weather Station at Fresno Yosemite International Airport, Fresno, California",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [-119.719, 36.78]
+  },
+  "center": [-119.719, 36.78],
+  "bbox": [-119.719, 36.78, -119.719, 36.78],
+  "id": 11,
+  "properties": {
+    "name": "Fresno Yosemite International Airport",
+    "usaf": 723890,
+    "wban": 93193,
+    "elevation_m": 101.5,
+    "icao": "KFAT",
+    "city": "Fresno",
+    "climdiv": 5
+  }
+}
