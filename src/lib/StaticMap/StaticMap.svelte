@@ -92,6 +92,8 @@
     >
       <title id="{titleId}">{titleText}</title>
 
+      <!-- FIXME: map tile gaps are visible at certain width & height settings -->
+      <!-- see: https://observablehq.com/@d3/seamless-zoomable-map-tiles -->
       {#if tiles && tiles.length}
         {#each tiles as [x, y, z]}
           {@const [tx, ty] = tiles.translate}
