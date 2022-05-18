@@ -1,5 +1,6 @@
 <script lang="ts">
   import * as d3 from "d3-geo";
+  import LocationMarker from "carbon-icons-svelte/lib/LocationFilled32/LocationFilled32.svelte";
   import Button from "./Button.svelte";
   import Div from "./Div.svelte";
   import { getTileUrl, getTiles } from "./utils";
@@ -87,7 +88,9 @@
   }
 
   path {
+    stroke: var(--stroke, var(--gray-90));
     stroke-width: var(--stroke-width, 3);
+    fill: none;
   }
 </style>
 
@@ -120,10 +123,21 @@
       {/if}
 
       {#if overlay}
-        <path
-          stroke="{isPoint ? 'none' : 'var(--stroke, var(--gray-90))'}"
-          fill="{isPoint ? 'var(--stroke, var(--gray-90))' : 'none'}"
-          d="{path(overlay)}"></path>
+        {#if isPoint}
+          <g
+            transform="{`translate(${Math.round(width / 2) - 16}, ${
+              Math.round(height / 2) - 32
+            })`}"
+          >
+            <LocationMarker
+              style="{`fill: var(--marker-fill, #fa005e);
+                stroke: var(--stroke, var(--gray-90));
+                stroke-width: var(--marker-stroke-width, 2);`}"
+            />
+          </g>
+        {:else}
+          <path d="{path(overlay)}"></path>
+        {/if}
       {/if}
     </svg>
   </svelte:component>
