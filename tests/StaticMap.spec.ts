@@ -6,6 +6,7 @@ import "@testing-library/jest-dom";
 import { render, fireEvent } from "@testing-library/svelte";
 import { StaticMap } from "../src/lib";
 import defaultLocation from "../static/data/locations/default-location.json";
+import stationLocation from "../static/data/locations/station.json";
 import type { Location } from "$lib/StaticMap/types";
 
 describe("StaticMap", () => {
@@ -42,6 +43,18 @@ describe("StaticMap", () => {
     });
     const svg = queryByRole("img");
     expect(svg.querySelector("path")).toBeInTheDocument();
+    expect(svg.querySelector("svg")).not.toBeInTheDocument();
+  });
+
+  test("Marker renders for point geoms", () => {
+    const { queryByRole } = render(StaticMap, {
+      target,
+      props: {
+        location: stationLocation
+      }
+    });
+    const svg = queryByRole("img");
+    expect(svg.querySelector("svg")).toBeInTheDocument();
   });
 
   test("SVG title", () => {
@@ -136,6 +149,28 @@ describe("StaticMap", () => {
     expect(
       container.querySelector("div").getAttribute("aria-label")
     ).toBeNull();
+  });
+
+  // NOTE: the component's projection does not seem to update correctly,
+  // when using JSDOM, therefore it's difficult to test the zoom prop.
+  test.skip("zoom prop", async () => {
+    const { component, queryByRole } = render(StaticMap, {
+      target,
+      props: {
+        location,
+        zoom: 18
+      }
+    });
+
+    const svg = queryByRole("img");
+    const getPositions = () =>
+      Array.from(svg.querySelectorAll("image")).map((el) => ({
+        x: +el.getAttribute("x"),
+        y: +el.getAttribute("y")
+      }));
+    console.log(getPositions());
+    await component.$set({ zoom: 22 });
+    console.log(getPositions());
   });
 
   test("on:click", async () => {
