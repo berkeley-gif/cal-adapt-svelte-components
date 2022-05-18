@@ -44,12 +44,10 @@
     location && location.title ? `Locator map for ${location.title}` : "";
   $: isPoint = location && location.geometry.type === "Point";
 
-  $: {
-    if (location && "geometry" in location) {
-      createOverlay();
-      setProjection();
-      tiles = getTiles(width, height, projection)();
-    }
+  $: if (zoom && location && "geometry" in location) {
+    createOverlay();
+    setProjection();
+    tiles = getTiles(width, height, projection)();
   }
 
   function createOverlay() {
