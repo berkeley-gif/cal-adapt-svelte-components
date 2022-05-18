@@ -84,6 +84,10 @@
     ? "var(--gray-10)"
     : "var(--gray-80)";
 
+  $: markerStrokeColor = darkStyles.has(mapStyle)
+    ? "var(--gray-10)"
+    : "var(--gray-90)";
+
   function handleClick(event: Event) {
     window.alert(`You clicked on ${selectedLocation.title}`);
   }
@@ -181,4 +185,5 @@
   basemapStyle="{mapStyle}"
   zoom="{zoom}"
   --stroke="{strokeColor}"
+  --marker-stroke="{markerStrokeColor}"
 />
