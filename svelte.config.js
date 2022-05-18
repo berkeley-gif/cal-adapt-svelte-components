@@ -12,7 +12,6 @@ const config = {
     adapter: adapter(),
     vite: () => ({
       assetsInclude: ["**/*.json"],
-      publicDir: "static",
       resolve: {
         alias: {
           "~": resolve("./src"),
