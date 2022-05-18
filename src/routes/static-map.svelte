@@ -185,5 +185,8 @@
   basemapStyle="{mapStyle}"
   zoom="{zoom}"
   --stroke="{strokeColor}"
+  --stroke-width="{4}"
   --marker-stroke="{markerStrokeColor}"
+  --marker-stroke-width="{1}"
+  --marker-fill="{'orange'}"
 />
