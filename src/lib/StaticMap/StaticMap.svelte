@@ -130,8 +130,8 @@
             })`}"
           >
             <LocationMarker
-              style="{`fill: var(--marker-fill, #fa005e);
-                stroke: var(--stroke, var(--gray-90));
+              style="{`fill: var(--marker-fill, var(--teal-40));
+                stroke: var(--marker-stroke, var(--gray-80));
                 stroke-width: var(--marker-stroke-width, 2);`}"
             />
           </g>
