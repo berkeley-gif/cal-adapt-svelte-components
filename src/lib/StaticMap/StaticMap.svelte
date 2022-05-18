@@ -31,9 +31,7 @@
   export let titleId = `cac-${Math.random().toString(36)}`;
 
   const projection = d3.geoMercator();
-
-  // TODO: remove .pointRadius after adding the marker.
-  const path = d3.geoPath(projection).pointRadius(5);
+  const path = d3.geoPath(projection);
 
   let tiles: Tiles;
   let overlay: Feature;
