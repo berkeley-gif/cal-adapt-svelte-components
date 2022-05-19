@@ -8,7 +8,8 @@
       "california",
       "census-tract",
       "default-location",
-      "los-angeles"
+      "los-angeles",
+      "station"
     ];
     const baseUrl = "/data/locations/";
 
@@ -47,7 +48,7 @@
 <script lang="ts">
   import throttle from "lodash.throttle";
   import { StaticMap } from "$lib";
-  import type { Location } from "$lib/StaticMap/types";
+  import type { Location, MapBoxStyle } from "$lib/StaticMap/types";
 
   interface SampleLocation {
     value: Location;
@@ -76,11 +77,16 @@
   let useButton = true;
   let width = 320;
   let height = 250;
-  let mapStyle;
+  let mapStyle: MapBoxStyle = "streets-v11";
+  let zoom = 20;
 
   $: strokeColor = darkStyles.has(mapStyle)
     ? "var(--gray-10)"
     : "var(--gray-80)";
+
+  $: markerStrokeColor = darkStyles.has(mapStyle)
+    ? "var(--gray-10)"
+    : "var(--gray-90)";
 
   function handleClick(event: Event) {
     window.alert(`You clicked on ${selectedLocation.title}`);
@@ -95,6 +101,12 @@
   function handleChangeHeight(event: Event) {
     if (event.target) {
       height = +(event.target as HTMLInputElement).value;
+    }
+  }
+
+  function handleChangeZoom(event: Event) {
+    if (event.target) {
+      zoom = +(event.target as HTMLInputElement).value;
     }
   }
 </script>
@@ -150,6 +162,16 @@
 </fieldset>
 
 <fieldset>
+  <label for="zoom">Zoom level (marker only):</label>
+  <input
+    on:input="{throttle(handleChangeZoom, throttleMs)}"
+    value="{zoom}"
+    id="zoom"
+    type="number"
+  />
+</fieldset>
+
+<fieldset>
   <label for="use-button">Make it a button?</label>
   <input bind:checked="{useButton}" type="checkbox" />
 </fieldset>
@@ -161,5 +183,10 @@
   useButton="{useButton}"
   location="{selectedLocation}"
   basemapStyle="{mapStyle}"
+  zoom="{zoom}"
   --stroke="{strokeColor}"
+  --stroke-width="{4}"
+  --marker-stroke="{markerStrokeColor}"
+  --marker-stroke-width="{1}"
+  --marker-fill="{'orange'}"
 />

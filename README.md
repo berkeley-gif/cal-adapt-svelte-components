@@ -58,18 +58,22 @@ locator map that displays the geographic boundary selected by the user. In most 
 
 #### Props
 
-| Prop Name      | Type             | Default Value                        | Description                                               |
-| -------------- | ---------------- | ------------------------------------ | --------------------------------------------------------- |
-| width          | number           | 250                                  | The width of the component / map in pixels.               |
-| height         | number           | 250                                  | The height of the component / map in pixels.              |
-| location       | Location \| null | null                                 | The location data to display as an overlay on the map.    |
-| basemapStyle   | string           | streets-v11                          | The name of the MapBox map tiles style.                   |
-| padding        | number           | 20                                   | Padding in pixels between the overlay and map frame.      |
-| useButton      | boolean          | true                                 | Whether or not to wrap the map in an HTML button element. |
-| tableId        | string           | `cac- ${Math.random().toString(36)}` | The id attribute of the SVG title element.                |
-| --border-color | string           | var(--gray-90)                       | The color of the map frame / neatline.                    |
-| --stroke       | string           | var(--gray-80)                       | The stroke color of the location overlay.                 |
-| --stroke-width | number           | 3                                    | The stroke width in pixels of the location overlay.       |
+| Prop Name             | Type             | Default Value                        | Description                                                       |
+| --------------------- | ---------------- | ------------------------------------ | ----------------------------------------------------------------- |
+| width                 | number           | 250                                  | The width of the component / map in pixels.                       |
+| height                | number           | 250                                  | The height of the component / map in pixels.                      |
+| location              | Location \| null | null                                 | The location data to display as an overlay on the map.            |
+| basemapStyle          | string           | streets-v11                          | The name of the MapBox map tiles style.                           |
+| padding               | number           | 20                                   | Padding in pixels between the overlay and map frame.              |
+| useButton             | boolean          | true                                 | Whether or not to wrap the map in an HTML button element.         |
+| titleId               | string           | `cac- ${Math.random().toString(36)}` | The id attribute of the SVG title element.                        |
+| zoom                  | number           | 20                                   | The map zoom level to use when displaying a Point geometry.       |
+| --border-color        | string           | var(--gray-90)                       | The color of the map frame / neatline.                            |
+| --stroke              | string           | var(--gray-80)                       | The stroke color of the location overlay.                         |
+| --stroke-width        | number           | 3                                    | The stroke width in pixels of the location overlay.               |
+| --marker-fill         | string           | var(--teal-40)                       | The fill color for the marker when displaying a Point geometry.   |
+| --marker-stroke       | string           | var(--gray-80)                       | The stroke color for the marker when displaying a Point geometry. |
+| --marker-stroke-width | string           | 2                                    | The stroke width for the marker when displaying a Point geometry. |
 
 #### Events
 

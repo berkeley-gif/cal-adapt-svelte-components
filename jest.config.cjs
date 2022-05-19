@@ -21,5 +21,10 @@ module.exports = {
     "^data/(.*)$": "<rootDir>/static/data/$1",
     "^styles/(.*)$": "<rootDir>/src/styles/$1"
   },
-  preset: "ts-jest/presets/js-with-babel-esm"
+  preset: "ts-jest/presets/js-with-babel-esm",
+  testPathIgnorePatterns: [
+    "<rootDir>/package/",
+    "<rootDir>/build/",
+    "<rootDir>/node_modules/"
+  ]
 };

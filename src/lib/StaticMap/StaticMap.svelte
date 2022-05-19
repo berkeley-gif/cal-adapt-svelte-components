@@ -1,5 +1,6 @@
 <script lang="ts">
   import * as d3 from "d3-geo";
+  import LocationMarker from "carbon-icons-svelte/lib/LocationFilled32/LocationFilled32.svelte";
   import Button from "./Button.svelte";
   import Div from "./Div.svelte";
   import { getTileUrl, getTiles } from "./utils";
@@ -20,6 +21,9 @@
   /** specify the amount of padding between the overlay and map border */
   export let padding = 20;
 
+  /** specify the zoom level when location has a point geometry */
+  export let zoom = 20;
+
   /** wrap the map in an HTML button element or not */
   export let useButton = true;
 
@@ -36,13 +40,12 @@
   $: ariaLabel = useButton ? "Change location" : undefined;
   $: titleText =
     location && location.title ? `Locator map for ${location.title}` : "";
+  $: isPoint = location && location.geometry.type === "Point";
 
-  $: {
-    if (location) {
-      createOverlay();
-      setProjection();
-      tiles = getTiles(width, height, projection)();
-    }
+  $: if (zoom && location && "geometry" in location) {
+    createOverlay();
+    setProjection();
+    tiles = getTiles(width, height, projection)();
   }
 
   function createOverlay() {
@@ -54,13 +57,20 @@
   }
 
   function setProjection() {
-    projection.fitExtent(
-      [
-        [padding, padding],
-        [width - padding, height - padding]
-      ],
-      overlay
-    );
+    if (isPoint && "coordinates" in overlay.geometry) {
+      projection
+        .center(overlay.geometry.coordinates as [number, number])
+        .scale(Math.pow(2, zoom) / (2 * Math.PI))
+        .translate([width / 2, height / 2]);
+    } else {
+      projection.fitExtent(
+        [
+          [padding, padding],
+          [width - padding, height - padding]
+        ],
+        overlay
+      );
+    }
   }
 </script>
 
@@ -76,6 +86,7 @@
   path {
     stroke: var(--stroke, var(--gray-90));
     stroke-width: var(--stroke-width, 3);
+    fill: none;
   }
 </style>
 
@@ -108,7 +119,21 @@
       {/if}
 
       {#if overlay}
-        <path fill="none" d="{path(overlay)}"></path>
+        {#if isPoint}
+          <g
+            transform="{`translate(${Math.round(width / 2) - 16}, ${
+              Math.round(height / 2) - 32
+            })`}"
+          >
+            <LocationMarker
+              style="{`fill: var(--marker-fill, var(--teal-40));
+                stroke: var(--marker-stroke, var(--gray-80));
+                stroke-width: var(--marker-stroke-width, 2);`}"
+            />
+          </g>
+        {:else}
+          <path d="{path(overlay)}"></path>
+        {/if}
       {/if}
     </svg>
   </svelte:component>
