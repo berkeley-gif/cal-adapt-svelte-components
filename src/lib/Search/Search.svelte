@@ -81,6 +81,7 @@
     if (focus && inputRef) {
       inputRef.focus();
     }
+    dispatch("clear");
   }
 
   function selectSearchResult() {
