@@ -37,11 +37,16 @@ Note that the Search component **will not** filter list items on its own, it's u
 
 #### Events
 
-When a list item from the Search component's `suggestions` list is selected a `change` custom event is dispatched with the `selectedItem`.
+##### Dispatched Events
+
+- `change`: dispatched when a list item from the Search component's `suggestions` list is selected a `change` custom event is dispatched with the `selectedItem`.
+
+- `clear`: dispatched when the clear search input button is clicked.
+
+##### Forwarded Events
 
 Additionally, the following native events may be listened for on the Search component's input element:
 
-- `change`
 - `input`
 - `focus`
 - `blur`
@@ -76,6 +81,8 @@ locator map that displays the geographic boundary selected by the user. In most 
 | --marker-stroke-width | string           | 2                                    | The stroke width for the marker when displaying a Point geometry. |
 
 #### Events
+
+##### Forwarded Events
 
 - `click`
 
