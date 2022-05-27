@@ -36,6 +36,10 @@
     console.log("search select event: ", event.detail);
     suggestionsFiltered = [];
   }
+
+  function handleSearchClear() {
+    alert("Search cleared!");
+  }
 </script>
 
 <h1>Seach with auto-suggest</h1>
@@ -48,6 +52,7 @@
   bind:searchValue
   on:select="{handleSearchSelection}"
   on:input="{handleSearchInput}"
+  on:clear="{handleSearchClear}"
   description="{description}"
   outlineColor="{outlineColor}"
   suggestions="{suggestionsFiltered}"
