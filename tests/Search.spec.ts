@@ -152,6 +152,23 @@ describe("Search", () => {
     expect(input.value).toBe("");
   });
 
+  test("clear input button dispatches", async () => {
+    const { getByLabelText, getByRole, component } = render(Search, {
+      target,
+      props: {
+        suggestions
+      }
+    });
+    const mock = jest.fn();
+    component.$on("clear", mock);
+    const input = getByRole("combobox") as HTMLInputElement;
+    await fireEvent.focus(input);
+    await component.$set({ searchValue: "I read the news today, oh boy." });
+    const button = getByLabelText("Clear input") as HTMLButtonElement;
+    await fireEvent.click(button);
+    expect(mock.mock.calls).toHaveLength(1);
+  });
+
   test("clicking on an option selects a suggestion", async () => {
     const { getByRole, getAllByRole, component } = render(Search, {
       target,
