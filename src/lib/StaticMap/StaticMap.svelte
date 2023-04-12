@@ -1,6 +1,6 @@
 <script lang="ts">
   import * as d3 from "d3-geo";
-  import LocationMarker from "carbon-icons-svelte/lib/LocationFilled32/LocationFilled32.svelte";
+  import LocationMarker from "carbon-icons-svelte/lib/LocationFilled.svelte";
   import Button from "./Button.svelte";
   import Div from "./Div.svelte";
   import { getTileUrl, getTiles } from "./utils";
