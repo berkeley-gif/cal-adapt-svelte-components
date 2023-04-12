@@ -49,7 +49,7 @@
 </p>
 
 <Search
-  bind:searchValue
+  bind:searchValue="{searchValue}"
   on:select="{handleSearchSelection}"
   on:input="{handleSearchInput}"
   on:clear="{handleSearchClear}"
