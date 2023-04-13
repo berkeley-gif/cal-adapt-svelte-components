@@ -2,7 +2,8 @@
   "extends": [
     "stylelint-config-standard-scss",
     "stylelint-config-prettier-scss",
-    "stylelint-config-html/svelte"
+    "stylelint-config-html/svelte",
+    "stylelint-config-carbon"
   ],
   "rules": {
     "scss/comment-no-empty": null,
