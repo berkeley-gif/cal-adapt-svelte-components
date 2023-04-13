@@ -12,3 +12,4 @@ vite.config.ts.timestamp-*
 .eslintcache
 berkeley-gif-gif-svelte-components-*.tgz
 package-lock.json
+.stylelintcache
