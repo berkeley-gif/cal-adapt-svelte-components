@@ -77,16 +77,16 @@
 <style>
   div {
     display: inline-block;
-    box-sizing: content-box;
-    border: 1px solid var(--border-color, var(--gray-90));
     width: var(--width, 250px);
     height: var(--height, 250px);
+    box-sizing: content-box;
+    border: 1px solid var(--border-color, var(--gray-90));
   }
 
   path {
+    fill: none;
     stroke: var(--stroke, var(--gray-90));
     stroke-width: var(--stroke-width, 3);
-    fill: none;
   }
 </style>
 

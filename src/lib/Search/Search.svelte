@@ -242,11 +242,12 @@
   div.cac--search {
     position: relative;
     padding-left: 0.5rem;
-    background-color: var(--white);
     border: 1px solid var(--gray-60);
+    background-color: var(--white);
 
     &:focus-within {
       @include outline-style;
+
       border-color: transparent;
     }
 
@@ -272,15 +273,16 @@
     /* stylelint-disable-next-line selector-class-pattern */
     :global(.bx--list-box__menu-item--highlighted) {
       @include outline-style;
+
       outline-offset: -3px;
     }
 
     // override the input styles
     /* stylelint-disable-next-line selector-class-pattern */
     :global(.bx--search-input) {
-      border: none;
-      padding-left: 0.5rem;
       padding-right: 4rem;
+      padding-left: 0.5rem;
+      border: none;
       color: var(--gray-90);
 
       &:focus {

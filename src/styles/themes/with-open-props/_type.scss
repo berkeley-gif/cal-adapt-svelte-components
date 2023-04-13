@@ -1,0 +1,74 @@
+@use "./variables" as var;
+@use "carbon-components/scss/globals/scss/spacing" as spc;
+
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300;400;&display=swap";
+@import "https://fonts.googleapis.com/css?family=Dancing+Script:600&display=swap";
+@import "https://unpkg.com/open-props";
+
+// Font Variables
+$header-font-family: "Dancing Script", serif;
+$header-font-weight: 600;
+
+$body-font-family: "Open Sans", sans-serif;
+$body-font-weight: 400;
+
+body {
+  font-family: $body-font-family;
+  font-weight: $body-font-weight;
+}
+
+.h1,
+h1 {
+  margin-top: spc.$spacing-lg;
+  margin-bottom: spc.$spacing-md;
+  font-family: $header-font-family;
+  font-size: var(--font-size-8);
+  font-weight: $header-font-weight;
+  line-height: var(--font-lineheight-1);
+}
+
+.h2,
+h2 {
+  margin-top: spc.$spacing-lg;
+  margin-bottom: spc.$spacing-md;
+  font-family: $header-font-family;
+  font-size: var(--font-size-7);
+  font-weight: $header-font-weight;
+}
+
+.h3,
+h3 {
+  margin-top: spc.$spacing-lg;
+  margin-bottom: spc.$spacing-md;
+  font-family: $header-font-family;
+  font-size: var(--font-size-6);
+  font-weight: $header-font-weight;
+}
+
+.h4,
+h4 {
+  margin-top: spc.$spacing-lg;
+  margin-bottom: spc.$spacing-md;
+  font-family: $header-font-family;
+  font-size: var(--font-size-5);
+  font-weight: $header-font-weight;
+}
+
+.h5,
+h5,
+.h6,
+h6 {
+  // h5 and h6 intentionally mimic one another
+  margin-top: spc.$spacing-lg;
+  margin-bottom: spc.$spacing-md;
+  font-family: $header-font-family;
+  font-size: var(--font-size-4);
+  font-weight: $header-font-weight;
+}
+
+p {
+  max-width: var.$p-default-max-width;
+  margin-bottom: spc.$spacing-md;
+  font-family: $body-font-family;
+  font-size: var(--font-size-3);
+}
