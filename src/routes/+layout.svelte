@@ -1,4 +1,5 @@
 <script>
+  import { page } from "$app/stores";
   import {
     Header,
     HeaderNav,
@@ -7,8 +8,10 @@
     Content,
     Grid,
     Row,
-    Column
+    Column,
+    Button
   } from "carbon-components-svelte";
+  import Home from "carbon-icons-svelte/lib/Home.svelte";
 
   import "../styles/main.scss";
 </script>
@@ -40,5 +43,15 @@
         <slot />
       </Column>
     </Row>
+
+    {#if $page.url.pathname !== "/"}
+      <Row>
+        <Column>
+          <footer style="margin-top:var(--spacing-96)">
+            <Button href="/" icon="{Home}">Go back to the homepage</Button>
+          </footer>
+        </Column>
+      </Row>
+    {/if}
   </Grid>
 </Content>
