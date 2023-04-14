@@ -1,18 +1,21 @@
 {
   "extends": [
-      "stylelint-config-carbon",
-      "stylelint-config-html/svelte",
-      "stylelint-config-prettier-scss"
+    "stylelint-config-carbon",
+    "stylelint-config-html/svelte",
+    "stylelint-config-prettier-scss"
   ],
   "rules": {
-      "max-nesting-depth": 3,
-      "no-invalid-position-at-import-rule": null,
-      "selector-pseudo-class-no-unknown": [
-          true,
-          {
-              "ignorePseudoClasses": ["global"]
-          }
-      ]
+    "scss/comment-no-empty": null,
+    "declaration-empty-line-before": "never",
+    "custom-property-empty-line-before": "never",
+    "max-nesting-depth": 3,
+    "no-invalid-position-at-import-rule": null,
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ]
   },
   "ignoreFiles": ["node_modules/*", "static/**", "dist/**"],
   "defaultSeverity": "error"
