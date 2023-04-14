@@ -5,6 +5,7 @@
 // As the library is updated to use Carbon v11 styling, it might become
 // easier to theme. For more see issue:
 // Carbon v11 style integration - https://github.com/carbon-design-system/carbon-components-svelte/issues/1629
+@use "sass:map";
 
 $feature-flags: (
   ui-shell: true,
