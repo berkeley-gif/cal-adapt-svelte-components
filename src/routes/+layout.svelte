@@ -12,7 +12,6 @@
     Button
   } from "carbon-components-svelte";
   import Home from "carbon-icons-svelte/lib/Home.svelte";
-
   import "../styles/main.scss";
 </script>
 
