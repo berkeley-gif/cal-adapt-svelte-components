@@ -247,7 +247,6 @@
 
     &:focus-within {
       @include outline-style;
-
       border-color: transparent;
     }
 
@@ -273,7 +272,6 @@
     /* stylelint-disable-next-line selector-class-pattern */
     :global(.bx--list-box__menu-item--highlighted) {
       @include outline-style;
-
       outline-offset: -3px;
     }
 
