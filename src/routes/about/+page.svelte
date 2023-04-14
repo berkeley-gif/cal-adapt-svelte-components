@@ -1,3 +1,13 @@
+<style>
+  ul {
+    list-style-type: disc;
+  }
+
+  ul li {
+    margin: var(--cds-spacing-04) var(--cds-spacing-06);
+  }
+</style>
+
 <h1>About</h1>
 
 <p>
