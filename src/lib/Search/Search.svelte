@@ -236,7 +236,7 @@
 </script>
 
 <style lang="scss">
-  @use "../../styles/utils/mixins" as *;
+  @use "../../styles/themes/caladapt/mixins" as *;
 
   /* stylelint-disable-next-line selector-class-pattern */
   div.cac--search {
