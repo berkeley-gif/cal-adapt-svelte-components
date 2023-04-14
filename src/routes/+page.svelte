@@ -3,6 +3,6 @@
 <p>The following components are available to use:</p>
 
 <ul>
-  <li><p><a href="/search">Search with auto-suggest</a></p></li>
-  <li><p><a href="/static-map">Static Map</a></p></li>
+  <li><a href="/search">Search with auto-suggest</a></li>
+  <li><a href="/static-map">Static Map</a></li>
 </ul>
