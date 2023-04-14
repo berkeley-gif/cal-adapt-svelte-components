@@ -21,34 +21,34 @@ $css--reset: true;
 $css--default-type: true;
 $css--plex: true;
 
-@import "carbon-components/scss/globals/scss/vendor/@carbon/themes/scss";
-@import "carbon-components/scss/globals/scss/component-tokens";
-@import "carbon-components/src/components/tag/tag";
-@import "carbon-components/src/components/notification/inline-notification";
-@import "carbon-components/src/components/notification/toast-notification";
+@import url("carbon-components/scss/globals/scss/vendor/@carbon/themes/scss");
+@import url("carbon-components/scss/globals/scss/component-tokens");
+@import url("carbon-components/src/components/tag/tag");
+@import url("carbon-components/src/components/notification/inline-notification");
+@import url("carbon-components/src/components/notification/toast-notification");
 //@import "./popover";
 // Use full path to popover file
-@import "carbon-components-svelte/css/popover";
+@import url("carbon-components-svelte/css/popover");
 
 // Override all or some of the carbon tokens in your custom theme's token file
 // Using light grey (g10) theme as the fallback theme
-@import "./themes/caladapt/carbon-tokens";
+@import url("./themes/caladapt/carbon-tokens");
 $carbon--theme: map.merge($carbon--theme--g10, $carbon--theme--caladapt);
 @include carbon--theme();
 
-@import "carbon-components/scss/globals/scss/_css--reset";
-@import "carbon-components/scss/globals/scss/_css--font-face";
-@import "carbon-components/scss/globals/scss/_css--helpers";
-@import "carbon-components/scss/globals/scss/_css--body";
-@import "carbon-components/scss/globals/grid/grid";
+@import url("carbon-components/scss/globals/scss/_css--reset");
+@import url("carbon-components/scss/globals/scss/_css--font-face");
+@import url("carbon-components/scss/globals/scss/_css--helpers");
+@import url("carbon-components/scss/globals/scss/_css--body");
+@import url("carbon-components/scss/globals/grid/grid");
 
 // For the purposes of this library import only the component styles that are used
-@import "carbon-components/scss/components/search/search";
-@import "carbon-components/scss/components/button/button";
-@import "carbon-components/scss/components/text-input/text-input";
-@import "carbon-components/scss/components/combo-box/combo-box";
-@import "carbon-components/scss/components/select/select";
-@import "carbon-components/scss/components/ui-shell/ui-shell";
+@import url("carbon-components/scss/components/search/search");
+@import url("carbon-components/scss/components/button/button");
+@import url("carbon-components/scss/components/text-input/text-input");
+@import url("carbon-components/scss/components/combo-box/combo-box");
+@import url("carbon-components/scss/components/select/select");
+@import url("carbon-components/scss/components/ui-shell/ui-shell");
 
 // To import all component styles use the folllwing line
 //@import "carbon-components/scss/globals/scss/styles";
@@ -64,4 +64,4 @@ $carbon--theme: map.merge($carbon--theme--g10, $carbon--theme--caladapt);
 // Import other custom theme styles e.g. alternate font families, typography
 // These files need to be imported after all the Carbon scss imports
 // Comment out this line if using a default Carbon theme
-@import "./themes/caladapt";
+@import url("./themes/caladapt");
