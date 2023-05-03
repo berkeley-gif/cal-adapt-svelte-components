@@ -43,7 +43,7 @@
   const labelId = `cac-label-${inputId}`;
   const listboxId = `cac-listbox-${inputId}`;
 
-  let selectedItem: Suggestion;
+  let selectedItem: Suggestion | undefined;
   let open = false;
   let highlightedIndex = -1;
   let announceContainer: HTMLDivElement;
@@ -95,7 +95,7 @@
     }
     open = false;
     highlightedIndex = -1;
-    searchValue = selectedItem.title;
+    searchValue = selectedItem?.title;
     dispatch("select", selectedItem);
   }
 
