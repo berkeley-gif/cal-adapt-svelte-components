@@ -1,4 +1,4 @@
-/** @type {import('./[slug]').Load} */
+/** @type {import('@sveltejs/kit').Load} */
 export async function load({ fetch }) {
   let locations = [];
 
