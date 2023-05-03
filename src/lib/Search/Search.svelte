@@ -369,7 +369,7 @@
         aria-label="Clear input"
         on:click="{() => clearSearch()}"
       >
-        <Close16 aria-hidden="{true}" focusable="{false}" />
+        <Close16 aria-hidden="{true}" focusable="{'false'}" />
       </button>
     {/if}
     {#if suggestions && suggestions.length}
@@ -386,7 +386,7 @@
           event.stopPropagation();
         }}"
       >
-        <ChevronUp16 aria-hidden="{true}" focusable="{false}" />
+        <ChevronUp16 aria-hidden="{true}" focusable="{'false'}" />
       </div>
     {/if}
   </div>
