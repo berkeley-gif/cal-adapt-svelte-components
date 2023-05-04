@@ -12,7 +12,7 @@
 @use "./variables";
 @use "sass:meta";
 
-:root[theme="caladapt"] {
+:root {
   @each $key, $value in meta.module-variables(variables) {
     --#{$key}: #{$value};
   }
