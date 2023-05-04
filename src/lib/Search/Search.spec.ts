@@ -1,117 +1,104 @@
+import { render, fireEvent, screen } from "@testing-library/svelte";
 import { vi } from "vitest";
-import { render, fireEvent } from "@testing-library/svelte";
 import { Search } from "$lib";
 
-describe("Search", () => {
+describe("Search", async () => {
   const announceContainerTestId = "cac--announce-container";
   const searchContainerTestId = "cac--search-container";
   const highlightClass = "bx--list-box__menu-item--highlighted";
-  let target;
-  let suggestions;
 
-  beforeEach(() => {
-    target = document.body.appendChild(document.createElement("slot"));
-    suggestions = [
-      {
-        title: "Text for thing one",
-        id: "a"
-      },
-      {
-        title: "Text for thing two",
-        id: "b"
-      },
-      {
-        title: "Text for thing three",
-        id: "c"
-      }
-    ];
-  });
+  const suggestions = [
+    {
+      title: "Text for thing one",
+      id: "a"
+    },
+    {
+      title: "Text for thing two",
+      id: "b"
+    },
+    {
+      title: "Text for thing three",
+      id: "c"
+    }
+  ];
 
   test("should render", async () => {
     const result = render(Search);
-    expect(result).toBeTruthy();
+    expect(() => result).not.toThrow();
   });
 
   test("description prop", async () => {
-    const { getByText, getByPlaceholderText, component } = render(Search, {
-      target,
+    render(Search, {
       props: {
-        suggestions
+        suggestions,
+        description: "Search for a thing"
       }
     });
-    await component.$set({ description: "Search for a thing" });
+
     // label text
-    expect(() => getByText("Search for a thing")).not.toThrow();
+    expect(() => screen.getByText("Search for a thing")).not.toThrow();
     // input placeholder text
-    expect(() => getByPlaceholderText("Search for a thing")).not.toThrow();
+    expect(() =>
+      screen.getByPlaceholderText("Search for a thing")
+    ).not.toThrow();
   });
 
   test("listboxLabel prop", async () => {
-    const { getByLabelText, getByRole } = render(Search, {
-      target,
+    render(Search, {
       props: {
         suggestions,
         listboxLabel: "Things"
       }
     });
 
-    const input = getByRole("combobox") as HTMLInputElement;
-    await fireEvent.focus(input);
+    await fireEvent.focus(screen.getByRole("combobox"));
 
-    const listbox = getByLabelText(/things/i);
-    expect(listbox).toBeTruthy();
+    expect(screen.getByLabelText(/things/i)).toBeTruthy();
   });
 
   test("searchValue prop", async () => {
     const searchValue = "two";
-    const { getByRole } = render(Search, {
-      target,
+    render(Search, {
       props: { searchValue }
     });
-    const input = getByRole("combobox") as HTMLInputElement;
-    const result = input.value;
-    expect(result).toEqual(searchValue);
+    const result: HTMLInputElement = screen.getByRole("combobox");
+    expect(result.value).toEqual(searchValue);
   });
 
   test("suggestions prop", async () => {
-    const { getAllByRole, getByRole, component } = render(Search, {
-      target,
+    const { component } = render(Search, {
       props: { suggestions }
     });
 
-    const input = getByRole("combobox") as HTMLInputElement;
-    await fireEvent.focus(input);
+    await fireEvent.focus(screen.getByRole("combobox"));
 
-    const options = getAllByRole("option") as HTMLDivElement[];
-    expect(options).toHaveLength(3);
+    expect(screen.getAllByRole("option")).toHaveLength(3);
 
     await component.$set({ suggestions: [] });
-    const listbox = getByRole("listbox");
+    const listbox = screen.getByRole("listbox");
     expect(listbox.querySelectorAll("*")).toHaveLength(0);
   });
 
   test("outlineColor prop", async () => {
-    const { getByTestId } = render(Search, {
-      target,
+    render(Search, {
       props: { outlineColor: "magenta" }
     });
-    const container = getByTestId(searchContainerTestId);
+    const container = screen.getByTestId(searchContainerTestId);
     const style = window.getComputedStyle(container);
     expect(style.getPropertyValue("--outline-color")).toBe("magenta");
   });
 
   test("inputId prop", async () => {
-    const { getByRole } = render(Search, {
-      target,
+    render(Search, {
       props: {
         inputId: "custom-id",
         suggestions
       }
     });
-    const input = getByRole("combobox");
+    const input = screen.getByRole("combobox");
     await fireEvent.focus(input);
     const label = document.getElementById("cac-label-custom-id");
-    const listbox = getByRole("listbox");
+    const listbox = screen.getByRole("listbox");
     expect(input.getAttribute("id")).toBe("custom-id");
     expect(label).toBeTruthy();
     expect(listbox.getAttribute("id")).toBe("cac-listbox-custom-id");
@@ -119,7 +106,6 @@ describe("Search", () => {
 
   test("clearSearch fn prop", async () => {
     const { getByRole, component } = render(Search, {
-      target,
       props: {
         suggestions
       }
@@ -135,7 +121,6 @@ describe("Search", () => {
 
   test("clicking clear input button clears input value", async () => {
     const { getByRole, getByLabelText, component } = render(Search, {
-      target,
       props: {
         suggestions
       }
@@ -150,7 +135,6 @@ describe("Search", () => {
 
   test("clear input button dispatches", async () => {
     const { getByLabelText, getByRole, component } = render(Search, {
-      target,
       props: {
         suggestions
       }
@@ -167,7 +151,6 @@ describe("Search", () => {
 
   test("clicking on an option selects a suggestion", async () => {
     const { getByRole, getAllByRole, component } = render(Search, {
-      target,
       props: {
         suggestions
       }
@@ -189,7 +172,6 @@ describe("Search", () => {
 
   test("keydown enter selects a suggestion", async () => {
     const { getByRole, component } = render(Search, {
-      target,
       props: {
         suggestions
       }
@@ -206,7 +188,6 @@ describe("Search", () => {
 
   test("keydown arrow down event", async () => {
     const { getByRole, getAllByRole, component } = render(Search, {
-      target,
       props: {
         suggestions
       }
@@ -226,7 +207,6 @@ describe("Search", () => {
 
   test("keydown arrow up event", async () => {
     const { getByRole, getAllByRole, component } = render(Search, {
-      target,
       props: {
         suggestions
       }
@@ -246,7 +226,6 @@ describe("Search", () => {
 
   test("keydown home event", async () => {
     const { getByRole, getAllByRole, component } = render(Search, {
-      target,
       props: {
         suggestions
       }
@@ -264,7 +243,6 @@ describe("Search", () => {
 
   test("keydown end event", async () => {
     const { getByRole, getAllByRole, component } = render(Search, {
-      target,
       props: {
         suggestions
       }
@@ -282,7 +260,6 @@ describe("Search", () => {
 
   test("keydown tab event", async () => {
     const { getByRole, component } = render(Search, {
-      target,
       props: {
         suggestions
       }
@@ -296,43 +273,45 @@ describe("Search", () => {
   });
 
   test("input focus event opens the listbox", async () => {
-    const { getByRole, queryByRole } = render(Search, {
-      target,
+    render(Search, {
       props: {
         suggestions
       }
     });
-    const input = getByRole("combobox") as HTMLInputElement;
+    const input = screen.getByRole("combobox") as HTMLInputElement;
     await fireEvent.focus(input);
-    const listbox = queryByRole("listbox");
+    const listbox = screen.getByRole("listbox");
     expect(listbox.style.display).toBe("block");
   });
 
   test("external click event closes the listbox", async () => {
-    const { getByRole, queryByRole } = render(Search, {
-      target,
+    render(Search, {
       props: {
         suggestions
       }
     });
-    const input = getByRole("combobox") as HTMLInputElement;
+    const input = screen.getByRole("combobox") as HTMLInputElement;
     await fireEvent.focus(input);
-    const listbox = queryByRole("listbox");
+    const listbox = screen.getByRole("listbox");
     await fireEvent.click(document.body);
     expect(listbox.style.display).toBe("none");
   });
 
   test("aria-live content", async () => {
-    const { getByTestId, getByRole, component } = render(Search, { target });
-    const announceContainer = getByTestId(announceContainerTestId);
-    const input = getByRole("combobox");
+    const { component } = render(Search, {
+      props: {
+        suggestions
+      }
+    });
+    const announceContainer = screen.getByTestId(announceContainerTestId);
+    const input = screen.getByRole("combobox");
     await component.$set({ suggestions });
     await fireEvent.focus(input);
     await component.$set({ searchValue: " " });
-    expect(announceContainer.innerText).toBe("3 suggestions found.");
+    expect(component.innerText).toBe("3 suggestions found.");
     await component.$set({ suggestions: suggestions.slice(0, 1) });
-    expect(announceContainer.innerText).toBe("1 suggestion found.");
+    expect(component.innerText).toBe("1 suggestion found.");
     await component.$set({ searchValue: "" });
-    expect(announceContainer.innerText).toBe("");
+    expect(component.innerText).toBe("");
   });
 });
