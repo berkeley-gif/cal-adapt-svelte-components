@@ -1,7 +1,7 @@
 <script lang="ts">
   import throttle from "lodash.throttle";
   import { StaticMap } from "$lib";
-  import type { Location, MapBoxStyle } from "$lib/StaticMap/types";
+  import type { Location, MapBoxStyle } from "$lib/types";
 
   interface SampleLocation {
     value: Location;

@@ -4,7 +4,7 @@
   import Button from "./Button.svelte";
   import Div from "./Div.svelte";
   import { getTileUrl, getTiles } from "./utils";
-  import type { Location, MapBoxStyle, Feature, Tiles } from "./types";
+  import type { Location, MapBoxStyle, Feature, Tiles } from "$lib/types";
 
   /** specify the height of the map */
   export let height = 250;
