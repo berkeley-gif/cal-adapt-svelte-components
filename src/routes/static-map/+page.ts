@@ -30,6 +30,7 @@ export async function load({ fetch }) {
       title: d.title,
       value: d
     }));
+    console.log("locations", locations);
   } catch {
     console.error("failed to fetch locations json");
   }
