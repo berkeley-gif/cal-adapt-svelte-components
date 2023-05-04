@@ -2,16 +2,13 @@
   import throttle from "lodash.throttle";
   import { StaticMap } from "$lib";
   import type { Location, MapBoxStyle } from "$lib/StaticMap/types";
-  import type { PageData } from "./$types";
-
-  export let data: PageData;
 
   interface SampleLocation {
     value: Location;
     title: string;
   }
 
-  export let locations: SampleLocation[] = data.props.locations;
+  export let locations: SampleLocation[] = [];
 
   const mapStyleOptions = [
     { title: "Streets", value: "streets-v11" },

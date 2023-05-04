@@ -51,7 +51,7 @@
   function createOverlay() {
     overlay = {
       type: "Feature",
-      geometry: location.geometry,
+      geometry: location!.geometry,
       properties: {}
     };
   }

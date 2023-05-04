@@ -1,6 +1,11 @@
+interface SampleLocation {
+  value: Location;
+  title: string;
+}
+
 /** @type {import('@sveltejs/kit').Load} */
 export async function load({ fetch }) {
-  let locations = [];
+  let locations: SampleLocation[] = [];
 
   const fileNames = [
     "alameda",
