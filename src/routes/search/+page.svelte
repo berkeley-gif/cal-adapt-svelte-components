@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
   import { Search } from "$lib";
 
   const suggestions = [
@@ -21,8 +21,10 @@
   let searchValue = "";
   let suggestionsFiltered = suggestions.slice();
 
-  function handleSearchInput(event: Event) {
-    const { value } = <HTMLInputElement>event.target;
+  /** @param {Event} event */
+  function handleSearchInput(event) {
+    /** @type {any} */
+    const { value } = event.target;
     if (value && value.length) {
       suggestionsFiltered = suggestions.filter(({ title }) =>
         title.toLowerCase().includes(value.toLocaleLowerCase())
@@ -32,7 +34,8 @@
     }
   }
 
-  function handleSearchSelection(event: CustomEvent) {
+  /** @param {CustomEvent & { detail: Object }} event */
+  function handleSearchSelection(event) {
     console.log("search select event: ", event.detail);
     suggestionsFiltered = [];
   }
