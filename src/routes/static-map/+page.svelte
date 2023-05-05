@@ -47,16 +47,16 @@
     ? "var(--gray-10)"
     : "var(--gray-90)";
 
+  /** @param {Event} event */
+  function handleClick(event) {
+    window.alert(`You clicked on ${selectedLocation.title}`);
+  }
+
   /**
    * Extend the Event class by the new target property
    * https://stackoverflow.com/questions/66206501/jsdoc-property-value-does-not-exist-on-type-eventtarget
    * @param {Event & { target: HTMLInputElement }} event
    */
-  function handleClick(event) {
-    window.alert(`You clicked on ${selectedLocation.title}`);
-  }
-
-  /** @param {Event & { target: HTMLInputElement }} event */
   function handleChangeWidth(event) {
     if (event.target) {
       width = +event.target.value;
