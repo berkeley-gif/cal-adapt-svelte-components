@@ -33,14 +33,8 @@
 
   let zoom = 20;
 
-  /**
-   * @typedef {Object} location
-   * @property {String} title - UNIX timestamp.
-   * @property {Location} value - Booking URL.
-   */
-  /**
-   * @type {Array<location>} locations
-   */
+  /** @type {import('$lib/types').SampleLocation} */
+  /** @type {Array<SampleLocation>} */
   let locations;
 
   $: locations = data?.locations || [];
