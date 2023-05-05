@@ -1,14 +1,9 @@
-<script lang="ts">
+<script>
   import throttle from "lodash.throttle";
   import { StaticMap } from "$lib";
-  import type { Location, MapBoxStyle } from "$lib/types";
 
-  interface SampleLocation {
-    value: Location;
-    title: string;
-  }
-
-  export let locations: SampleLocation[] = [];
+  /** @type {import('./$types').PageData} */
+  export let data;
 
   const mapStyleOptions = [
     { title: "Streets", value: "streets-v11" },
@@ -26,12 +21,29 @@
 
   const throttleMs = 350;
 
-  let selectedLocation: Location;
+  /** @type {import('$lib/types').Location} */
+  let selectedLocation;
+
   let useButton = true;
   let width = 320;
   let height = 250;
-  let mapStyle: MapBoxStyle = "streets-v11";
+
+  /** @type {import('$lib/types').MapBoxStyle} */
+  let mapStyle = "streets-v11";
+
   let zoom = 20;
+
+  /**
+   * @typedef {Object} location
+   * @property {String} title - UNIX timestamp.
+   * @property {Location} value - Booking URL.
+   */
+  /**
+   * @type {Array<location>} locations
+   */
+  let locations;
+
+  $: locations = data?.locations || [];
 
   $: strokeColor = darkStyles.has(mapStyle)
     ? "var(--gray-10)"
@@ -41,25 +53,33 @@
     ? "var(--gray-10)"
     : "var(--gray-90)";
 
-  function handleClick(event: Event) {
+  /**
+   * Extend the Event class by the new target property
+   * https://stackoverflow.com/questions/66206501/jsdoc-property-value-does-not-exist-on-type-eventtarget
+   * @param {Event & { target: HTMLInputElement }} event
+   */
+  function handleClick(event) {
     window.alert(`You clicked on ${selectedLocation.title}`);
   }
 
-  function handleChangeWidth(event: Event) {
+  /** @param {Event & { target: HTMLInputElement }} event */
+  function handleChangeWidth(event) {
     if (event.target) {
-      width = +(event.target as HTMLInputElement).value;
+      width = +event.target.value;
     }
   }
 
-  function handleChangeHeight(event: Event) {
+  /** @param {Event & { target: HTMLInputElement }} event */
+  function handleChangeHeight(event) {
     if (event.target) {
-      height = +(event.target as HTMLInputElement).value;
+      height = +event.target.value;
     }
   }
 
-  function handleChangeZoom(event: Event) {
+  /** @param {Event & { target: HTMLInputElement }} event */
+  function handleChangeZoom(event) {
     if (event.target) {
-      zoom = +(event.target as HTMLInputElement).value;
+      zoom = +event.target.value;
     }
   }
 </script>

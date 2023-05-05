@@ -1,11 +1,6 @@
-interface SampleLocation {
-  value: Location;
-  title: string;
-}
-
-/** @type {import('@sveltejs/kit').Load} */
+/** @type {import('./$types').PageLoad} */
 export async function load({ fetch }) {
-  let locations: SampleLocation[] = [];
+  let locations;
 
   const fileNames = [
     "alameda",
@@ -30,7 +25,6 @@ export async function load({ fetch }) {
       title: d.title,
       value: d
     }));
-    console.log("locations", locations);
   } catch {
     console.error("failed to fetch locations json");
   }
@@ -38,9 +32,7 @@ export async function load({ fetch }) {
   if (locations && locations.length) {
     return {
       status: 200,
-      props: {
-        locations
-      }
+      locations
     };
   }
 
