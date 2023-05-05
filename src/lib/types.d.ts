@@ -19,11 +19,12 @@ export interface Location {
   bbox: BBox;
 }
 
+export interface SampleLocation {
+  value: Location;
+  title: string;
+}
+
 export interface Tiles extends Array<[number, number, number]> {
   scale: number;
   translate: [number, number];
 }
-
-// Add declarations for npm packages that dont have types.
-// import { tile } from "d3-tile";
-// import type { GeoProjection } from "d3-geo";
