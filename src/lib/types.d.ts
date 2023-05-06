@@ -28,3 +28,10 @@ export interface Tiles extends Array<[number, number, number]> {
   scale: number;
   translate: [number, number];
 }
+
+// describes the properties of a suggestion item
+export interface Suggestion {
+  title: string;
+  id: string | number;
+  data?: any;
+}
