@@ -1,10 +1,9 @@
-<script lang="ts">
+<script>
   import * as d3 from "d3-geo";
   import LocationMarker from "carbon-icons-svelte/lib/LocationFilled.svelte";
   import Button from "./Button.svelte";
   import Div from "./Div.svelte";
   import { getTileUrl, getTiles } from "./utils";
-  import type { Location, MapBoxStyle, Feature, Tiles } from "$lib/types";
 
   /** specify the height of the map */
   export let height = 250;
@@ -13,10 +12,12 @@
   export let width = 250;
 
   /** specify the location data */
-  export let location: Location | null = null;
+  /** @type {import('$lib/types').Location} */
+  export let location;
 
   /** specify the mapbox basemap style type */
-  export let basemapStyle: MapBoxStyle = "streets-v11";
+  /** @type {import('$lib/types').MapBoxStyle} */
+  export let basemapStyle = "streets-v11";
 
   /** specify the amount of padding between the overlay and map border */
   export let padding = 20;
@@ -33,8 +34,10 @@
   const projection = d3.geoMercator();
   const path = d3.geoPath(projection);
 
-  let tiles: Tiles;
-  let overlay: Feature;
+  /** @type {import('$lib/types').Tiles} */
+  let tiles;
+  /** @type {import('$lib/types').Feature} */
+  let overlay;
 
   $: Wrapper = useButton ? Button : Div;
   $: ariaLabel = useButton ? "Change location" : undefined;
@@ -51,7 +54,7 @@
   function createOverlay() {
     overlay = {
       type: "Feature",
-      geometry: location!.geometry,
+      geometry: location.geometry,
       properties: {}
     };
   }
@@ -59,7 +62,9 @@
   function setProjection() {
     if (isPoint && "coordinates" in overlay.geometry) {
       projection
-        .center(overlay.geometry.coordinates as [number, number])
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        .center(overlay.geometry.coordinates)
         .scale(Math.pow(2, zoom) / (2 * Math.PI))
         .translate([width / 2, height / 2]);
     } else {
