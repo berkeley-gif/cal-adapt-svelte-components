@@ -52,27 +52,29 @@
     window.alert(`You clicked on ${selectedLocation.title}`);
   }
 
-  /**
-   * Extend the Event class by the new target property
-   * https://stackoverflow.com/questions/66206501/jsdoc-property-value-does-not-exist-on-type-eventtarget
-   * @param {Event & { target: HTMLInputElement }} event
-   */
+  /** @param {Event} event */
   function handleChangeWidth(event) {
     if (event.target) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       width = +event.target.value;
     }
   }
 
-  /** @param {Event & { target: HTMLInputElement }} event */
+  /** @param {Event} event */
   function handleChangeHeight(event) {
     if (event.target) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       height = +event.target.value;
     }
   }
 
-  /** @param {Event & { target: HTMLInputElement }} event */
+  /** @param {Event} event */
   function handleChangeZoom(event) {
     if (event.target) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       zoom = +event.target.value;
     }
   }
