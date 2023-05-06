@@ -33,8 +33,7 @@
 
   let zoom = 20;
 
-  /** @type {import('$lib/types').SampleLocation} */
-  /** @type {Array<SampleLocation>} */
+  /** @type {Array<import("$lib/types").SampleLocation>} */
   let locations;
 
   $: locations = data?.locations || [];
