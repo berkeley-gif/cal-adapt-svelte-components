@@ -1,15 +1,8 @@
-<script lang="ts">
+<script>
   import { createEventDispatcher, afterUpdate } from "svelte";
   import Search16 from "carbon-icons-svelte/lib/Search.svelte";
   import Close16 from "carbon-icons-svelte/lib/Close.svelte";
   import ChevronUp16 from "carbon-icons-svelte/lib/ChevronUp.svelte";
-
-  // describes the properties of a suggestion item
-  interface Suggestion {
-    title: string;
-    id: string | number;
-    data?: any;
-  }
 
   /** specify the input's label & placeholder text */
   export let description = "Search for a place name or address";
@@ -18,7 +11,8 @@
   export let searchValue = "";
 
   /** specify the list of suggestions */
-  export let suggestions: Suggestion[] = [];
+  /** @type {Array<import('$lib/types').Suggestion>} */
+  export let suggestions = [];
 
   /** specify the label for the listbox */
   export let listboxLabel = "Options";
@@ -27,13 +21,15 @@
   export let outlineColor = "#fdd13a";
 
   /** a reference to the search input */
-  export let inputRef: HTMLInputElement | null = null;
+  /** @type {HTMLInputElement | null} */
+  export let inputRef = null;
 
   /** optional id for the input element */
   export let inputId = `cac-${Math.random().toString(36)}`;
 
   /** specify size of the carbon components search bar */
-  export let size: "sm" | "lg" | "xl" = "sm";
+  /** @type {"sm" | "lg" | "xl"} */
+  export let size = "sm";
 
   /** enables console.logging of reactive variables and some function calls */
   export let debug = false;
@@ -43,12 +39,14 @@
   const labelId = `cac-label-${inputId}`;
   const listboxId = `cac-listbox-${inputId}`;
 
-  let selectedItem: Suggestion | undefined;
+  /** @type {import('$lib/types').Suggestion | undefined} */
+  let selectedItem = undefined;
   let open = false;
   let highlightedIndex = -1;
-  let announceContainer: HTMLDivElement;
+  /** @type {HTMLDivElement} */
+  let announceContainer;
 
-  // the id attribute of the selected listbox option
+  // the id attribuxte of the selected listbox option
   $: selectedId =
     suggestions && suggestions[highlightedIndex]
       ? getOptionId(suggestions[highlightedIndex].id)
@@ -95,15 +93,18 @@
     }
     open = false;
     highlightedIndex = -1;
-    searchValue = selectedItem?.title;
+    searchValue = selectedItem ? selectedItem.title : "";
     dispatch("select", selectedItem);
   }
 
-  function handleInput(event: Event) {
+  /** @param {Event} event */
+  function handleInput(event) {
     if (debug) {
       console.log("--handle input--");
     }
-    const { value } = <HTMLInputElement>event.target;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const { value } = event.target;
     if (!open && value.length > 0) {
       open = true;
     }
@@ -128,7 +129,8 @@
     }
   }
 
-  function handleInputKeydown(event: KeyboardEvent) {
+  /** @param {KeyboardEvent} event */
+  function handleInputKeydown(event) {
     if (debug) {
       console.log("--handle keydown--");
     }
@@ -179,7 +181,8 @@
     }
   }
 
-  function updateHighlightedIndex(dir: number) {
+  /** @param {Number} dir */
+  function updateHighlightedIndex(dir) {
     let index = highlightedIndex + dir;
     if (index < 0) {
       index = suggestions.length - 1;
@@ -197,7 +200,8 @@
     highlightedIndex = suggestions.length - 1;
   }
 
-  function handleWindowClick(event: Event) {
+  /** @param {Event} event */
+  function handleWindowClick(event) {
     if (debug) {
       console.log("--handle window click--");
     }
@@ -212,7 +216,8 @@
     }
   }
 
-  function getOptionId(value: string | number) {
+  /** @param {String | Number} value */
+  function getOptionId(value) {
     return `suggestion-${value}`;
   }
 
@@ -232,6 +237,12 @@
       console.log("--set aria live content--", value);
     }
     announceContainer.innerText = value;
+  }
+
+  /** @param {Event} event */
+  function handleOptionClick(event) {
+    open = !open;
+    event.stopPropagation();
   }
 </script>
 
@@ -352,6 +363,7 @@
       aria-owns="{listboxId}"
       aria-activedescendant="{selectedId}"
       aria-expanded="{open}"
+      aria-controls="{listboxId}"
       on:change
       on:input
       on:input="{handleInput}"
@@ -381,10 +393,8 @@
         aria-controls="{listboxId}"
         aria-expanded="{open}"
         tabindex="-1"
-        on:click|preventDefault="{(event) => {
-          open = !open;
-          event.stopPropagation();
-        }}"
+        on:click|preventDefault="{handleOptionClick}"
+        on:keydown|preventDefault="{handleOptionClick}"
       >
         <ChevronUp16 aria-hidden="{true}" focusable="{'false'}" />
       </div>
@@ -411,6 +421,7 @@
           highlightedIndex = i;
         }}"
         on:click="{() => selectSearchResult()}"
+        on:keydown="{() => selectSearchResult()}"
       >
         <div class:bx--list-box__menu-item__option="{true}">
           {item.title}
