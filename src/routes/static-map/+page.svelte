@@ -46,8 +46,7 @@
     ? "var(--gray-10)"
     : "var(--gray-90)";
 
-  /** @param {Event} event */
-  function handleClick(event) {
+  function handleClick() {
     window.alert(`You clicked on ${selectedLocation.title}`);
   }
 
