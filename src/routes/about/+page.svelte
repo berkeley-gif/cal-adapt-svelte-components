@@ -11,11 +11,11 @@
 <h1>About</h1>
 
 <p>
-  TThis library is for developing new UI Components for <a
+  This library is for developing new UI Components for <a
     href="https://cal-adapt.org">Cal-Adapt.org</a
   >. These components use the <a href="https://svelte.dev/">Svelte</a>
   JavaScript framework and
-  <a href="https://www.carbondesignsystem.com/">IBM Carbon Design</a>system.
+  <a href="https://www.carbondesignsystem.com/">IBM Carbon Design</a> system.
 </p>
 
 The rationale for this component repository is:
