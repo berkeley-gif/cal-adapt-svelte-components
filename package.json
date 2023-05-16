@@ -39,6 +39,9 @@
     "format": "prettier --plugin-search-dir . --write .",
     "sass:check": "sass --load-path=./node_modules src/styles/main.scss > /dev/null"
   },
+  "peerDependencies": {
+		"svelte": "^3.54.0"
+	},
   "devDependencies": {
     "@playwright/test": "^1.28.1",
     "@sveltejs/adapter-auto": "^2.0.0",
