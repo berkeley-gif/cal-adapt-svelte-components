@@ -12,9 +12,9 @@
   "contributors": [
     "Chris Henrick <chrishenrick@gmail.com> (https://clhenrick.io)"
   ],
-  "module": "index.js",
+  "svelte": "./dist/index.js",
   "type": "module",
-  "types": "index.d.ts",
+  "types":  "./dist/index.d.ts",
   "homepage": "https://cal-adapt-svelte-components.netlify.app/",
   "repository": {
     "type": "git",
