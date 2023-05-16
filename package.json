@@ -12,7 +12,6 @@
   "contributors": [
     "Chris Henrick <chrishenrick@gmail.com> (https://clhenrick.io)"
   ],
-  "main": "index.js",
   "module": "index.js",
   "type": "module",
   "types": "index.d.ts",
