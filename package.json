@@ -81,7 +81,7 @@
     "vitest": "^0.25.3"
   },
   "engines": {
-    "node": ">=16.13.0"
+    "node": ">=18.16.0"
   },
   "lint-staged": {
     "*.{js,ts,svelte}": "eslint --cache",

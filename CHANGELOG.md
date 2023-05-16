@@ -14,6 +14,7 @@ This major release fully focuses on getting in sync with the wider SvelteKit eco
 - Update `@sveltejs/kit` to `1.5.0`
 - Use `JSDoc` annotations for type checking instead of `TypeScript` as reccomended for Svelte libraries
 - Use `Vitest` for unit testing instead of `Jest`
+- Update node version to `18.16.0`
 
 ### Changed features
 
