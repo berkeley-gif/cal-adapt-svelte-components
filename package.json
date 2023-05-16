@@ -90,7 +90,7 @@
   },
   "exports": {
     ".": {
-        "types": "./dist/index.d.ts",
+        "types": ["./dist/index.d.ts", "./dist/types.d.ts", "./dist/modules.d.ts"],
         "svelte": "./dist/index.js"
     }
   }
