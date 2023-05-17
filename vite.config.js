@@ -12,13 +12,5 @@ export default defineConfig({
     types: ["vitest/globals"]
   },
 
-  // css: {
-  //   preprocessorOptions: {
-  //     scss: {
-  //       additionalData: `@import "./src/styles/themes/caladapt/variables.scss";`, // Import any additional SCSS files here
-  //     }
-  //   },
-  // },
-
   assetsInclude: ["**/*.json"]
 });
