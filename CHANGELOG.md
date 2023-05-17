@@ -25,4 +25,3 @@ This major release fully focuses on getting in sync with the wider SvelteKit eco
 - Move reusable type declarations to a common file under lib root
 - Reorganize styles and remove unused styles
 - Move unit tests to components
-- Update search component demo to include clear event
