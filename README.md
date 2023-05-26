@@ -132,7 +132,7 @@ The components in this repository are made publicly available on NPM and Github.
 ```bash
 npm version patch # updates the package version (including in git)
 npm run package
-npm publish --access=public ./package
+npm publish --access public
 git push origin --tags
 ```
 
