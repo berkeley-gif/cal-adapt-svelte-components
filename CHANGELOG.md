@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.0] - 2023-05-16
 
-This major release fully focuses on getting in sync with the wider SvelteKit ecosystem and doesn't in itself introduce any new rules or features.
+This major release fully focuses on getting in sync with the wider SvelteKit ecosystem and doesn't in itself introduce any new rules or features compared to version 1.1.2.
 
 ### Major changes
 
