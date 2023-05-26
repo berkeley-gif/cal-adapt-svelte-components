@@ -10,7 +10,7 @@ The rationale for this component repository is:
 
 ## Changelog
 
-View [Change Log](https://github.com/berkeley-gif/cal-adapt-svelte-components/blob/main/CHANGELOG)
+View [Change Log](https://github.com/berkeley-gif/cal-adapt-svelte-components/blob/main/CHANGELOG.md)
 
 ## The Components
 
