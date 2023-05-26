@@ -6,7 +6,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
-  plugins: ["svelte3", "@typescript-eslint", "jest"],
+  plugins: ["svelte3", "@typescript-eslint"],
   ignorePatterns: ["*.cjs"],
   overrides: [{ files: ["*.svelte"], processor: "svelte3/svelte3" }],
   settings: {
@@ -19,14 +19,6 @@ module.exports = {
   env: {
     browser: true,
     es2017: true,
-    node: true,
-    "jest/globals": true,
-  },
-  rules: {
-    "jest/no-disabled-tests": "warn",
-    "jest/no-focused-tests": "error",
-    "jest/no-identical-title": "error",
-    "jest/prefer-to-have-length": "warn",
-    "jest/valid-expect": "error",
-  },
+    node: true
+  }
 };

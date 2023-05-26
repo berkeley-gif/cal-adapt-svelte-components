@@ -5,5 +5,7 @@
   "svelteSortOrder": "options-scripts-styles-markup",
   "svelteStrictMode": true,
   "svelteAllowShorthand": true,
-  "plugins": ["prettier-plugin-svelte"]
+  "plugins": ["prettier-plugin-svelte"],
+  "pluginSearchDirs": ["."],
+  "overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }]
 }

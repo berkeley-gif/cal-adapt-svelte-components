@@ -1,3 +1,4 @@
+// Add reusable type declarations
 import type { Geometry, Feature, BBox, Position } from "geojson";
 
 export type { Feature };
@@ -18,7 +19,19 @@ export interface Location {
   bbox: BBox;
 }
 
+export interface SampleLocation {
+  value: Location;
+  title: string;
+}
+
 export interface Tiles extends Array<[number, number, number]> {
   scale: number;
   translate: [number, number];
+}
+
+// describes the properties of a suggestion item
+export interface Suggestion {
+  title: string;
+  id: string | number;
+  data?: any;
 }

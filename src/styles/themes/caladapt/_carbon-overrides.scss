@@ -1,7 +1,3 @@
-@use "./utils/variables" as *;
-
-// Note: this does not include the overrides for the .sidebar and .content classes
-
 /* This prevents layout shift */
 .bx--body--with-modal-open {
   overflow-y: scroll;
@@ -20,8 +16,8 @@
   }
 
   .bx--list-box__menu-item__option {
-    margin: 0 5px;
     padding-right: 0;
+    margin: 0 5px;
   }
 }
 
@@ -41,46 +37,4 @@
       padding: 0.25rem 1rem 0.25rem 0.5rem;
     }
   }
-}
-
-.bx--tooltip__trigger.bx--tooltip__trigger--definition {
-  font-size: inherit;
-}
-
-/* Following should exist but dont get compiled with current scss setup (??) */
-.bx--select__arrow {
-  right: 1rem;
-}
-
-.bx--search--lg .bx--search-magnifier {
-  left: 0.75rem;
-}
-
-.bx--search--xl .bx--search-input {
-  padding: 0 3rem;
-}
-
-.bx--search--lg .bx--search-input {
-  padding: 0 2.5rem;
-}
-
-.bx--search--sm .bx--search-input {
-  padding: 0 2rem;
-}
-
-.bx--modal-header_heading {
-  font-weight: 600;
-}
-
-.bx--modal-header {
-  padding: 1rem;
-  background: $gray-20;
-
-  h3 {
-    margin: 0;
-  }
-}
-
-.bx--modal-content {
-  padding: 1rem;
 }

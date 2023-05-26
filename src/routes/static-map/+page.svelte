@@ -1,61 +1,9 @@
-<script lang="ts" context="module">
-  /** @type {import('./[slug]').Load} */
-  export async function load({ fetch }) {
-    let locations = [];
-
-    const fileNames = [
-      "alameda",
-      "california",
-      "census-tract",
-      "default-location",
-      "los-angeles",
-      "station"
-    ];
-    const baseUrl = "/data/locations/";
-
-    try {
-      const responses = await Promise.all(
-        fileNames.map(async (file) => await fetch(`${baseUrl}${file}.json`))
-      );
-
-      const jsons = await Promise.all(
-        responses.map(async (res) => await res.json())
-      );
-
-      locations = jsons.map((d) => ({
-        title: d.title,
-        value: d
-      }));
-    } catch {
-      console.error("failed to fetch locations json");
-    }
-
-    if (locations && locations.length) {
-      return {
-        status: 200,
-        props: {
-          locations
-        }
-      };
-    }
-
-    return {
-      status: 404
-    };
-  }
-</script>
-
-<script lang="ts">
+<script>
   import throttle from "lodash.throttle";
   import { StaticMap } from "$lib";
-  import type { Location, MapBoxStyle } from "$lib/StaticMap/types";
 
-  interface SampleLocation {
-    value: Location;
-    title: string;
-  }
-
-  export let locations: SampleLocation[] = [];
+  /** @type {import('./$types').PageData} */
+  export let data;
 
   const mapStyleOptions = [
     { title: "Streets", value: "streets-v11" },
@@ -73,12 +21,22 @@
 
   const throttleMs = 350;
 
-  let selectedLocation: Location;
+  /** @type {import('$lib/types').Location} */
+  let selectedLocation;
+
   let useButton = true;
   let width = 320;
   let height = 250;
-  let mapStyle: MapBoxStyle = "streets-v11";
+
+  /** @type {import('$lib/types').MapBoxStyle} */
+  let mapStyle = "streets-v11";
+
   let zoom = 20;
+
+  /** @type {Array<import("$lib/types").SampleLocation>} */
+  let locations;
+
+  $: locations = data?.locations || [];
 
   $: strokeColor = darkStyles.has(mapStyle)
     ? "var(--gray-10)"
@@ -88,25 +46,34 @@
     ? "var(--gray-10)"
     : "var(--gray-90)";
 
-  function handleClick(event: Event) {
+  function handleClick() {
     window.alert(`You clicked on ${selectedLocation.title}`);
   }
 
-  function handleChangeWidth(event: Event) {
+  /** @param {Event} event */
+  function handleChangeWidth(event) {
     if (event.target) {
-      width = +(event.target as HTMLInputElement).value;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      width = +event.target.value;
     }
   }
 
-  function handleChangeHeight(event: Event) {
+  /** @param {Event} event */
+  function handleChangeHeight(event) {
     if (event.target) {
-      height = +(event.target as HTMLInputElement).value;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      height = +event.target.value;
     }
   }
 
-  function handleChangeZoom(event: Event) {
+  /** @param {Event} event */
+  function handleChangeZoom(event) {
     if (event.target) {
-      zoom = +(event.target as HTMLInputElement).value;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      zoom = +event.target.value;
     }
   }
 </script>

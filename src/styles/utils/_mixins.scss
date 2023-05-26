@@ -1,5 +1,0 @@
-@use "./variables" as *;
-
-@mixin outline-style {
-  outline: 3px solid var(--outline-color, #{$support-03});
-}

@@ -1,17 +1,63 @@
-// main.scss: Global Sass styles.
-//
-// These styles mostly follow those from the caladapt-website-2021 repo.
-// An attempt has been made to include only the bare-minimum global styles that
-// likely affect how a component will render. All other global styles, (for
-// example those specific to pages, dashboards, etc.) have been excluded.
-//
-// This Sass setup also uses the newer Dart Sass while Cal-Adapt.org uses its
-// predecessor node-sass, so some structure of the modules here may be different
-// (for example the use of @use instead of @import in places).
+// To learn more about theming carbon-components-svelte see:
+// https://github.com/carbon-design-system/carbon-components-svelte#styling
+// https://github.com/carbon-design-system/carbon-components-svelte/issues/713
 
-@use "./utils/variables";
-@use "./carbon";
-@use "./carbon-overrides";
-@use "./base";
-@use "./type";
-@use "./helpers";
+// Note: The carbon-components-svelte library currently uses Carbon v10 styles
+// As the library is updated to use Carbon v11 styling, it might become
+// easier to theme. For more see issue:
+// https://github.com/carbon-design-system/carbon-components-svelte/issues/1629
+
+$feature-flags: (
+  ui-shell: true,
+  grid-columns-16: true,
+  enable-css-custom-properties: true
+);
+
+$css--font-face: true;
+$css--helpers: true;
+$css--body: true;
+$css--use-layer: true;
+$css--reset: true;
+$css--default-type: true;
+$css--plex: true;
+
+@use "sass:map";
+
+@import "carbon-components/scss/globals/scss/vendor/@carbon/themes/scss";
+@import "carbon-components/scss/globals/scss/component-tokens";
+@import "carbon-components/src/components/tag/tag";
+@import "carbon-components/src/components/notification/inline-notification";
+@import "carbon-components/src/components/notification/toast-notification";
+//@import "./popover";
+// Use full path to popover file
+@import "carbon-components-svelte/css/popover";
+
+// The Carbon Design System comes with five themes (2 light, 3 dark). You can use any of
+// these themes as the fallback theme for your project.
+// This example uses the light grey (g10) theme as the fallback theme.
+// The tokens from the Carbon g10 theme are overriden by tokens specified in your custom theme
+// e.g. $carbon--theme--caladapt scss map in the caladapt-rokens file
+@import "./themes/caladapt/carbon-tokens";
+$carbon--theme: map.merge($carbon--theme--g10, $carbon--theme--caladapt);
+@include carbon--theme();
+
+@import "carbon-components/scss/globals/scss/_css--reset";
+@import "carbon-components/scss/globals/scss/_css--font-face";
+@import "carbon-components/scss/globals/scss/_css--helpers";
+@import "carbon-components/scss/globals/scss/_css--body";
+@import "carbon-components/scss/globals/grid/grid";
+
+// Import styles for all Carbon components
+@import "carbon-components/scss/globals/scss/styles";
+
+// Generate CSS variables
+:root {
+  @include carbon--theme($carbon--theme, true) {
+    @include emit-component-tokens($tag-colors);
+    @include emit-component-tokens($notification-colors);
+  }
+}
+
+// Import your custom theme styles e.g. alternate font families, typography
+// These files need to be imported after all the Carbon scss imports
+@import "./themes/caladapt";

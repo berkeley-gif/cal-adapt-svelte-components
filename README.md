@@ -8,6 +8,10 @@ The rationale for this component repository is:
 
 2. Develop components in isolation so that they may be compatible in other Cal-Adapt related projects.
 
+## Changelog
+
+View [Change Log](https://github.com/berkeley-gif/cal-adapt-svelte-components/blob/main/CHANGELOG)
+
 ## The Components
 
 ### Search with auto-suggest
@@ -177,7 +181,7 @@ import { SomeComponent } from "cal-adapt-svelte-components";
 
 ## Tests
 
-Component unit tests are written in TypeScript and run via [Jest](https://jestjs.io/), [Babel](https://babeljs.io/), [@testing-library](https://testing-library.com/), and [svelte-jester](https://www.npmjs.com/package/svelte-jester).
+Component unit tests are written in TypeScript and run via [Vitest](https://vitest.dev/), [@testing-library/svelte](https://testing-library.com/docs/svelte-testing-library/intro) and [@testing-library/jest-dom](https://testing-library.com/docs/ecosystem-jest-dom/).
 
 To run component unit tests do
 
@@ -208,5 +212,5 @@ If all goes well no output will be shown. Any errors will be printed to the cons
 This project was bootstrapped using [SvelteKit](https://kit.svelte.dev)'s [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte) project generator:
 
 ```bash
-npm init svelte@next cal-adapt-svelte-components
+npm create svelte@latest cal-adapt-svelte-components
 ```
